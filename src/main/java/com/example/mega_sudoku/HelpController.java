@@ -1,5 +1,7 @@
 package com.example.mega_sudoku;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +17,7 @@ public class HelpController {
     @FXML
     protected void onReturnButtonClick() throws IOException {
         Stage stage = (Stage) returnToMainMenuButton.getScene().getWindow();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("hello_screen.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml_stages/hello_screen.fxml")));
         stage.setScene(scene);
         stage.show();
     }

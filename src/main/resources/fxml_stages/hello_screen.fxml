@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/hello_screen.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.HelloController">
+   <children>
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" focusTraversable="false" layoutX="150.0" layoutY="20.0" prefHeight="80.0" prefWidth="300.0" text="Мега-Судоку">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Label>
+      <Button alignment="TOP_CENTER" focusTraversable="false" layoutX="150.0" layoutY="120.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" text="Новая игра">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="helpButton" alignment="TOP_CENTER" focusTraversable="false" layoutX="150.0" layoutY="190.0" mnemonicParsing="false" onAction="#onHelpButtonClick" prefHeight="40.0" prefWidth="300.0" text="Помощь">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="devInfoButton" alignment="TOP_CENTER" focusTraversable="false" layoutX="150.0" layoutY="260.0" mnemonicParsing="false" onAction="#onInfoButtonClick" prefHeight="40.0" prefWidth="300.0" text="О разработчиках">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
