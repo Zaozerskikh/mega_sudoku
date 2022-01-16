@@ -4,13 +4,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.HelpController">
-    <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="150.0" layoutY="20.0" prefHeight="80.0" prefWidth="300.0" text="Бля Бля Бля">
+<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/help_screen.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.HelpController">
+    <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="150.0" layoutY="20.0" prefHeight="80.0" prefWidth="300.0" text="Бла Бла Бла">
         <font>
             <Font size="50.0" />
         </font>
     </Label>
-    <Button fx:id="returnToMainMenuButton" alignment="TOP_CENTER" layoutX="150.0" layoutY="330.0" mnemonicParsing="false" onMouseClicked="#onReturnButtonClick" prefHeight="40.0" prefWidth="300.0" text="Назад в меню">
+    <Button fx:id="returnToMainMenuButton" alignment="TOP_CENTER" focusTraversable="false" layoutX="150.0" layoutY="330.0" mnemonicParsing="false" onMouseClicked="#onReturnButtonClick" prefHeight="40.0" prefWidth="300.0" text="Назад в меню">
         <font>
             <Font size="20.0" />
         </font>

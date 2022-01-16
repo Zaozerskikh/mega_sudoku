@@ -1,3 +1,7 @@
+.image {
+    border-radius: 15%;
+}
+
 .button {
     -fx-background-radius: 15 15 15 15;
     -fx-border-width: 2;

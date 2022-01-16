@@ -15,6 +15,7 @@ public class DevInfoController {
     @FXML
     protected void onReturnButtonClick() throws IOException {
         Stage stage = (Stage) returnToMainMenuButton.getScene().getWindow();
+        stage.setTitle("Мега-Судоку");
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml_stages/hello_screen.fxml")));
         stage.setScene(scene);
         stage.show();

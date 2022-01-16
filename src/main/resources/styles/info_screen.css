@@ -1,0 +1,17 @@
+.button {
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-width: 2;
+    -fx-border-color: #171717;
+    -fx-border-radius: 15 15 15 15;
+}
+.button:hover {
+    -fx-border-color: #c41492;
+    -fx-font-size: 21;
+}
+
+#pane{
+    -fx-background-image: url("/sudoku-final.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 600 400;
+    -fx-background-position: center center;
+}

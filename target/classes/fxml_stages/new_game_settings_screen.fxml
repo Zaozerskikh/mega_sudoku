@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.mega_sudoku.NewGameSettingsScreen"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" stylesheets="@../styles/game_settings_screen.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.NewGameSettingsController">
+   <children>
+      <Slider fx:id="slider" blockIncrement="1.0" layoutX="100.0" layoutY="230.0" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="0" onMouseClicked="#sliderChange" prefHeight="14.0" prefWidth="300.0" showTickMarks="true" snapToTicks="true" value="1.0" />
+      <ImageView fitHeight="30.0" fitWidth="400.0" layoutX="50.0" layoutY="253.0" pickOnBounds="true" styleClass="image">
+         <image>
+            <Image url="@../gradient.jpg" />
+         </image></ImageView>
+      <Button alignment="TOP_CENTER" contentDisplay="TOP" focusTraversable="false" layoutX="50.0" layoutY="330.0" mnemonicParsing="false" prefWidth="400.0" text="Сгенерировать судоку и начать игру!">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Label alignment="TOP_CENTER" layoutX="50.0" layoutY="10.0" prefWidth="400.0" text="Настройки новой игры">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="easy" layoutX="70.0" layoutY="252.0" prefHeight="17.0" prefWidth="80.0" text="простой">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
+      <Label id="medium" fx:id="medium" layoutX="219.0" layoutY="255.0" opacity="0.6" text="средний">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label id="hard" fx:id="hard" layoutX="366.0" layoutY="255.0" opacity="0.6" text="сложный">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label layoutX="150.0" layoutY="185.0" prefWidth="200.0" text="Уровень сложности:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="95.0" prefHeight="30.0" prefWidth="186.0" text="Размеры поля:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="fourBox" focusTraversable="false" layoutX="261.0" layoutY="95.0" mnemonicParsing="false" onMouseClicked="#fourSelected" prefHeight="17.0" prefWidth="102.0" selected="true" text="4 х 4">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="fiveBox" focusTraversable="false" layoutX="372.0" layoutY="95.0" mnemonicParsing="false" onMouseClicked="#fiveSelected" text="5 х 5">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </CheckBox>
+   </children>
+</Pane>

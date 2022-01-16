@@ -20,21 +20,34 @@ public class HelloController {
     protected void onInfoButtonClick(ActionEvent e) throws IOException {
         Stage.getWindows().stream().filter(Window::isShowing).toList().forEach(Window:: hide);
         Stage stage = new Stage();
+        stage.setTitle("О разработчиках");
+        stage.setResizable(false);
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml_stages/dev_info_screen.fxml"))));
-        showHelpOrInfoStage(stage, scene, getClass().getResource("/fxml_stages/hello_screen.fxml"));
+        showStage(stage, scene, getClass().getResource("/fxml_stages/hello_screen.fxml"));
     }
 
     @FXML
     protected void onHelpButtonClick(ActionEvent e) throws Exception {
         Stage.getWindows().stream().filter(Window::isShowing).toList().forEach(Window:: hide);
         Stage stage = new Stage();
+        stage.setTitle("Помощь");
         stage.setResizable(false);
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml_stages/help_screen.fxml"))));
-        showHelpOrInfoStage(stage, scene, getClass().getResource("/fxml_stages/hello_screen.fxml"));
+        showStage(stage, scene, getClass().getResource("/fxml_stages/hello_screen.fxml"));
+    }
+
+    @FXML
+    protected void onNewGameButtonClick(ActionEvent e) throws Exception {
+        Stage.getWindows().stream().filter(Window::isShowing).toList().forEach(Window:: hide);
+        Stage stage = new Stage();
+        stage.setTitle("Новая игра");
+        stage.setResizable(false);
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml_stages/new_game_settings_screen.fxml"))));
+        showStage(stage, scene, getClass().getResource("/fxml_stages/hello_screen.fxml"));
     }
 
 
-    private void showHelpOrInfoStage(Stage stage, Scene scene, URL resource) {
+    private void showStage(Stage stage, Scene scene, URL resource) {
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(windowEvent -> {
@@ -44,6 +57,7 @@ public class HelloController {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            stage1.setTitle("Мега-Судоку");
             stage1.setResizable(false);
             stage1.show();
         });

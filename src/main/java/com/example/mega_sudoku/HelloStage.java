@@ -14,7 +14,7 @@ public class HelloStage extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloStage.class.getResource("/fxml_stages/hello_screen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Добро пожаловть в игру!");
+        stage.setTitle("Мега-Судоку");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
