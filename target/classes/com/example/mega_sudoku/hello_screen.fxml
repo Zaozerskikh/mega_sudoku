@@ -26,7 +26,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="devInfoButton" alignment="TOP_CENTER" layoutX="150.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#onHelloButtonClick" prefHeight="40.0" prefWidth="300.0" text="О разработчиках">
+      <Button fx:id="devInfoButton" alignment="TOP_CENTER" layoutX="150.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#onInfoButtonClick" prefHeight="40.0" prefWidth="300.0" text="О разработчиках">
          <font>
             <Font size="20.0" />
          </font>
