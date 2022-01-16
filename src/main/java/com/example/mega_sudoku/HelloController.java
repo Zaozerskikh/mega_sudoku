@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -60,6 +61,17 @@ public class HelloController {
             stage1.setTitle("Мега-Судоку");
             stage1.setResizable(false);
             stage1.show();
+            stage1.setOnCloseRequest(dialogEvent -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверенны, что хотите выйти из программы?");
+                alert.setTitle("Подтвердите действие");
+                alert.showAndWait().ifPresent(response -> {
+                    if (response.getText().equals("OK")) {
+                        stage1.close();
+                    } else {
+                        dialogEvent.consume();
+                    }
+                });
+            });
         });
     }
 }
