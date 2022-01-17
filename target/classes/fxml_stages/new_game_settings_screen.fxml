@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" stylesheets="@../styles/game_settings_screen.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.NewGameSettingsController">
+<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" stylesheets="@../styles/game_settings_screen.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.NewGameSettingsController">
    <children>
       <Slider fx:id="slider" blockIncrement="1.0" layoutX="100.0" layoutY="230.0" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="0" onMouseClicked="#sliderChange" prefHeight="14.0" prefWidth="300.0" showTickMarks="true" snapToTicks="true" value="1.0" />
       <ImageView fitHeight="30.0" fitWidth="400.0" layoutX="50.0" layoutY="253.0" pickOnBounds="true" styleClass="image">
          <image>
             <Image url="@../gradient.jpg" />
          </image></ImageView>
-      <Button alignment="TOP_CENTER" contentDisplay="TOP" focusTraversable="false" layoutX="50.0" layoutY="330.0" mnemonicParsing="false" prefWidth="400.0" text="Сгенерировать судоку и начать игру!">
+      <Button alignment="TOP_CENTER" contentDisplay="TOP" focusTraversable="false" layoutX="50.0" layoutY="330.0" mnemonicParsing="false" onAction="#onNewGameButtonClick" prefWidth="400.0" text="Сгенерировать судоку и начать игру!">
          <font>
             <Font size="20.0" />
          </font></Button>

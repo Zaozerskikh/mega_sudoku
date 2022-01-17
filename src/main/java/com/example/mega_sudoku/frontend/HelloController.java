@@ -1,4 +1,4 @@
-package com.example.mega_sudoku;
+package com.example.mega_sudoku.frontend;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -41,9 +39,7 @@ public class HelloController {
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(resource)));
         stage.setScene(scene);
         stage.show();
-        stage.setOnCloseRequest(windowEvent -> {
-            returnStartScreen();
-        });
+        stage.setOnCloseRequest(windowEvent -> returnStartScreen());
     }
 
     public static void returnStartScreen() {

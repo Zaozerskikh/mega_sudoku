@@ -1,4 +1,4 @@
-package com.example.mega_sudoku;
+package com.example.mega_sudoku.frontend;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

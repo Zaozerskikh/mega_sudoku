@@ -1,4 +1,4 @@
-package com.example.mega_sudoku;
+package com.example.mega_sudoku.frontend;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -89,5 +89,10 @@ public class NewGameSettingsController {
                 easy.setOpacity(0.6);
             }
         }
+    }
+
+    @FXML
+    protected void onNewGameButtonClick() {
+
     }
 }
