@@ -1,14 +1,20 @@
 package com.example.mega_sudoku.frontend;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import java.io.IOException;
 
 public class NewGameSettingsController {
-    private int boardSize = 4;
+    private int boardSize = 16;
     private int difficultyLevel = 1;
+
+    @FXML
+    protected Button startGameButton;
 
     @FXML
     protected CheckBox fourBox;
@@ -32,10 +38,10 @@ public class NewGameSettingsController {
     protected void fourSelected() {
         if (fourBox.isSelected()) {
             fiveBox.setSelected(false);
-            boardSize = 4;
+            boardSize = 16;
         } else {
             fiveBox.setSelected(true);
-            boardSize = 5;
+            boardSize = 25;
         }
     }
 
@@ -43,10 +49,10 @@ public class NewGameSettingsController {
     protected void fiveSelected() {
         if (fiveBox.isSelected()) {
             fourBox.setSelected(false);
-            boardSize = 5;
+            boardSize = 25;
         } else {
             fourBox.setSelected(true);
-            boardSize = 4;
+            boardSize = 16;
         }
     }
 
@@ -92,7 +98,8 @@ public class NewGameSettingsController {
     }
 
     @FXML
-    protected void onNewGameButtonClick() {
-
+    protected void onNewGameButtonClick() throws IOException {
+        ((Stage)startGameButton.getScene().getWindow()).close();
+        GameController.createGame(this.boardSize, this.difficultyLevel);
     }
 }
