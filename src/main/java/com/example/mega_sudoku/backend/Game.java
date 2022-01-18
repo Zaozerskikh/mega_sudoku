@@ -1,11 +1,18 @@
 package com.example.mega_sudoku.backend;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class Game {
     private int boardSize;
@@ -27,39 +34,17 @@ public class Game {
         return sudoku;
     }
 
-    public Stage generateGameStage()  {
-        GridPane gridPane = new GridPane();
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
-                TextField textField = new TextField();
-                if (boardSize == 4) {
-                    textField.setFont(new Font(18));
-                } else {
-                    textField.setFont(new Font(10));
-                }
-                textField.setFocusTraversable(false);
-                gridPane.add(textField, i, j);
-            }
-        }
-        gridPane.getChildren().forEach(x -> ((TextField)x).setPrefSize(720.0 / boardSize, 720.0 / boardSize));
-        gridPane.getChildren().forEach(x -> {
-            if (GridPane.getRowIndex(x) % (int)Math.sqrt(boardSize) == 0 && GridPane.getRowIndex(x) != 0 &&
-                    (GridPane.getColumnIndex(x) % (int)Math.sqrt(boardSize) == 0 && GridPane.getColumnIndex(x) != 0)) {
-                x.setStyle("-fx-border-style: solid hidden hidden solid; -fx-border-width: 3; -fx-border-color: #c41492;");
-            } else {
-                if (GridPane.getRowIndex(x) % (int)Math.sqrt(boardSize) == 0 && GridPane.getRowIndex(x) != 0) {
-                    x.setStyle("-fx-border-style: solid hidden hidden hidden; -fx-border-width: 3; -fx-border-color: #c41492;");
-                }
-                if (GridPane.getColumnIndex(x) % (int)Math.sqrt(boardSize) == 0 && GridPane.getColumnIndex(x) != 0) {
-                    x.setStyle("-fx-border-style: hidden hidden hidden solid; -fx-border-width: 3; -fx-border-color: #c41492;");
-                }
-            }
-        });
-        gridPane.setStyle("-fx-border-width: 3; -fx-border-color: #c41492;");
-        gridPane.setGridLinesVisible(true);
-        Pane root = new Pane(gridPane);
+    public Stage generateGameStage() throws IOException {
+        GridPane gridPane = new GameGridBuilder().buildGameGrid(boardSize);
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = getClass().getResource("/fxml_stages/game_screen.fxml");
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
+        GridPane paneForTable = new GridPane();
+        paneForTable.add(gridPane, 0, 0);
+        gridPane.setPadding(new Insets(11));
         Stage stage = new Stage();
-        stage.setScene(new Scene(root, 900, 730));
+        stage.setScene(new Scene(new HBox(paneForTable, root), 870, 730));
         return stage;
     }
 }

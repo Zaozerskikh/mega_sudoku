@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/hello_screen.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.HelloController">
-   <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="150.0" layoutY="20.0" prefHeight="80.0" prefWidth="300.0" text="Мега-Судоку">
+<VBox id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.HelloController">
+   <Label alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="80.0" prefWidth="300.0" text="Мега-Судоку" VBox.vgrow="SOMETIMES">
       <font>
          <Font size="50.0" />
       </font>
    </Label>
-   <Button alignment="TOP_CENTER" focusTraversable="false" layoutX="150.0" layoutY="120.0" mnemonicParsing="false" onAction="#onNewGameButtonClick" prefHeight="40.0" prefWidth="300.0" text="Новая игра">
+   <Button fx:id="newGameButton" alignment="TOP_CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onNewGameButtonClick" prefHeight="40.0" prefWidth="300.0" text="Новая игра" VBox.vgrow="SOMETIMES">
       <font>
          <Font size="20.0" />
       </font>
    </Button>
-   <Button fx:id="helpButton" alignment="TOP_CENTER" focusTraversable="false" layoutX="150.0" layoutY="190.0" mnemonicParsing="false" onAction="#onHelpButtonClick" prefHeight="40.0" prefWidth="300.0" text="Помощь">
+   <Button fx:id="myGamesButton" alignment="TOP_CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHelpButtonClick" prefHeight="40.0" prefWidth="300.0" text="Мои сохраненные игры" VBox.vgrow="SOMETIMES">
       <font>
          <Font size="20.0" />
       </font>
    </Button>
-   <Button fx:id="devInfoButton" alignment="TOP_CENTER" focusTraversable="false" layoutX="150.0" layoutY="260.0" mnemonicParsing="false" onAction="#onInfoButtonClick" prefHeight="40.0" prefWidth="300.0" text="О разработчиках">
+   <Button fx:id="helpButton" alignment="TOP_CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHelpButtonClick" prefHeight="40.0" prefWidth="300.0" text="Помощь" VBox.vgrow="SOMETIMES">
       <font>
          <Font size="20.0" />
       </font>
    </Button>
-</Pane>
+   <Button fx:id="devInfoButton" alignment="TOP_CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onInfoButtonClick" prefHeight="40.0" prefWidth="300.0" text="О разработчиках" VBox.vgrow="SOMETIMES">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Button>
+   <stylesheets>
+      <URL value="@../styles/background_image.css" />
+      <URL value="@../styles/common_buttons_design.css" />
+   </stylesheets>
+   <padding>
+      <Insets bottom="100.0" left="100.0" right="100.0" top="20.0" />
+   </padding>
+</VBox>
