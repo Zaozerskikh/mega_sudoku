@@ -8,17 +8,17 @@
 
 <VBox fx:id="vbox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="130.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button id="help_button" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+      <Button id="help_button" fx:id="help_button" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
          <font>
             <Font size="10.0" />
          </font></Button>
-      <Button id="save_button" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+      <Button id="save_button" fx:id="save_button" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
          <font>
             <Font size="10.0" />
          </font></Button>
    </children>
    <padding>
-      <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+      <Insets bottom="10.0" left="10.0" right="20.0" top="11.0" />
    </padding>
    <stylesheets>
       <URL value="@../styles/grid_design.css" />

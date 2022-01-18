@@ -1,13 +1,10 @@
 package com.example.mega_sudoku.frontend;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -18,8 +15,13 @@ public class HelloController {
     protected Button devInfoButton, helpButton, myGamesButton, newGameButton;
 
     @FXML
-    protected void onInfoButtonClick(ActionEvent e) throws IOException {
-        showStage(getClass().getResource("/fxml_stages/dev_info_screen.fxml"), "Помощь");
+    protected void onNewGameButtonClick(ActionEvent e) throws Exception {
+        showStage(getClass().getResource("/fxml_stages/new_game_settings_screen.fxml"), "Новая игра");
+    }
+
+    @FXML
+    protected void onMyGamesButtonClick(ActionEvent e) {
+
     }
 
     @FXML
@@ -28,10 +30,9 @@ public class HelloController {
     }
 
     @FXML
-    protected void onNewGameButtonClick(ActionEvent e) throws Exception {
-        showStage(getClass().getResource("/fxml_stages/new_game_settings_screen.fxml"), "Новая игра");
+    protected void onInfoButtonClick(ActionEvent e) throws IOException {
+        showStage(getClass().getResource("/fxml_stages/dev_info_screen.fxml"), "Помощь");
     }
-
 
     private void showStage(URL resource, String stageName) throws IOException {
         ((Stage)helpButton.getScene().getWindow()).close();

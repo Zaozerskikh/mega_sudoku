@@ -1,16 +1,24 @@
-#help_button{
+#help_button {
     -fx-background-image: url("/lamp.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
-#save_button{
+#help_button:pressed {
+    -fx-background-image: url("/yellow_lamp.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#save_button {
     -fx-background-image: url("/saving.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
+
 
 .button {
     -fx-background-radius: 15 15 15 15;
@@ -23,8 +31,10 @@
     -fx-border-color: #c41492;
     -fx-font-size: 21;
 }
-
-#vbox {
-
+.root {
+    -fx-background-image: url("/white.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
 }
 

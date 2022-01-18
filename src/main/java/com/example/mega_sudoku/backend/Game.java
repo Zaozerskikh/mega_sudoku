@@ -3,14 +3,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 
@@ -45,6 +40,8 @@ public class Game {
         gridPane.setPadding(new Insets(11));
         Stage stage = new Stage();
         stage.setScene(new Scene(new HBox(paneForTable, root), 870, 730));
+        stage.getScene().getStylesheets().addAll(this.getClass().getResource("/styles/game_buttons_design.css").toExternalForm());
+        stage.setTitle("Мега-Cудоку " + boardSize + " x " + boardSize);
         return stage;
     }
 }

@@ -17,7 +17,7 @@
          <Font size="20.0" />
       </font>
    </Button>
-   <Button fx:id="myGamesButton" alignment="TOP_CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHelpButtonClick" prefHeight="40.0" prefWidth="300.0" text="Мои сохраненные игры" VBox.vgrow="SOMETIMES">
+   <Button fx:id="myGamesButton" alignment="TOP_CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onMyGamesButtonClick" prefHeight="40.0" prefWidth="300.0" text="Мои сохраненные игры" VBox.vgrow="SOMETIMES">
       <font>
          <Font size="20.0" />
       </font>

@@ -10,7 +10,7 @@ public class GameGridBuilder {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 TextField textField = new TextField();
-                if (boardSize == 4) {
+                if (boardSize == 16) {
                     textField.setFont(new Font(18));
                 } else {
                     textField.setFont(new Font(10));
@@ -70,6 +70,4 @@ public class GameGridBuilder {
         gridPane.setGridLinesVisible(true);
         return gridPane;
     }
-
-
 }
