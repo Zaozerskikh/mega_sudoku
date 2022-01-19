@@ -60,7 +60,7 @@ public class HelloController {
         stage.getIcons().add(new Image("/icon.png"));
         stage.show();
         stage.setOnCloseRequest(dialogEvent -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверены, что хотите выйти из программы?");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверены, что хотите выйти из игры?");
             alert.setTitle("Подтвердите действие");
             alert.showAndWait().ifPresent(response -> {
                 if (response.getText().equals("OK")) {

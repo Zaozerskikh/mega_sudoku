@@ -6,30 +6,41 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="vbox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="130.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.GameController">
+<VBox fx:id="vbox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="726.0" prefWidth="130.0" spacing="21.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.GameController">
    <children>
-      <Button id="help_button" fx:id="help_button" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHelpButtonClick" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
+      <Button id="check_button" fx:id="checkButton" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onCheckButtonClick" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
          <font>
             <Font size="10.0" />
          </font></Button>
-      <Button id="save_button" fx:id="save_button" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
+      <Button id="help_button" fx:id="helpButton" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHelpButtonClick" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
          <font>
             <Font size="10.0" />
          </font></Button>
-      <Button id="return_button" fx:id="return_button" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onReturnButtonClick" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
+      <Button id="solution_button" fx:id="solutionButton" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSolutionButtonClick" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
          <font>
             <Font size="10.0" />
          </font></Button>
-      <Button id="rules_button" fx:id="rules_button" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRulesButtonClick" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
+      <Button id="save_button" fx:id="saveButton" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
+         <font>
+            <Font size="10.0" />
+         </font></Button>
+      <Button id="return_button" fx:id="returnButton" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onReturnButtonClick" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
+         <font>
+            <Font size="10.0" />
+         </font></Button>
+      <Button id="reset_button" fx:id="resetButton" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onResetButtonClick" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
          <font>
             <Font size="10.0" />
          </font></Button>
    </children>
    <padding>
-      <Insets bottom="10.0" left="5.0" right="25.0" top="11.0" />
+      <Insets bottom="11.0" left="5.0" right="25.0" top="11.0" />
    </padding>
    <stylesheets>
       <URL value="@../styles/grid_design.css" />
       <URL value="@../styles/game_buttons_design.css" />
    </stylesheets>
+   <opaqueInsets>
+      <Insets bottom="20.0" top="20.0" />
+   </opaqueInsets>
 </VBox>

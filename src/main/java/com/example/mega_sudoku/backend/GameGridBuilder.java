@@ -1,11 +1,12 @@
 package com.example.mega_sudoku.backend;
 
+import com.example.mega_sudoku.frontend.GameController;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 
 public class GameGridBuilder {
-    public GridPane buildGameGrid(int boardSize) {
+    public GridPane buildGameGrid(int boardSize, int[][] problem) {
         GridPane gridPane = new GridPane();
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
@@ -16,6 +17,11 @@ public class GameGridBuilder {
                     textField.setFont(new Font(10));
                 }
                 textField.setFocusTraversable(false);
+                if (problem[i][j] != -1) {
+                    textField.setText(Integer.toString(problem[i][j]));
+                    textField.setEditable(false);
+                }
+                textField.setOnMousePressed(mouseEvent -> GameController.updateCurrentTextField((TextField) mouseEvent.getSource()));
                 gridPane.add(textField, i, j);
             }
         }

@@ -1,3 +1,17 @@
+#check_button {
+    -fx-background-image: url("/check.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#check_button:pressed {
+    -fx-background-image: url("/checked.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
 #help_button {
     -fx-background-image: url("/lamp.jpg");
     -fx-background-repeat: stretch;
@@ -7,6 +21,20 @@
 
 #help_button:pressed {
     -fx-background-image: url("/yellow_lamp.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#solution_button {
+    -fx-background-image: url("/flag.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#solution_button:pressed {
+    -fx-background-image: url("/flagged.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
@@ -40,15 +68,15 @@
     -fx-background-position: center center;
 }
 
-#rules_button {
-    -fx-background-image: url("/info.jpg");
+#reset_button {
+    -fx-background-image: url("/reset.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
-#rules_button:pressed {
-    -fx-background-image: url("/informed.jpg");
+#reset_button:pressed {
+    -fx-background-image: url("/reseted.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;

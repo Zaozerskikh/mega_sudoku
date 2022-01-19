@@ -1,6 +1,7 @@
 package com.example.mega_sudoku.backend;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SudokuBuilder {
     public ArrayList<int[][]> generateProblemAndSolution(int boardSize, int diffLevel) {
@@ -13,6 +14,11 @@ public class SudokuBuilder {
     private int[][] generateProblem(int boardSize, int diffLevel) {
         int[][] problem = new int[boardSize][boardSize];
         //TODO implement problem generation.
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                problem[i][j] = ThreadLocalRandom.current().nextInt(-1, 3);
+            }
+        }
         return problem;
     };
 
