@@ -65,7 +65,6 @@ public class GameGridBuilder {
             if (GridPane.getColumnIndex(x) == boardSize - 1 && GridPane.getRowIndex(x) == boardSize - 1) {
                 x.setStyle("-fx-border-style: hidden solid solid hidden; -fx-border-width: 3; -fx-border-color: #000000;");
             }
-
         });
         gridPane.setGridLinesVisible(true);
         return gridPane;
