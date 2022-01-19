@@ -12,21 +12,15 @@ import java.net.URL;
 public class Game {
     private int boardSize;
     private int diffLevel;
-    private int[][] generatedSudoku;
-
-    public int[][] getGeneratedSudoku() {
-        return this.generatedSudoku;
-    }
+    private int[][] problem;
+    private int[][] solution;
 
     public Game(int boardSize, int diffLevel) {
         this.boardSize = boardSize;
         this.diffLevel = diffLevel;
-        this.generatedSudoku = generateSudoku(boardSize);
-    }
-
-    private int[][] generateSudoku(int boardSize) {
-        int[][] sudoku = new int[boardSize][boardSize];
-        return sudoku;
+        var problemAndSolution = new SudokuBuilder().generateProblemAndSolution(boardSize, diffLevel);
+        this.problem = problemAndSolution.get(0);
+        this.solution = problemAndSolution.get(1);
     }
 
     public Stage generateGameStage() throws IOException {
