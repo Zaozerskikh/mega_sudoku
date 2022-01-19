@@ -16,9 +16,17 @@
          <font>
             <Font size="10.0" />
          </font></Button>
+      <Button id="return_button" fx:id="return_button" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
+         <font>
+            <Font size="10.0" />
+         </font></Button>
+      <Button id="rules_button" fx:id="rules_button" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" stylesheets="@../styles/game_buttons_design.css">
+         <font>
+            <Font size="10.0" />
+         </font></Button>
    </children>
    <padding>
-      <Insets bottom="10.0" left="10.0" right="20.0" top="11.0" />
+      <Insets bottom="10.0" left="5.0" right="25.0" top="11.0" />
    </padding>
    <stylesheets>
       <URL value="@../styles/grid_design.css" />

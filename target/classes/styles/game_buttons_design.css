@@ -19,6 +19,40 @@
     -fx-background-position: center center;
 }
 
+#save_button:pressed {
+    -fx-background-image: url("/saved.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#return_button {
+    -fx-background-image: url("/home.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#return_button:pressed {
+    -fx-background-image: url("/return_home.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#rules_button {
+    -fx-background-image: url("/info.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#rules_button:pressed {
+    -fx-background-image: url("/informed.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
 
 .button {
     -fx-background-radius: 15 15 15 15;

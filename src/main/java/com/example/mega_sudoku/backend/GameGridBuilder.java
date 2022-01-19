@@ -11,7 +11,7 @@ public class GameGridBuilder {
             for (int j = 0; j < boardSize; j++) {
                 TextField textField = new TextField();
                 if (boardSize == 16) {
-                    textField.setFont(new Font(18));
+                    textField.setFont(new Font(16));
                 } else {
                     textField.setFont(new Font(10));
                 }

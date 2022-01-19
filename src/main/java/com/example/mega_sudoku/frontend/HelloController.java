@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -20,8 +21,8 @@ public class HelloController {
     }
 
     @FXML
-    protected void onMyGamesButtonClick(ActionEvent e) {
-
+    protected void onMyGamesButtonClick(ActionEvent e) throws IOException {
+        showStage(getClass().getResource("/fxml_stages/my_games_screen.fxml"), "Мои сохраненные игры");
     }
 
     @FXML
@@ -41,6 +42,7 @@ public class HelloController {
         stage.setResizable(false);
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(resource)));
         stage.setScene(scene);
+        stage.getIcons().add(new Image("/icon.png"));
         stage.show();
         stage.setOnCloseRequest(windowEvent -> returnStartScreen());
     }
@@ -55,6 +57,7 @@ public class HelloController {
         stage.setTitle("Мега-Судоку");
         stage.setMinWidth(600);
         stage.setMinHeight(400);
+        stage.getIcons().add(new Image("/icon.png"));
         stage.show();
         stage.setOnCloseRequest(dialogEvent -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверены, что хотите выйти из программы?");
