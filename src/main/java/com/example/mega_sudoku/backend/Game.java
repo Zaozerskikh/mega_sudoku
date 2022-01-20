@@ -105,18 +105,17 @@ public class Game {
      * Проверка на корректность решения пользователя.
      * @return статус верно ли решена головоломка.
      */
-    public String check() {
-        var currentPosition = GameSaver.getCurrentPos(gameGrid, sudoku.getBoardSize());
+    public String checkAnswer() {
         for (int i = 0; i < sudoku.getBoardSize(); i++) {
             for (int j = 0; j < sudoku.getBoardSize(); j++) {
-                if (currentPosition[i][j] == -1) {
+                if (sudoku.getCurrentPosition()[i][j] == -1) {
                     return "empty_cell";
                 }
             }
         }
         for (int i = 0; i < sudoku.getBoardSize(); i++) {
             for (int j = 0; j < sudoku.getBoardSize(); j++) {
-                if (currentPosition[i][j] != sudoku.getSolution()[i][j]) {
+                if (sudoku.getCurrentPosition()[i][j] != sudoku.getSolution()[i][j]) {
                     return "incorrect";
                 }
             }
@@ -135,5 +134,14 @@ public class Game {
                 }
             }
         });
+    }
+
+    public Sudoku getSudoku() {
+        return this.sudoku;
+    }
+
+
+    public void updateCurrentPosition(TextField currentTextField) {
+        sudoku.updateCurrentPosition(Integer.parseInt(currentTextField.getText()), GridPane.getColumnIndex(currentTextField), GridPane.getRowIndex(currentTextField));
     }
 }

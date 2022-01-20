@@ -27,7 +27,7 @@ public class GameGridBuilder {
                     textField.setText(Integer.toString(currentPosition[i][j]));
                     textField.setEditable(false);
                 }
-                textField.setOnMousePressed(mouseEvent -> GameController.updateCurrentTextField((TextField) mouseEvent.getSource()));
+                textField.setOnMousePressed(mouseEvent -> GameController.checkAndUpdateCurrTF((TextField) mouseEvent.getSource()));
                 gridPane.add(textField, i, j);
             }
         }

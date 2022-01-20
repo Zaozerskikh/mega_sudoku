@@ -1,14 +1,20 @@
 package com.example.mega_sudoku.frontend;
 
 import com.example.mega_sudoku.backend.Game;
+import com.example.mega_sudoku.backend.GameSaver;
 import com.example.mega_sudoku.backend.Sudoku;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameController {
     // Текущая игра.
@@ -45,6 +51,7 @@ public class GameController {
         }
     }
 
+    @FXML
     public void onSolutionButtonClick(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверены, что хотите сдаться и посмотреть решение?");
         alert.setTitle("Подтвердите действие");
@@ -55,9 +62,9 @@ public class GameController {
         });
     }
 
-
+    @FXML
     public void onCheckButtonClick(ActionEvent actionEvent) {
-        String res = game.check();
+        String res = game.checkAnswer();
         switch (res) {
             case "empty_cell" -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Не все клетки заполнены.");
@@ -78,8 +85,9 @@ public class GameController {
     }
 
     @FXML
-    protected void onSaveButtonClick(ActionEvent e) {
+    protected void onSaveButtonClick(ActionEvent e) throws Exception {
         game.setSaved(true);
+        GameSaver.save(game.getSudoku(), "kkk");
     }
 
     @FXML
@@ -110,7 +118,38 @@ public class GameController {
         });
     }
 
-    public static void updateCurrentTextField(TextField currentTextField) {
-        GameController.currentTextField = currentTextField;
+    public static void checkAndUpdateCurrTF(TextField currentTextField) {
+        TextField oldTextField = GameController.currentTextField;
+        boolean isCorrect = true;
+        if (GameController.currentTextField != null && !GameController.currentTextField.getText().equals("")) {
+            try {
+                int value = Integer.parseInt(GameController.currentTextField.getText());
+                isCorrect = value > 0 && value <= game.getSudoku().getBoardSize();
+            } catch (Exception e) {
+                isCorrect = false;
+            }
+            if (isCorrect) {
+                game.updateCurrentPosition(GameController.currentTextField);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Некорректное значение поля!\nДолжно быть целое число от 0 до " + game.getSudoku().getBoardSize());
+                alert.showAndWait();
+                GameController.currentTextField.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+                oldTextField.setFocusTraversable(true);
+                oldTextField.requestFocus();
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        oldTextField.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+                        timer.cancel();
+                    }
+                }, 2*1000);
+            }
+        }
+        if (isCorrect) {
+            GameController.currentTextField = currentTextField;
+        } else {
+            GameController.currentTextField = oldTextField;
+        }
     }
 }

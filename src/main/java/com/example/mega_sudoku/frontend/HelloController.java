@@ -22,7 +22,7 @@ public class HelloController {
 
     @FXML
     protected void onMyGamesButtonClick(ActionEvent e) throws IOException {
-        showStage(getClass().getResource("/fxml_stages/my_games_screen.fxml"), "Мои сохраненные игры");
+
     }
 
     @FXML

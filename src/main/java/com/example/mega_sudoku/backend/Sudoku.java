@@ -1,6 +1,13 @@
 package com.example.mega_sudoku.backend;
 
-public class Sudoku {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Sudoku implements Serializable {
+    // Поле для работы сериализации.
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     // Судоку (задача).
     private final int[][] problem;
 
@@ -13,8 +20,8 @@ public class Sudoku {
     // Уровень сложности.
     private final int diffLevel;
 
-    public void updateCurrentPosition(int[][] newCurrentPosition) {
-        currentPosition = newCurrentPosition;
+    public void updateCurrentPosition(int value, int i, int j) {
+        currentPosition[i][j] = value;
     }
 
     public int[][] getProblem() {
