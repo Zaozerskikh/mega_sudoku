@@ -24,6 +24,10 @@ public class Sudoku implements Serializable {
         currentPosition[i][j] = value;
     }
 
+    public void setCurrentPosition(int[][] newPosition) {
+        currentPosition = newPosition;
+    }
+
     public int[][] getProblem() {
         return this.problem;
     }

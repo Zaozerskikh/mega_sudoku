@@ -1,7 +1,5 @@
 package com.example.mega_sudoku.frontend;
 
-import com.example.mega_sudoku.backend.Game;
-import com.example.mega_sudoku.backend.Sudoku;
 import com.example.mega_sudoku.backend.SudokuBuilder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

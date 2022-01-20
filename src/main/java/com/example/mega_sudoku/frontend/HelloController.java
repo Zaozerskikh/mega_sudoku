@@ -9,11 +9,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.Objects;
 
@@ -23,6 +21,7 @@ public class HelloController {
 
     @FXML
     protected void onNewGameButtonClick(ActionEvent e) throws Exception {
+        ((Stage)helpButton.getScene().getWindow()).close();
         showStage(getClass().getResource("/fxml_stages/new_game_settings_screen.fxml"), "Новая игра");
     }
 
@@ -50,19 +49,22 @@ public class HelloController {
 
     @FXML
     protected void onInfoButtonClick(ActionEvent e) throws IOException {
-        showStage(getClass().getResource("/fxml_stages/dev_info_screen.fxml"), "Помощь");
+        showStage(getClass().getResource("/fxml_stages/dev_info_screen.fxml"), "О разработчиках");
     }
 
     private void showStage(URL resource, String stageName) throws IOException {
-        ((Stage)helpButton.getScene().getWindow()).close();
         Stage stage = new Stage();
         stage.setTitle(stageName);
-        stage.setResizable(false);
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(resource)));
         stage.setScene(scene);
         stage.getIcons().add(new Image("/icon.png"));
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner((Stage)helpButton.getScene().getWindow());
         stage.show();
-        stage.setOnCloseRequest(windowEvent -> returnStartScreen());
+        if (stageName.equals("Новая игра")) {
+            stage.setResizable(false);
+            stage.setOnCloseRequest(windowEvent -> returnStartScreen());
+        }
     }
 
     public static void returnStartScreen() {
@@ -74,7 +76,7 @@ public class HelloController {
         }
         stage.setTitle("Мега-Судоку");
         stage.setMinWidth(600);
-        stage.setMinHeight(400);
+        stage.setMinHeight(440);
         stage.getIcons().add(new Image("/icon.png"));
         stage.show();
         stage.setOnCloseRequest(dialogEvent -> {

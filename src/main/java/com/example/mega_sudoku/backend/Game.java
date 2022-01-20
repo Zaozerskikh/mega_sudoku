@@ -34,6 +34,10 @@ public class Game {
         return saved;
     }
 
+    public Sudoku getSudoku() {
+        return this.sudoku;
+    }
+
     /**
      * Установка сохранения.
      * @param saved текущее состояние (сохранено или нет).
@@ -135,12 +139,8 @@ public class Game {
                 }
             }
         });
+        sudoku.setCurrentPosition(sudoku.getProblem());
     }
-
-    public Sudoku getSudoku() {
-        return this.sudoku;
-    }
-
 
     public void updateCurrentPosition(TextField currentTextField) {
         sudoku.updateCurrentPosition(Integer.parseInt(currentTextField.getText()), GridPane.getColumnIndex(currentTextField), GridPane.getRowIndex(currentTextField));

@@ -1,6 +1,5 @@
 package com.example.mega_sudoku.backend;
 
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SudokuBuilder {
@@ -17,7 +16,7 @@ public class SudokuBuilder {
             }
         }
         return problem;
-    };
+    }
 
     private int[][] generateSolution(int boardSize, int diffLevel) {
         int[][] solution = new int[boardSize][boardSize];

@@ -22,6 +22,7 @@ public class GameController {
 
     // Текущая активная клетка.
     private static TextField currentTextField;
+
     @FXML
     private Button returnButton, helpButton, resetButton, solutionButton, saveButton;
 
@@ -85,7 +86,7 @@ public class GameController {
     }
 
     @FXML
-    protected void onSaveButtonClick(ActionEvent e) throws Exception {
+    protected void onSaveButtonClick(ActionEvent e) {
         game.setSaved(true);
         GameSaver.save(game.getSudoku(), (Stage)returnButton.getScene().getWindow());
     }
@@ -129,6 +130,7 @@ public class GameController {
                 isCorrect = false;
             }
             if (isCorrect) {
+                game.setSaved(false);
                 game.updateCurrentPosition(GameController.currentTextField);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Некорректное значение поля!\nДолжно быть целое число от 0 до " + game.getSudoku().getBoardSize());
