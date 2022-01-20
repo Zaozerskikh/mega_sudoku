@@ -64,7 +64,8 @@ public class Game {
         Stage stage = new Stage();
         stage.setScene(new Scene(new HBox(paneForTable, root), 870, 730));
         stage.getScene().getStylesheets().addAll(this.getClass().getResource("/styles/game_buttons_design.css").toExternalForm());
-        stage.setTitle("Мега-Cудоку " + sudoku.getBoardSize() + " x " + sudoku.getBoardSize());
+        String diffInfo = (sudoku.getDiffLevel() == 1) ? "Простой" : (sudoku.getDiffLevel() == 2) ? "Средний" : "Сложный";
+        stage.setTitle("Мега-Cудоку " + sudoku.getBoardSize() + " x " + sudoku.getBoardSize() + " " + diffInfo);
         stage.setResizable(false);
         return stage;
     }

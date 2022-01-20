@@ -1,4 +1,6 @@
 package com.example.mega_sudoku.frontend;
+import com.example.mega_sudoku.backend.GameLoader;
+import com.example.mega_sudoku.backend.Sudoku;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,8 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.Objects;
 
@@ -21,8 +27,20 @@ public class HelloController {
     }
 
     @FXML
-    protected void onMyGamesButtonClick(ActionEvent e) throws IOException {
-
+    protected void onLoadSavedGameButtonClick(ActionEvent e) throws Exception {
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Sudoku files (*.sudoku)", "*.sudoku"));
+        var file = fc.showOpenDialog((Stage)helpButton.getScene().getWindow());
+        if (file != null) {
+            Sudoku sudoku = GameLoader.load(file);
+            if (sudoku != null) {
+                ((Stage)helpButton.getScene().getWindow()).close();
+                GameController.createGame(sudoku);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "К сожалению, игру сохранить не удалось. Попробуйте еще раз.");
+                alert.showAndWait();
+            }
+        }
     }
 
     @FXML

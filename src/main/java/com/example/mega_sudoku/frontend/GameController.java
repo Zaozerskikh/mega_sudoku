@@ -87,7 +87,7 @@ public class GameController {
     @FXML
     protected void onSaveButtonClick(ActionEvent e) throws Exception {
         game.setSaved(true);
-        GameSaver.save(game.getSudoku(), "kkk");
+        GameSaver.save(game.getSudoku(), (Stage)returnButton.getScene().getWindow());
     }
 
     @FXML
@@ -106,7 +106,7 @@ public class GameController {
     }
 
     @FXML
-    protected void onResetButtonClick(ActionEvent e) throws IOException {
+    protected void onResetButtonClick(ActionEvent e) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Ваше решение будет сброшено. Вы уверены?");
         alert.setTitle("Подтвердите действие");
         alert.showAndWait().ifPresent(response -> {
