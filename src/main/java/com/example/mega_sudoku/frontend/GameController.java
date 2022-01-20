@@ -1,27 +1,26 @@
 package com.example.mega_sudoku.frontend;
 
 import com.example.mega_sudoku.backend.Game;
+import com.example.mega_sudoku.backend.Sudoku;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GameController {
+    // Текущая игра.
     private static Game game;
+
+    // Текущая активная клетка.
     private static TextField currentTextField;
     @FXML
     private Button returnButton, helpButton, resetButton, solutionButton, saveButton;
 
-    public static void createGame(int size, int diffLevel) throws IOException {
-        game = new Game(size, diffLevel);
+    public static void createGame(Sudoku sudoku) throws IOException {
+        game = new Game(sudoku);
         Stage stage = game.generateGameStage();
         stage.show();
         stage.setOnCloseRequest(dialogEvent -> {

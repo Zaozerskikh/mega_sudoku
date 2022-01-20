@@ -12,49 +12,48 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.io.PushbackInputStream;
 import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Game {
-    //Размер игрового поля.
-    private final int boardSize;
-
-    // Уровень сложности.
-    private final int diffLevel;
-
     // Игровое поле.
     private GridPane gameGrid;
 
-    // Судоку (задача).
-    private final int[][] problem;
-
-    // Судоку (решенная).
-    private final int[][] solution;
+    // Судоку.
+    private final Sudoku sudoku;
 
     // Сохранено ли текущее состояние игры.
     private boolean saved;
 
+    /**
+     * Проверка сохранено ли текущее состояние игры.
+     * @return результат проверки.
+     */
     public boolean isSaved() {
         return saved;
     }
 
+    /**
+     * Установка сохранения.
+     * @param saved текущее состояние (сохранено или нет).
+     */
     public void setSaved(boolean saved) {
         this.saved = saved;
     }
 
-    public Game(int boardSize, int diffLevel) {
-        this.boardSize = boardSize;
-        this.diffLevel = diffLevel;
-        var problemAndSolution = new SudokuBuilder().generateProblemAndSolution(boardSize, diffLevel);
-        this.problem = problemAndSolution.get(0);
-        this.solution = problemAndSolution.get(1);
+    public Game(Sudoku sudoku) {
+        this.sudoku = sudoku;
         this.saved = false;
     }
 
+    /**
+     * Генерация окна игры.
+     * @return окно игры.
+     * @throws IOException не выкидывается.
+     */
     public Stage generateGameStage() throws IOException {
-        gameGrid = new GameGridBuilder().buildGameGrid(boardSize, problem);
+        gameGrid = new GameGridBuilder().buildGameGrid(sudoku.getBoardSize(), sudoku.getCurrentPosition());
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = getClass().getResource("/fxml_stages/game_screen.fxml");
         loader.setLocation(xmlUrl);
@@ -65,24 +64,31 @@ public class Game {
         Stage stage = new Stage();
         stage.setScene(new Scene(new HBox(paneForTable, root), 870, 730));
         stage.getScene().getStylesheets().addAll(this.getClass().getResource("/styles/game_buttons_design.css").toExternalForm());
-        stage.setTitle("Мега-Cудоку " + boardSize + " x " + boardSize);
+        stage.setTitle("Мега-Cудоку " + sudoku.getBoardSize() + " x " + sudoku.getBoardSize());
         stage.setResizable(false);
         return stage;
     }
 
+    /**
+     * Отображает правильное решение.
+     */
     public void showSolution() {
         gameGrid.getChildren().forEach(x -> {
             if(x.getClass() == TextField.class) {
-                if (problem[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)] == -1) {
-                    ((TextField)x).setText(Integer.toString(solution[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)]));
+                if (sudoku.getProblem()[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)] == -1) {
+                    ((TextField)x).setText(Integer.toString(sudoku.getSolution()[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)]));
                 }
             }
         });
     }
 
+    /**
+     * Отображает подсказку.
+     * @param textField клетка в которой нужно отобразить подсказку.
+     */
     public void showTip(TextField textField) {
         if (textField.editableProperty().getValue()) {
-            textField.setText(Integer.toString(solution[GridPane.getColumnIndex(textField)][GridPane.getRowIndex(textField)]));
+            textField.setText(Integer.toString(sudoku.getSolution()[GridPane.getColumnIndex(textField)][GridPane.getRowIndex(textField)]));
             textField.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
@@ -95,18 +101,22 @@ public class Game {
         }
     }
 
+    /**
+     * Проверка на корректность решения пользователя.
+     * @return статус верно ли решена головоломка.
+     */
     public String check() {
-        var currentPosition = GameSaver.getCurrentPos(gameGrid, boardSize);
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
+        var currentPosition = GameSaver.getCurrentPos(gameGrid, sudoku.getBoardSize());
+        for (int i = 0; i < sudoku.getBoardSize(); i++) {
+            for (int j = 0; j < sudoku.getBoardSize(); j++) {
                 if (currentPosition[i][j] == -1) {
                     return "empty_cell";
                 }
             }
         }
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
-                if (currentPosition[i][j] != solution[i][j]) {
+        for (int i = 0; i < sudoku.getBoardSize(); i++) {
+            for (int j = 0; j < sudoku.getBoardSize(); j++) {
+                if (currentPosition[i][j] != sudoku.getSolution()[i][j]) {
                     return "incorrect";
                 }
             }
@@ -114,10 +124,13 @@ public class Game {
         return "correct";
     }
 
+    /**
+     * Сброс головоломки до начального этапа (удаление пользовательского решения).
+     */
     public void reset() {
         gameGrid.getChildren().forEach(x -> {
             if (x.getClass() == TextField.class) {
-                if (problem[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)] == -1) {
+                if (sudoku.getProblem()[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)] == -1) {
                     ((TextField)x).setText("");
                 }
             }

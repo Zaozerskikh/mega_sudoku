@@ -1,5 +1,8 @@
 package com.example.mega_sudoku.frontend;
 
+import com.example.mega_sudoku.backend.Game;
+import com.example.mega_sudoku.backend.Sudoku;
+import com.example.mega_sudoku.backend.SudokuBuilder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -100,6 +103,6 @@ public class NewGameSettingsController {
     @FXML
     protected void onNewGameButtonClick() throws IOException {
         ((Stage)startGameButton.getScene().getWindow()).close();
-        GameController.createGame(this.boardSize, this.difficultyLevel);
+        GameController.createGame(new SudokuBuilder().generateSudoku(boardSize, difficultyLevel));
     }
 }

@@ -6,7 +6,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 
 public class GameGridBuilder {
-    public GridPane buildGameGrid(int boardSize, int[][] problem) {
+    /**
+     * Создает сетку игры по заданной судоку.
+     * @param boardSize размер доски.
+     * @param currentPosition судоку.
+     * @return игровая сетка.
+     */
+    public GridPane buildGameGrid(int boardSize, int[][] currentPosition) {
         GridPane gridPane = new GridPane();
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
@@ -17,14 +23,16 @@ public class GameGridBuilder {
                     textField.setFont(new Font(10));
                 }
                 textField.setFocusTraversable(false);
-                if (problem[i][j] != -1) {
-                    textField.setText(Integer.toString(problem[i][j]));
+                if (currentPosition[i][j] != -1) {
+                    textField.setText(Integer.toString(currentPosition[i][j]));
                     textField.setEditable(false);
                 }
                 textField.setOnMousePressed(mouseEvent -> GameController.updateCurrentTextField((TextField) mouseEvent.getSource()));
                 gridPane.add(textField, i, j);
             }
         }
+
+        // TODO Если будет время - заменить этот ужас нормальным кодом.
         gridPane.getChildren().forEach(x -> ((TextField)x).setPrefSize(720.0 / boardSize, 720.0 / boardSize));
         gridPane.getChildren().forEach(x -> {
             if (GridPane.getRowIndex(x) % (int)Math.sqrt(boardSize) == 0 && GridPane.getRowIndex(x) != 0 &&
@@ -72,6 +80,8 @@ public class GameGridBuilder {
                 x.setStyle("-fx-border-style: hidden solid solid hidden; -fx-border-width: 3; -fx-border-color: #000000;");
             }
         });
+        // END OF TODO
+
         gridPane.setGridLinesVisible(true);
         return gridPane;
     }

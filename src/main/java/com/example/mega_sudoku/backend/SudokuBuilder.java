@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SudokuBuilder {
-    public ArrayList<int[][]> generateProblemAndSolution(int boardSize, int diffLevel) {
-        ArrayList<int[][]> problemAndSolution = new ArrayList<>();
-        problemAndSolution.add(this.generateProblem(boardSize, diffLevel));
-        problemAndSolution.add(this.generateSolution(boardSize, diffLevel));
-        return problemAndSolution;
+    public Sudoku generateSudoku(int boardSize, int diffLevel) {
+        return new Sudoku(this.generateProblem(boardSize, diffLevel), this.generateSolution(boardSize, diffLevel), diffLevel);
     }
 
     private int[][] generateProblem(int boardSize, int diffLevel) {
