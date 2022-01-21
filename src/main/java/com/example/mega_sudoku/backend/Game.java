@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
@@ -71,6 +72,7 @@ public class Game {
         String diffInfo = (sudoku.getDiffLevel() == 1) ? "Простой" : (sudoku.getDiffLevel() == 2) ? "Средний" : "Сложный";
         stage.setTitle("Мега-Cудоку " + sudoku.getBoardSize() + " x " + sudoku.getBoardSize() + " " + diffInfo);
         stage.setResizable(false);
+        stage.getIcons().add(new Image("/icon.png"));
         return stage;
     }
 
@@ -102,7 +104,7 @@ public class Game {
                     textField.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
                     timer.cancel();
                 }
-            }, 5*1000);
+            }, 3*1000);
         }
     }
 

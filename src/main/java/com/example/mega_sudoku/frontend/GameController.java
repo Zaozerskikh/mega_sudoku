@@ -87,8 +87,9 @@ public class GameController {
 
     @FXML
     protected void onSaveButtonClick(ActionEvent e) {
-        game.setSaved(true);
-        GameSaver.save(game.getSudoku(), (Stage)returnButton.getScene().getWindow());
+        if(GameSaver.save(game.getSudoku(), (Stage)returnButton.getScene().getWindow())) {
+            game.setSaved(true);
+        }
     }
 
     @FXML
@@ -137,6 +138,7 @@ public class GameController {
                 alert.showAndWait();
                 GameController.currentTextField.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
                 oldTextField.setFocusTraversable(true);
+                oldTextField.selectAll();
                 oldTextField.requestFocus();
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {

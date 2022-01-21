@@ -1,82 +1,82 @@
 #check_button {
-    -fx-background-image: url("/check.jpg");
+    -fx-background-image: url("/check.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
 #check_button:pressed {
-    -fx-background-image: url("/checked.jpg");
+    -fx-background-image: url("/checked.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
 #help_button {
-    -fx-background-image: url("/lamp.jpg");
+    -fx-background-image: url("/lamp.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
 #help_button:pressed {
-    -fx-background-image: url("/yellow_lamp.jpg");
+    -fx-background-image: url("/yellow_lamp.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
 #solution_button {
-    -fx-background-image: url("/flag.jpg");
+    -fx-background-image: url("/flag.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
 #solution_button:pressed {
-    -fx-background-image: url("/flagged.jpg");
+    -fx-background-image: url("/flagged.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
 #save_button {
-    -fx-background-image: url("/saving.jpg");
+    -fx-background-image: url("/saving.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
 #save_button:pressed {
-    -fx-background-image: url("/saved.jpg");
+    -fx-background-image: url("/saved.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
 #return_button {
-    -fx-background-image: url("/home.jpg");
+    -fx-background-image: url("/home.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
 #return_button:pressed {
-    -fx-background-image: url("/return_home.jpg");
+    -fx-background-image: url("/return_home.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
 #reset_button {
-    -fx-background-image: url("/reset.jpg");
+    -fx-background-image: url("/reset.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
 #reset_button:pressed {
-    -fx-background-image: url("/reseted.jpg");
+    -fx-background-image: url("/reseted.png");
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
@@ -85,14 +85,16 @@
 .button {
     -fx-background-radius: 15 15 15 15;
     -fx-border-width: 3;
-    -fx-border-color: #171717;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #525252;
     -fx-border-radius: 10 10 10 10;
 }
 
 .button:hover {
-    -fx-border-color: #c41492;
     -fx-font-size: 21;
+    -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.35 ), 10, 0, 5, 5 );
 }
+
 .root {
     -fx-background-image: url("/white.jpg");
     -fx-background-repeat: stretch;
