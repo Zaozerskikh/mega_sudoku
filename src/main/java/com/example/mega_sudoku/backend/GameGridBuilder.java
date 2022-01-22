@@ -38,63 +38,68 @@ public class GameGridBuilder {
         gridPane.getChildren().forEach(x -> ((TextField)x).setPrefSize(720.0 / boardSize, 720.0 / boardSize));
         gridPane.getChildren().forEach(x -> {
             if (ColorThemeManager.isDarkTheme()) {
-                x.setStyle("-fx-background-color: #525252; -fx-text-fill: white");
+                x.setStyle("-fx-background-color: #525252; -fx-text-fill: white;");
             }
             if (GridPane.getRowIndex(x) % (int)Math.sqrt(boardSize) == 0 && GridPane.getRowIndex(x) != 0 &&
                     (GridPane.getColumnIndex(x) % (int)Math.sqrt(boardSize) == 0 && GridPane.getColumnIndex(x) != 0)) {
-                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: solid hidden hidden solid; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 4 1 1 4; -fx-border-color: " + cellBorderColor);
             } else {
                 if (GridPane.getRowIndex(x) % (int)Math.sqrt(boardSize) == 0 && GridPane.getRowIndex(x) != 0) {
-                    x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: solid hidden hidden hidden; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                    x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 4 1 1 1; -fx-border-color: " + cellBorderColor);
                 }
                 if (GridPane.getColumnIndex(x) % (int)Math.sqrt(boardSize) == 0 && GridPane.getColumnIndex(x) != 0) {
-                    x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: hidden hidden hidden solid; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                    x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 1 1 1 4; -fx-border-color: " + cellBorderColor);
                 }
             }
         });
         gridPane.getChildren().forEach(x -> {
             if (GridPane.getRowIndex(x) == 0) {
-                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: solid hidden hidden hidden; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 5 1 1 1; -fx-border-color: " + cellBorderColor);
             }
             if (GridPane.getRowIndex(x) == 0 && GridPane.getColumnIndex(x) % (int)Math.sqrt(boardSize) == 0) {
-                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: solid hidden hidden solid; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 5 1 1 4; -fx-border-color: " + cellBorderColor);
             }
             if (GridPane.getRowIndex(x) == boardSize - 1) {
-                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: hidden hidden solid hidden; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 1 1 5 1; -fx-border-color: " + cellBorderColor);
             }
             if (GridPane.getRowIndex(x) == boardSize - 1 && GridPane.getColumnIndex(x) % (int)Math.sqrt(boardSize) == 0) {
-                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: hidden hidden solid solid; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 1 1 5 4; -fx-border-color: " + cellBorderColor);
             }
 
             if (GridPane.getColumnIndex(x) == 0) {
-                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: hidden hidden hidden solid; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 1 1 1 5; -fx-border-color: " + cellBorderColor);
             }
             if (GridPane.getColumnIndex(x) == 0 && GridPane.getRowIndex(x) % (int)Math.sqrt(boardSize) == 0) {
-                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: solid hidden hidden solid; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 4 1 1 5; -fx-border-color: " + cellBorderColor);
             }
             if (GridPane.getColumnIndex(x) == boardSize - 1) {
-                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: hidden solid hidden hidden; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 1 5 1 1; -fx-border-color: " + cellBorderColor);
             }
             if (GridPane.getColumnIndex(x) == boardSize - 1 && GridPane.getRowIndex(x) % (int)Math.sqrt(boardSize) == 0) {
-                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: solid solid hidden hidden; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 4 5 1 1; -fx-border-color: " + cellBorderColor);
             }
             if (GridPane.getColumnIndex(x) == 0 && GridPane.getRowIndex(x) == boardSize - 1) {
-                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: hidden hidden solid solid; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 1 1 5 5; -fx-border-color: " + cellBorderColor);
             }
             if (GridPane.getColumnIndex(x) == boardSize - 1 && GridPane.getRowIndex(x) == boardSize - 1) {
-                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-style: hidden solid solid hidden; -fx-border-width: 3; -fx-border-color: " + cellBorderColor);
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 1 5 5 1; -fx-border-color: " + cellBorderColor);
             }
-
+            if (GridPane.getColumnIndex(x) == boardSize - 1 && GridPane.getRowIndex(x) == 0) {
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 5 5 1 1; -fx-border-color: " + cellBorderColor);
+            }
+            if (GridPane.getColumnIndex(x) == 0 && GridPane.getRowIndex(x) == 0) {
+                x.setStyle("-fx-text-fill: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor + "; -fx-border-width: 5 1 1 5; -fx-border-color: " + cellBorderColor);
+            }
         });
-        // END OF TODO
+        gridPane.getChildren().forEach(x -> {
+            if (GridPane.getRowIndex(x) != 0 && GridPane.getColumnIndex(x) != 0 &&
+                    GridPane.getRowIndex(x) != boardSize - 1 && GridPane.getColumnIndex(x) != boardSize - 1 &&
+                    GridPane.getRowIndex(x) % (int)Math.sqrt(boardSize) != 0 && GridPane.getColumnIndex(x) % (int)Math.sqrt(boardSize) != 0) {
+                    x.setStyle("-fx-text-fill: " + cellBorderColor + " ; -fx-border-style: solid solid solid solid; -fx-border-width: 1; -fx-border-color: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor);
+            }
+        });
 
-        gridPane.setGridLinesVisible(true);
-        gridPane.getStyleClass().add("myGridStyle");
-        if (ColorThemeManager.isDarkTheme()) {
-            gridPane.getStylesheets().add(this.getClass().getResource("/styles/dark_grid_design.css").toExternalForm());
-        } else {
-            gridPane.getStylesheets().add(this.getClass().getResource("/styles/white_grid_design.css").toExternalForm());
-        }
+        // END OF TODO
         return gridPane;
     }
 }

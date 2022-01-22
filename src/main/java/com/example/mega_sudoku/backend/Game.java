@@ -73,7 +73,6 @@ public class Game {
                 this.getClass().getResource("/styles/white_game_screen.css").toExternalForm());
         String diffInfo = (sudoku.getDiffLevel() == 1) ? "Простой" : (sudoku.getDiffLevel() == 2) ? "Средний" : "Сложный";
         stage.setTitle("Мега-Cудоку " + sudoku.getBoardSize() + " x " + sudoku.getBoardSize() + " " + diffInfo);
-        stage.setResizable(false);
         stage.getIcons().add(new Image("/icon.png"));
         return stage;
     }
