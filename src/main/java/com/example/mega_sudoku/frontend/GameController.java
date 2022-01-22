@@ -25,7 +25,7 @@ public class GameController {
     private static TextField currentTextField;
 
     @FXML
-    private Button returnButton, helpButton, resetButton, solutionButton, saveButton;
+    private Button returnButton, helpButton, resetButton, solutionButton, saveButton, closeButton;
 
     public static void createGame(Sudoku sudoku) throws IOException {
         game = new Game(sudoku);

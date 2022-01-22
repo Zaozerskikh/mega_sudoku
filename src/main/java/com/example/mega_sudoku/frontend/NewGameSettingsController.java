@@ -1,11 +1,14 @@
 package com.example.mega_sudoku.frontend;
 
 import com.example.mega_sudoku.backend.SudokuBuilder;
+import com.example.mega_sudoku.backend.ToolBarManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -103,4 +106,31 @@ public class NewGameSettingsController {
         ((Stage)startGameButton.getScene().getWindow()).close();
         GameController.createGame(new SudokuBuilder().generateSudoku(boardSize, difficultyLevel));
     }
+
+    @FXML
+    protected void onCloseButtonClick(ActionEvent e) throws IOException {
+        ToolBarManager.onCloseButtonClick(e, (Stage)startGameButton.getScene().getWindow());
+        HelloController.returnStartScreen();
+    }
+
+    @FXML
+    protected void onMinimizeButtonClick(ActionEvent e) throws IOException {
+        ToolBarManager.onMinimizeButtonClick(e, (Stage)startGameButton.getScene().getWindow());
+    }
+
+    @FXML
+    protected void onMaximizeButtonClick(ActionEvent e) throws IOException {
+        ToolBarManager.onMaximizeButtonClick(e, (Stage)startGameButton.getScene().getWindow());
+    }
+
+    @FXML
+    protected void onMouseMoved(MouseEvent e) throws IOException {
+        ToolBarManager.onMouseMoved(e, (Stage)startGameButton.getScene().getWindow());
+    }
+
+    @FXML
+    protected void onMousePressed(MouseEvent e) throws IOException {
+        ToolBarManager.onMousePressed(e, (Stage)startGameButton.getScene().getWindow());
+    }
+
 }

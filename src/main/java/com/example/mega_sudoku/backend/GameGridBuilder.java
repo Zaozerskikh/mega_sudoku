@@ -33,8 +33,8 @@ public class GameGridBuilder {
         }
 
         // TODO Если будет время - заменить этот ужас нормальным кодом.
-        String cellBorderColor = (ColorThemeManager.isDarkTheme()) ? "#ffffff" : "#525252";
-        String cellBackgroundColor = (ColorThemeManager.isDarkTheme()) ? "#525252" : "#ffffff";
+        String cellBorderColor = (ColorThemeManager.isDarkTheme()) ? "#ffffff" : "#464646";
+        String cellBackgroundColor = (ColorThemeManager.isDarkTheme()) ? "#464646" : "#ffffff";
         gridPane.getChildren().forEach(x -> ((TextField)x).setPrefSize(720.0 / boardSize, 720.0 / boardSize));
         gridPane.getChildren().forEach(x -> {
             if (ColorThemeManager.isDarkTheme()) {

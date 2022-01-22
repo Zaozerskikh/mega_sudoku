@@ -2,7 +2,7 @@
     -fx-background-color: #ffffff;
 }
 
-.button {
+#new_game_button {
     -fx-background-radius: 15 15 15 15;
     -fx-background-color: #f2f2f2;
     -fx-text-fill: #000000;
@@ -11,11 +11,62 @@
     -fx-border-radius: 15 15 15 15;
 }
 
-.button:hover {
+#new_game_button:hover {
     -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.3 ), 10, 0, 5, 5 );
 }
 
-.button:pressed {
+#new_game_button:pressed {
+    -fx-background-color: #e2e2e2;
+}
+
+#load_game_button {
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #f2f2f2;
+    -fx-text-fill: #000000;
+    -fx-border-width: 2;
+    -fx-border-color: #525252;
+    -fx-border-radius: 15 15 15 15;
+}
+
+#load_game_button:hover {
+    -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.3 ), 10, 0, 5, 5 );
+}
+
+#load_game_button:pressed {
+    -fx-background-color: #e2e2e2;
+}
+
+#help_button {
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #f2f2f2;
+    -fx-text-fill: #000000;
+    -fx-border-width: 2;
+    -fx-border-color: #525252;
+    -fx-border-radius: 15 15 15 15;
+}
+
+#help_button:hover {
+    -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.3 ), 10, 0, 5, 5 );
+}
+
+#help_button:pressed {
+    -fx-background-color: #e2e2e2;
+}
+
+#info_button {
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #f2f2f2;
+    -fx-text-fill: #000000;
+    -fx-border-width: 2;
+    -fx-border-color: #525252;
+    -fx-border-radius: 15 15 15 15;
+}
+
+#info_button:hover {
+    -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.3 ), 10, 0, 5, 5 );
+}
+
+#info_button:pressed {
     -fx-background-color: #e2e2e2;
 }
 
@@ -24,12 +75,81 @@
     -fx-background-repeat: stretch;
     -fx-background-size: cover;
     -fx-background-position: center center;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #f2f2f2;
+    -fx-text-fill: #000000;
+    -fx-border-width: 2;
+    -fx-border-color: #525252;
+    -fx-border-radius: 15 15 15 15;
+}
+
+#darkThemeButton:hover {
+    -fx-background-color: #e2e2e2;
+    -fx-background-image: url("/lamp.png");
+    -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.3 ), 10, 0, 5, 5 );
 }
 
 #darkThemeButton:pressed {
+    -fx-background-color: #e2e2e2;
     -fx-background-image: url("/lamp.png");
 }
 
+#close_button {
+    -fx-background-color: #ffffff;
+    -fx-background-image: url("/close.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#close_button:hover {
+    -fx-background-color: #cc5858;
+}
+
+#close_button:pressed {
+    -fx-background-color: #555555;
+}
+
+#maximize_button {
+    -fx-background-color: #ffffff;
+    -fx-background-image: url("/maximize.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#maximize_button:hover {
+    -fx-background-color: #e4e4e4;
+}
+
+#minimize_button {
+    -fx-background-color: #ffffff;
+    -fx-background-image: url("/minimize.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#minimize_button:hover {
+    -fx-background-color: #e4e4e4;
+}
+
+#title_bar {
+    -fx-background-color: #ffffff;
+}
+
+#icon_pane {
+    -fx-background-image: url("/icon.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
 .label {
-    -fx-text-fill: #000000;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+#pane {
+    -fx-background-color: white;
 }

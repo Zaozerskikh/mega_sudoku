@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseMoved" onMousePressed="#onMousePressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.InfoController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
+      <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="266.28572954450334" minHeight="10.0" percentHeight="100.0" prefHeight="266.28572954450334" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" prefHeight="216.0" prefWidth="377.0">
+        <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" prefHeight="216.0" prefWidth="377.0" GridPane.rowIndex="1">
             <content>
                 <TextArea editable="false" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="299.0" prefWidth="433.0" text="---------------------------------------------- Общая информация ----------------------------------------------&#10;Данная программа представляет собой известную игру &quot;Судоку&quot;, но на полях большего размера, а именно 4х4 и 5х5.&#10;Правила игры стандартны - необходимо заполнить свободные клетки цифрами от 1 до 16 (при игре на поле 16х16) или&#10;от 1 до 25 (при игре на поле 25х25) так, чтобы в каждой строке, в каждом столбце и в каждом малом квадрате &#10;каждая цифра встречалась бы только один раз.&#10;&#10;&#10;--------------------------------------------- Настройки новой игры --------------------------------------------&#10;Для того, чтобы начать новую игру в главном меню щелкните &quot;Новая игра&quot;. В открывшемся окне настроек выберите &#10;желаемые параметры игры.&#10;В игре предусмотрено 2 вида игровых полей:&#10;    -4 х 4&#10;    -5 х 5&#10;Предусмотрено так же 3 уровня сложности:&#10;    -Простой&#10;    -Средний&#10;    -Сложный&#10;Выберите желаемые параметры и нажмите кнопку &quot;Сгенерировать судоку и начать игру&quot;&#10;&#10;&#10;&#10;------------------------------------------------ Игровой процесс -----------------------------------------------&#10;После нажатия кнопки &quot;Сгенерировать судоку и начать игру&quot; на экране появится игровое поле с головоломкой. Ваша &#10;задача - заполнить его в соответствии с правилами судоку. &#10;После того, как вы полностью заполнили поле цифрами - вы можете проверить правильность вашего решения. Для этого&#10;нажмите на кнопку проверки решения (с галочкой), которая расположена справа от игрового поля. В появившемся &#10;информационном сообщении вы сможете увидеть, верно ли вы решили данную головоломку.&#10;&#10;&#10;&#10;------------------------------------ Сохранение и загрузка сохраненных игр ------------------------------------&#10;В игре предусмотрена возможность сохранения текущего прогресса решения головоломики. Для сохранения необходимо&#10;нажать кнопку &quot;Сохранить&quot; в окне головоломки справа от игрового поля. Откроется диалоговое окно сохранения, в &#10;этом окне необходимо указать имя файла, в который будет сохранена ваша игра. Файл сохраняется с расширением &#10;.sudoku .Расширение файла менять не следует, в противном случае загрузить сохраненную игру будет невозможно.&#10;&#10;Для загрузки сохраненной игры в главном меню нажмите на кнопку &quot;Загрузить сохраненную игру&quot;, и в открывшемся&#10;диалоговом окне выберите файл с вашей сохраненной игрой. Игра будет загружена автоматически, и вы сможете &#10;продолжить решение головоломки.&#10;&#10;&#10;&#10;-------------------------------------------------- Подсказки --------------------------------------------------&#10;В игре предусмотрена возможность получать подсказки по мере решения головоломки. Для получения подсказки щелкните&#10;на интересующую клетку игрового поля, а затем щелкните на кнопку подсказки (&quot;Лампочка&quot;) справа от игрового поля.&#10;В выбранной клетке появится правильное число. &#10;&#10;Кроме того, предусмотрена возможность посмотреть решение целиком. Для этого щелкните мышью на кнопку с флажком&#10;справа от игрового поля, и в открывшемся диалоговом окне щелкните &quot;Ок&quot;. После этого на игровом поле будет показан&#10;правильный ответ на головоломку.&#10;&#10;&#10;&#10;------------------------------------ Сброс головоломки до начального этапа ------------------------------------&#10;В игре предусмотрена возможность сброса головоломки до начального этапа. Для этого щелкните мыщью на кнопку &#10;сброса (со стрелкой) справа от игрового поля, и в открывшемся диалоговом окне нажмите &quot;Ок&quot;. Ваше решение будет&#10;очищено, и на поле останется изначальная головоломка.">
                <font>
@@ -20,5 +22,49 @@
                </font></TextArea>
             </content>
         </ScrollPane>
+      <GridPane id="title_bar" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button id="close_button" fx:id="closeButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" onAction="#onCloseButtonClick" prefHeight="16.0" prefWidth="16.0" GridPane.halignment="RIGHT">
+               <font>
+                  <Font size="8.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="7.0" left="570.0" right="10.0" top="7.0" />
+               </GridPane.margin>
+            </Button>
+             <Button id="maximize_button" fx:id="maximizeButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" onAction="#onMaximizeButtonClick" prefHeight="16.0" prefWidth="16.0" GridPane.halignment="RIGHT">
+                 <font>
+                     <Font size="8.0" />
+                 </font>
+                 <GridPane.margin>
+                     <Insets bottom="7.0" left="530.0" right="47.0" top="7.0" />
+                 </GridPane.margin>
+             </Button>
+             <Button id="minimize_button" fx:id="minimizeButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" onAction="#onMinimizeButtonClick" prefHeight="16.0" prefWidth="16.0" GridPane.halignment="RIGHT">
+                 <font>
+                     <Font size="8.0" />
+                 </font>
+                 <GridPane.margin>
+                     <Insets bottom="7.0" left="530.0" right="87.0" top="7.0" />
+                 </GridPane.margin>
+             </Button>
+            <Pane id="icon_pane" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0" styleClass="icon_pane">
+               <GridPane.margin>
+                  <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+               </GridPane.margin>
+            </Pane>
+            <Label text="Справка">
+               <GridPane.margin>
+                  <Insets left="33.0" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
     </children>
 </GridPane>

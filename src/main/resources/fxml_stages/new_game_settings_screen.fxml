@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.NewGameSettingsController">
+<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseMoved" onMouseMoved="#onMousePressed" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.NewGameSettingsController">
    <children>
       <Slider fx:id="slider" blockIncrement="1.0" focusTraversable="false" layoutX="100.0" layoutY="224.0" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="0" onMouseClicked="#sliderChange" onMouseDragged="#sliderChange" onMouseEntered="#sliderChange" onMouseMoved="#sliderChange" onMousePressed="#sliderChange" onMouseReleased="#sliderChange" prefHeight="14.0" prefWidth="300.0" showTickMarks="true" snapToTicks="true" value="1.0" />
       <ImageView fitHeight="30.0" fitWidth="400.0" layoutX="50.0" layoutY="253.0" pickOnBounds="true" styleClass="image">
          <image>
             <Image url="@../gradient.jpg" />
          </image></ImageView>
-      <Button fx:id="startGameButton" alignment="TOP_CENTER" contentDisplay="TOP" focusTraversable="false" layoutX="50.0" layoutY="330.0" mnemonicParsing="false" onAction="#onNewGameButtonClick" prefWidth="400.0" text="Сгенерировать судоку и начать игру">
+      <Button id="new_game_button" fx:id="startGameButton" alignment="TOP_CENTER" contentDisplay="TOP" focusTraversable="false" layoutX="50.0" layoutY="330.0" mnemonicParsing="false" onAction="#onNewGameButtonClick" prefWidth="400.0" text="Сгенерировать судоку и начать игру">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Label alignment="TOP_CENTER" layoutX="50.0" layoutY="10.0" prefWidth="400.0" text="Настройки новой игры">
+      <Label alignment="TOP_CENTER" layoutX="50.0" layoutY="30.0" prefWidth="400.0" text="Настройки новой игры">
          <font>
             <Font size="30.0" />
          </font>
@@ -38,20 +39,64 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="95.0" prefHeight="30.0" prefWidth="186.0" text="Размеры поля:">
+      <Label layoutX="50.0" layoutY="125.0" prefHeight="30.0" prefWidth="186.0" text="Размеры поля:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <CheckBox fx:id="fourBox" focusTraversable="false" layoutX="223.0" layoutY="95.0" mnemonicParsing="false" onMouseClicked="#fourSelected" prefHeight="30.0" prefWidth="116.0" selected="true" text="16 x 16">
+      <CheckBox fx:id="fourBox" focusTraversable="false" layoutX="223.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#fourSelected" prefHeight="30.0" prefWidth="116.0" selected="true" text="16 x 16">
          <font>
             <Font size="20.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="fiveBox" focusTraversable="false" layoutX="350.0" layoutY="95.0" mnemonicParsing="false" onMouseClicked="#fiveSelected" text="25 x 25">
+      <CheckBox fx:id="fiveBox" focusTraversable="false" layoutX="350.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#fiveSelected" text="25 x 25">
          <font>
             <Font size="20.0" />
          </font>
       </CheckBox>
+      <GridPane id="title_bar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="500.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button id="close_button" fx:id="closeButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" onAction="#onCloseButtonClick" prefHeight="16.0" prefWidth="16.0" GridPane.halignment="RIGHT">
+               <font>
+                  <Font size="8.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="7.0" left="570.0" right="10.0" top="7.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="maximize_button" fx:id="maximizeButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" onAction="#onMaximizeButtonClick" prefHeight="16.0" prefWidth="16.0" GridPane.halignment="RIGHT">
+               <font>
+                  <Font size="8.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="7.0" left="530.0" right="47.0" top="7.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="minimize_button" fx:id="minimizeButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" onAction="#onMinimizeButtonClick" prefHeight="16.0" prefWidth="16.0" GridPane.halignment="RIGHT">
+               <font>
+                  <Font size="8.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="7.0" left="530.0" right="87.0" top="7.0" />
+               </GridPane.margin>
+            </Button>
+            <Pane id="icon_pane" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0" styleClass="icon_pane">
+               <GridPane.margin>
+                  <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+               </GridPane.margin>
+            </Pane>
+            <Label text="Новая Игра">
+               <GridPane.margin>
+                  <Insets left="33.0" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
    </children>
 </Pane>

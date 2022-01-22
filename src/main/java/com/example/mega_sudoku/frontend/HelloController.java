@@ -3,6 +3,7 @@ package com.example.mega_sudoku.frontend;
 import com.example.mega_sudoku.backend.ColorThemeManager;
 import com.example.mega_sudoku.backend.GameLoader;
 import com.example.mega_sudoku.backend.Sudoku;
+import com.example.mega_sudoku.backend.ToolBarManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,16 +11,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
 public class HelloController {
     @FXML
-    protected Button devInfoButton, helpButton, myGamesButton, newGameButton;
+    protected Button devInfoButton, helpButton, myGamesButton, newGameButton, closeButton;
 
     @FXML
     protected void onNewGameButtonClick(ActionEvent e) throws Exception {
@@ -68,12 +72,12 @@ public class HelloController {
         stage.setScene(scene);
         stage.getIcons().add(new Image("/icon.png"));
         stage.initModality(Modality.WINDOW_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.initOwner((Stage)helpButton.getScene().getWindow());
-        stage.show();
         if (stageName.equals("Новая игра")) {
             stage.setResizable(false);
-            stage.setOnCloseRequest(windowEvent -> returnStartScreen());
         }
+        stage.show();
     }
 
     public static void returnStartScreen() {
@@ -85,7 +89,7 @@ public class HelloController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        stage.setTitle("Мега-Судоку");
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setMinWidth(600);
         stage.setMinHeight(440);
         stage.getIcons().add(new Image("/icon.png"));
@@ -93,18 +97,6 @@ public class HelloController {
                 HelloController.class.getResource("/styles/dark_start_screen.css").toExternalForm(),
                 HelloController.class.getResource("/styles/white_start_screen.css").toExternalForm());
         stage.show();
-        stage.setOnCloseRequest(dialogEvent -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверены, что хотите выйти из игры?");
-            alert.setTitle("Подтвердите действие");
-            ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
-            alert.showAndWait().ifPresent(response -> {
-                if (response.getText().equals("OK")) {
-                    stage.close();
-                } else {
-                    dialogEvent.consume();
-                }
-            });
-        });
     }
 
     public void onDarkThemeButtonClick(ActionEvent actionEvent) {
@@ -112,5 +104,32 @@ public class HelloController {
         ColorThemeManager.setThemeToScene(helpButton.getScene(),
                 this.getClass().getResource("/styles/dark_start_screen.css").toExternalForm(),
                 this.getClass().getResource("/styles/white_start_screen.css").toExternalForm());
+    }
+
+    public void onMinimizeButtonClick(ActionEvent actionEvent) {
+        ToolBarManager.onMinimizeButtonClick(actionEvent, (Stage)helpButton.getScene().getWindow());
+    }
+
+    public void onMaximizeButtonClick(ActionEvent actionEvent) {
+        ToolBarManager.onMaximizeButtonClick(actionEvent, (Stage)helpButton.getScene().getWindow());
+    }
+
+    public void onCloseButtonClick(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверены, что хотите выйти из игры?");
+        alert.setTitle("Подтвердите действие");
+        ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
+        alert.showAndWait().ifPresent(response -> {
+            if (response.getText().equals("OK")) {
+                ((Stage)helpButton.getScene().getWindow()).close();
+            }
+        });
+    }
+
+    public void onMousePressed(MouseEvent me) {
+        ToolBarManager.onMousePressed(me, (Stage)helpButton.getScene().getWindow());
+    }
+
+    public void onMouseMoved(MouseEvent me) {
+        ToolBarManager.onMouseMoved(me, (Stage)helpButton.getScene().getWindow());
     }
 }

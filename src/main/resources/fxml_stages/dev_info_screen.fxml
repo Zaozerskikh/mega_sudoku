@@ -1,24 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/dark_info_screen.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseMoved" onMousePressed="#onMousePressed" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/white_info_screen.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.InfoController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="266.28572954450334" minHeight="10.0" percentHeight="100.0" prefHeight="266.28572954450334" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="266.28572954450334" minHeight="10.0" percentHeight="93.0" prefHeight="266.28572954450334" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="216.0" prefWidth="377.0" style="-fx-background: transparent; -fx-background-color: transparent;">
+        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="400.0" prefWidth="600.0" style="-fx-background: transparent; -fx-background-color: transparent;" GridPane.rowIndex="1">
             <content>
-                <TextArea editable="false" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="299.0" prefWidth="433.0" text="Разработчики: &#10;      Заозерских Сергей (tg: @sergvhn) - GUI&#10;      Зимовнов Никита (tg: @nmzimovnov) - Генерация головоломки (dancing links)&#10;&#10;Программа разработана как прикладной курсовой проект НИУ ВШЭ ФКН ПИ 2022г.&#10;Научный руководитель - Ахметсафина Римма Закиевна.&#10;">
+                <TextArea editable="false" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="358.0" prefWidth="596.0" text="Разработчики: &#10;      Заозерских Сергей (tg: @sergvhn) - GUI&#10;      Зимовнов Никита (tg: @nmzimovnov) - Генерация головоломки (dancing links)&#10;&#10;Программа разработана как прикладной курсовой проект НИУ ВШЭ ФКН ПИ 2022г.&#10;Научный руководитель - Ахметсафина Римма Закиевна.&#10;">
                <font>
                   <Font size="16.0" />
                </font></TextArea>
             </content>
         </ScrollPane>
+      <GridPane id="title_bar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+             <Button id="close_button" fx:id="closeButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" onAction="#onCloseButtonClick" prefHeight="16.0" prefWidth="16.0" GridPane.halignment="RIGHT">
+                 <font>
+                     <Font size="8.0" />
+                 </font>
+                 <GridPane.margin>
+                     <Insets bottom="7.0" left="570.0" right="10.0" top="7.0" />
+                 </GridPane.margin>
+             </Button>
+             <Button id="maximize_button" fx:id="maximizeButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" onAction="#onMaximizeButtonClick" prefHeight="16.0" prefWidth="16.0" GridPane.halignment="RIGHT">
+                 <font>
+                     <Font size="8.0" />
+                 </font>
+                 <GridPane.margin>
+                     <Insets bottom="7.0" left="530.0" right="47.0" top="7.0" />
+                 </GridPane.margin>
+             </Button>
+             <Button id="minimize_button" fx:id="minimizeButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" onAction="#onMinimizeButtonClick" prefHeight="16.0" prefWidth="16.0" GridPane.halignment="RIGHT">
+                 <font>
+                     <Font size="8.0" />
+                 </font>
+                 <GridPane.margin>
+                     <Insets bottom="7.0" left="530.0" right="87.0" top="7.0" />
+                 </GridPane.margin>
+             </Button>
+             <Pane id="icon_pane" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0" styleClass="icon_pane">
+                 <GridPane.margin>
+                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                 </GridPane.margin>
+             </Pane>
+             <Label text="О разработчиках">
+                 <GridPane.margin>
+                     <Insets left="33.0" />
+                 </GridPane.margin>
+             </Label>
+         </children>
+      </GridPane>
+
     </children>
 </GridPane>
