@@ -1,4 +1,5 @@
 package com.example.mega_sudoku.frontend;
+
 import com.example.mega_sudoku.backend.ColorThemeManager;
 import com.example.mega_sudoku.backend.GameLoader;
 import com.example.mega_sudoku.backend.Sudoku;
@@ -8,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -69,7 +69,6 @@ public class HelloController {
         stage.getIcons().add(new Image("/icon.png"));
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner((Stage)helpButton.getScene().getWindow());
-
         stage.show();
         if (stageName.equals("Новая игра")) {
             stage.setResizable(false);
@@ -79,8 +78,10 @@ public class HelloController {
 
     public static void returnStartScreen() {
         Stage stage = new Stage();
+        Scene scene = null;
         try {
-            stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(HelloController.class.getResource("/fxml_stages/start_screen.fxml")))));
+            scene = new Scene(FXMLLoader.load(Objects.requireNonNull(HelloController.class.getResource("/fxml_stages/start_screen.fxml"))));
+            stage.setScene(scene);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -88,6 +89,9 @@ public class HelloController {
         stage.setMinWidth(600);
         stage.setMinHeight(440);
         stage.getIcons().add(new Image("/icon.png"));
+        ColorThemeManager.setThemeToScene(scene,
+                HelloController.class.getResource("/styles/dark_start_screen.css").toExternalForm(),
+                HelloController.class.getResource("/styles/white_start_screen.css").toExternalForm());
         stage.show();
         stage.setOnCloseRequest(dialogEvent -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверены, что хотите выйти из игры?");

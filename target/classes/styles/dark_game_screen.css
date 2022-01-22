@@ -1,0 +1,145 @@
+.root {
+    -fx-background-color: #464646;
+}
+
+#check_button {
+    -fx-background-image: url("/white_check.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #464646;
+    -fx-border-width: 2;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 15 15 15 15;
+}
+
+
+#help_button {
+    -fx-background-image: url("/white_lamp.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #464646;
+    -fx-border-width: 2;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 15 15 15 15;
+}
+
+#solution_button {
+    -fx-background-image: url("/white_flag.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #464646;
+    -fx-border-width: 2;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 15 15 15 15;
+}
+
+#save_button {
+    -fx-background-image: url("/white_saving.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #464646;
+    -fx-border-width: 2;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 15 15 15 15;
+}
+
+#return_button {
+    -fx-background-image: url("/white_home.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #464646;
+    -fx-border-width: 2;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 15 15 15 15;
+}
+
+#reset_button {
+    -fx-background-image: url("/white_reset.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #464646;
+    -fx-border-width: 2;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 15 15 15 15;
+}
+
+#check_button:hover {
+    -fx-effect: innershadow( gaussian, #ffffff, 10, 0, 5, 5 );
+}
+
+#help_button:hover {
+    -fx-effect: innershadow( gaussian, #ffffff, 10, 0, 5, 5 );
+}
+
+#solution_button:hover {
+    -fx-effect: innershadow( gaussian, #ffffff, 10, 0, 5, 5 );
+}
+
+#save_button:hover {
+    -fx-effect: innershadow( gaussian, #ffffff, 10, 0, 5, 5 );
+}
+
+#return_button:hover {
+    -fx-effect: innershadow( gaussian, #ffffff, 10, 0, 5, 5 );
+}
+
+#reset_button:hover {
+    -fx-effect: innershadow( gaussian, #ffffff, 10, 0, 5, 5 );
+}
+
+#check_button:pressed {
+    -fx-background-image: url("/white_checked.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+#help_button:pressed {
+    -fx-background-image: url("/white_yellow_lamp.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#solution_button:pressed {
+    -fx-background-image: url("/white_flagged.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#save_button:pressed {
+    -fx-background-image: url("/white_saved.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#return_button:pressed {
+    -fx-background-image: url("/white_return_home.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#reset_button:pressed {
+    -fx-background-image: url("/white_reseted.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.myGridStyle line {
+    -fx-stroke: #ffffff;
+}

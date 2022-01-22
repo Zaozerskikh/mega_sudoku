@@ -68,7 +68,9 @@ public class Game {
         gameGrid.setPadding(new Insets(11));
         Stage stage = new Stage();
         stage.setScene(new Scene(new HBox(paneForTable, root), 870, 730));
-        stage.getScene().getStylesheets().addAll(this.getClass().getResource("/styles/game_buttons_design.css").toExternalForm());
+        ColorThemeManager.setThemeToScene(stage.getScene(),
+                this.getClass().getResource("/styles/dark_game_screen.css").toExternalForm(),
+                this.getClass().getResource("/styles/white_game_screen.css").toExternalForm());
         String diffInfo = (sudoku.getDiffLevel() == 1) ? "Простой" : (sudoku.getDiffLevel() == 2) ? "Средний" : "Сложный";
         stage.setTitle("Мега-Cудоку " + sudoku.getBoardSize() + " x " + sudoku.getBoardSize() + " " + diffInfo);
         stage.setResizable(false);
@@ -101,7 +103,11 @@ public class Game {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    textField.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+                    if (ColorThemeManager.isDarkTheme()) {
+                        textField.setBackground(new Background(new BackgroundFill(Color.valueOf("#525252"), null, null)));
+                    } else {
+                        textField.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+                    }
                     timer.cancel();
                 }
             }, 3*1000);

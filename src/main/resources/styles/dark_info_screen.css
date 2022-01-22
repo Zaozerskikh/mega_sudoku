@@ -16,7 +16,7 @@
 }
 
 .scroll-pane .thumb {
-    -fx-background-color: #686868;
+    -fx-background-color: #696969;
     -fx-border-color: #464646;
 }
 
@@ -41,11 +41,11 @@
 }
 
 .scroll-pane .decrement-arrow {
-    -fx-background-color: #686868;
+    -fx-background-color: #696969;
 }
 
 .scroll-pane .increment-arrow {
-    -fx-background-color: #686868;
+    -fx-background-color: #696969;
 }
 
 .scroll-pane .corner {

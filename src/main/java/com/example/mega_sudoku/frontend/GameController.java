@@ -1,5 +1,6 @@
 package com.example.mega_sudoku.frontend;
 
+import com.example.mega_sudoku.backend.ColorThemeManager;
 import com.example.mega_sudoku.backend.Game;
 import com.example.mega_sudoku.backend.GameSaver;
 import com.example.mega_sudoku.backend.Sudoku;
@@ -29,11 +30,15 @@ public class GameController {
     public static void createGame(Sudoku sudoku) throws IOException {
         game = new Game(sudoku);
         Stage stage = game.generateGameStage();
+        ColorThemeManager.setThemeToScene(stage.getScene(),
+                GameController.class.getResource("/styles/dark_game_screen.css").toExternalForm(),
+                GameController.class.getResource("/styles/white_game_screen.css").toExternalForm());
         stage.show();
         stage.setOnCloseRequest(dialogEvent -> {
             String msg = (game.isSaved()) ? "Ваша игра успешно сохранена.\nВыйти в главное меню?" : "Ваша игра не сохранена.\nВы уверены, что хотите выйти?";
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, msg);
             alert.setTitle("Подтвердите действие");
+            ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
             alert.showAndWait().ifPresent(response -> {
                 if (response.getText().equals("OK")) {
                     stage.close();
@@ -56,6 +61,7 @@ public class GameController {
     public void onSolutionButtonClick(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверены, что хотите сдаться и посмотреть решение?");
         alert.setTitle("Подтвердите действие");
+        ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
         alert.showAndWait().ifPresent(response -> {
             if (response.getText().equals("OK")) {
                 game.showSolution();
@@ -70,16 +76,19 @@ public class GameController {
             case "empty_cell" -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Не все клетки заполнены.");
                 alert.setTitle("Судоку не решена");
+                ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
                 alert.show();
             }
             case "incorrect" -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Поле заполнено с ошибками :(");
                 alert.setTitle("Судоку решена неверно");
+                ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
                 alert.show();
             }
             case "correct" -> {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Судоку решена правильно!");
                 alert.setTitle("Успех!");
+                ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
                 alert.show();
             }
         }
@@ -97,6 +106,7 @@ public class GameController {
         String msg = (game.isSaved()) ? "Ваша игра успешно сохранена.\nВыйти в главное меню?" : "Ваша игра не сохранена.\nВы уверены, что хотите выйти?";
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, msg);
         alert.setTitle("Подтвердите действие");
+        ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
         alert.showAndWait().ifPresent(response -> {
             if (response.getText().equals("OK")) {
                 ((Stage)returnButton.getScene().getWindow()).close();;
@@ -111,6 +121,7 @@ public class GameController {
     protected void onResetButtonClick(ActionEvent e) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Ваше решение будет сброшено. Вы уверены?");
         alert.setTitle("Подтвердите действие");
+        ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
         alert.showAndWait().ifPresent(response -> {
             if (response.getText().equals("OK")) {
                 game.reset();
@@ -135,6 +146,7 @@ public class GameController {
                 game.updateCurrentPosition(GameController.currentTextField);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Некорректное значение поля!\nДолжно быть целое число от 0 до " + game.getSudoku().getBoardSize());
+                ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
                 alert.showAndWait();
                 GameController.currentTextField.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
                 oldTextField.setFocusTraversable(true);
@@ -144,7 +156,11 @@ public class GameController {
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        oldTextField.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+                        if (ColorThemeManager.isDarkTheme()) {
+                            oldTextField.setBackground(new Background(new BackgroundFill(Color.valueOf("#525252"), null, null)));
+                        } else {
+                            oldTextField.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+                        }
                         timer.cancel();
                     }
                 }, 2*1000);

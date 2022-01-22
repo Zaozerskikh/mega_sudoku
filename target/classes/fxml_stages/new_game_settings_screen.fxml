@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -8,7 +7,7 @@
 
 <Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.NewGameSettingsController">
    <children>
-      <Slider fx:id="slider" blockIncrement="1.0" layoutX="100.0" layoutY="230.0" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="0" onMouseClicked="#sliderChange" onMouseDragged="#sliderChange" onMouseEntered="#sliderChange" onMouseMoved="#sliderChange" onMousePressed="#sliderChange" onMouseReleased="#sliderChange" prefHeight="14.0" prefWidth="300.0" showTickMarks="true" snapToTicks="true" value="1.0" />
+      <Slider fx:id="slider" blockIncrement="1.0" focusTraversable="false" layoutX="100.0" layoutY="224.0" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="0" onMouseClicked="#sliderChange" onMouseDragged="#sliderChange" onMouseEntered="#sliderChange" onMouseMoved="#sliderChange" onMousePressed="#sliderChange" onMouseReleased="#sliderChange" prefHeight="14.0" prefWidth="300.0" showTickMarks="true" snapToTicks="true" value="1.0" />
       <ImageView fitHeight="30.0" fitWidth="400.0" layoutX="50.0" layoutY="253.0" pickOnBounds="true" styleClass="image">
          <image>
             <Image url="@../gradient.jpg" />
@@ -44,7 +43,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <CheckBox fx:id="fourBox" focusTraversable="false" layoutX="219.0" layoutY="95.0" mnemonicParsing="false" onMouseClicked="#fourSelected" prefHeight="17.0" prefWidth="102.0" selected="true" text="16 x 16">
+      <CheckBox fx:id="fourBox" focusTraversable="false" layoutX="223.0" layoutY="95.0" mnemonicParsing="false" onMouseClicked="#fourSelected" prefHeight="30.0" prefWidth="116.0" selected="true" text="16 x 16">
          <font>
             <Font size="20.0" />
          </font>
@@ -55,9 +54,4 @@
          </font>
       </CheckBox>
    </children>
-   <stylesheets>
-      <URL value="@../styles/background_image.css" />
-      <URL value="@../styles/common_buttons_design.css" />
-      <URL value="@../styles/grid_design.css" />
-   </stylesheets>
 </Pane>

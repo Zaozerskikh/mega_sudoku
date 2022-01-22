@@ -1,0 +1,55 @@
+.root {
+    -fx-background-color: #464646;
+}
+
+.button {
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #464646;
+    -fx-text-fill: white;
+    -fx-border-width: 2;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 15 15 15 15;
+}
+
+.button:hover {
+    -fx-effect: innershadow( gaussian, white, 10, 0, 5, 5 );
+}
+
+.button:pressed {
+    -fx-background-color: #393939;
+}
+
+.label {
+    -fx-text-fill: #ffffff;
+}
+
+.check-box .box {
+    -fx-background-color: #464646;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 6;
+    -fx-border-width: 2;
+}
+
+.check-box:hover .box {
+    -fx-background-radius: 6;
+    -fx-background-color: #707070;
+}
+
+.check-box {
+    -fx-text-fill: #ffffff;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #ffffff;
+}
+
+.slider .track {
+    -fx-background-color: #707070;
+}
+
+.slider .thumb {
+    -fx-border-width: 4;
+    -fx-border-radius: 16;
+    -fx-border-color: #707070;
+    -fx-background-color: #ffffff;
+}
