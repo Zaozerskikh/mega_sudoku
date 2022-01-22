@@ -1,0 +1,36 @@
+.root {
+     -fx-background-color: #464646;
+}
+
+.button {
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #464646;
+    -fx-text-fill: white;
+    -fx-border-width: 2;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 15 15 15 15;
+}
+
+.button:hover {
+    -fx-effect: innershadow( gaussian, white, 10, 0, 5, 5 );
+}
+
+.button:pressed {
+    -fx-background-color: #272727;
+}
+
+.label {
+    -fx-text-fill: #ffffff;
+}
+
+#darkThemeButton {
+    -fx-background-image: url("/white_lamp.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#darkThemeButton:pressed {
+    -fx-background-image: url("/yellow_lamp.png");
+    -fx-background-color: #464646;
+}

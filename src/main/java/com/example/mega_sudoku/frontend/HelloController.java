@@ -1,4 +1,5 @@
 package com.example.mega_sudoku.frontend;
+import com.example.mega_sudoku.backend.ColorThemeManager;
 import com.example.mega_sudoku.backend.GameLoader;
 import com.example.mega_sudoku.backend.Sudoku;
 import javafx.event.ActionEvent;
@@ -7,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -22,7 +24,9 @@ public class HelloController {
     @FXML
     protected void onNewGameButtonClick(ActionEvent e) throws Exception {
         ((Stage)helpButton.getScene().getWindow()).close();
-        showStage(getClass().getResource("/fxml_stages/new_game_settings_screen.fxml"), "Новая игра");
+        showStage(getClass().getResource("/fxml_stages/new_game_settings_screen.fxml"), "Новая игра",
+                this.getClass().getResource("/styles/dark_settings_screen.css").toExternalForm(),
+                this.getClass().getResource("/styles/white_settings_screen.css").toExternalForm());
     }
 
     @FXML
@@ -44,22 +48,28 @@ public class HelloController {
 
     @FXML
     protected void onHelpButtonClick(ActionEvent e) throws Exception {
-        showStage(getClass().getResource("/fxml_stages/help_screen.fxml"), "Помощь");
+        showStage(getClass().getResource("/fxml_stages/help_screen.fxml"), "Помощь",
+                this.getClass().getResource("/styles/dark_info_screen.css").toExternalForm(),
+                this.getClass().getResource("/styles/white_info_screen.css").toExternalForm());
     }
 
     @FXML
     protected void onInfoButtonClick(ActionEvent e) throws IOException {
-        showStage(getClass().getResource("/fxml_stages/dev_info_screen.fxml"), "О разработчиках");
+        showStage(getClass().getResource("/fxml_stages/dev_info_screen.fxml"), "О разработчиках",
+                this.getClass().getResource("/styles/dark_info_screen.css").toExternalForm(),
+                this.getClass().getResource("/styles/white_info_screen.css").toExternalForm());
     }
 
-    private void showStage(URL resource, String stageName) throws IOException {
+    private void showStage(URL resource, String stageName, String darkPath, String whitePath) throws IOException {
         Stage stage = new Stage();
         stage.setTitle(stageName);
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(resource)));
+        ColorThemeManager.setThemeToScene(scene, darkPath, whitePath);
         stage.setScene(scene);
         stage.getIcons().add(new Image("/icon.png"));
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner((Stage)helpButton.getScene().getWindow());
+
         stage.show();
         if (stageName.equals("Новая игра")) {
             stage.setResizable(false);
@@ -70,7 +80,7 @@ public class HelloController {
     public static void returnStartScreen() {
         Stage stage = new Stage();
         try {
-            stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(HelloController.class.getResource("/fxml_stages/hello_screen.fxml")))));
+            stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(HelloController.class.getResource("/fxml_stages/start_screen.fxml")))));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -82,6 +92,7 @@ public class HelloController {
         stage.setOnCloseRequest(dialogEvent -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверены, что хотите выйти из игры?");
             alert.setTitle("Подтвердите действие");
+            ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
             alert.showAndWait().ifPresent(response -> {
                 if (response.getText().equals("OK")) {
                     stage.close();
@@ -90,5 +101,12 @@ public class HelloController {
                 }
             });
         });
+    }
+
+    public void onDarkThemeButtonClick(ActionEvent actionEvent) {
+        ColorThemeManager.switchTheme();
+        ColorThemeManager.setThemeToScene(helpButton.getScene(),
+                this.getClass().getResource("/styles/dark_start_screen.css").toExternalForm(),
+                this.getClass().getResource("/styles/white_start_screen.css").toExternalForm());
     }
 }
