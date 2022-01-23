@@ -1,19 +1,21 @@
 package com.example.mega_sudoku.backend;
 
+import com.example.mega_sudoku.frontend.HelloController;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import java.io.IOException;
-import java.net.URL;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -59,20 +61,18 @@ public class Game {
      */
     public Stage generateGameStage() throws IOException {
         gameGrid = new GameGridBuilder().buildGameGrid(sudoku.getBoardSize(), sudoku.getCurrentPosition());
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getResource("/fxml_stages/game_screen.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-        GridPane paneForTable = new GridPane();
-        paneForTable.add(gameGrid, 0, 0);
-        gameGrid.setPadding(new Insets(11));
         Stage stage = new Stage();
-        stage.setScene(new Scene(new HBox(paneForTable, root), 870, 730));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(HelloController.class.getResource("/fxml_stages/game_screen.fxml"))));
+        gameGrid.setPadding(new Insets(11));
+        ((GridPane)(scene.getRoot().getChildrenUnmodifiable().get(0))).add(gameGrid, 0, 0);
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
         ColorThemeManager.setThemeToScene(stage.getScene(),
                 this.getClass().getResource("/styles/dark_game_screen.css").toExternalForm(),
                 this.getClass().getResource("/styles/white_game_screen.css").toExternalForm());
         String diffInfo = (sudoku.getDiffLevel() == 1) ? "Простой" : (sudoku.getDiffLevel() == 2) ? "Средний" : "Сложный";
-        stage.setTitle("Мега-Cудоку " + sudoku.getBoardSize() + " x " + sudoku.getBoardSize() + " " + diffInfo);
+        ((Label)((GridPane)scene.getRoot().getChildrenUnmodifiable().get(1)).getChildren().get(4)).
+                setText("Мега-Cудоку " + sudoku.getBoardSize() + " x " + sudoku.getBoardSize() + " " + diffInfo);
         stage.getIcons().add(new Image("/icon.png"));
         return stage;
     }
@@ -151,5 +151,12 @@ public class Game {
 
     public void updateCurrentPosition(TextField currentTextField) {
         sudoku.updateCurrentPosition(Integer.parseInt(currentTextField.getText()), GridPane.getColumnIndex(currentTextField), GridPane.getRowIndex(currentTextField));
+    }
+
+    public void resizeBoard(double stageHeight) {
+        gameGrid.getChildren().forEach(x -> {
+            ((TextField)x).setPrefSize((stageHeight - Math.sqrt(sudoku.getBoardSize())) / sudoku.getBoardSize(), (stageHeight - 52) / sudoku.getBoardSize());
+            ((TextField)x).setFont(new Font((int)(stageHeight - 52) / (3 * sudoku.getBoardSize())));
+        });
     }
 }

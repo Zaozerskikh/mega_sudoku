@@ -99,6 +99,10 @@
     -fx-effect: innershadow( gaussian, #ffffff, 10, 0, 5, 5 );
 }
 
+.label {
+    -fx-text-fill: white;
+}
+
 #check_button:pressed {
     -fx-background-image: url("/white_checked.png");
     -fx-background-repeat: stretch;
@@ -140,6 +144,68 @@
     -fx-background-position: center center;
 }
 
-.myGridStyle line {
-    -fx-stroke: #ffffff;
+#icon_pane {
+    -fx-background-image: url("/white_icon.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#close_button {
+    -fx-background-color: #696969;
+    -fx-background-image: url("/white_close.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#close_button:hover {
+    -fx-background-color: #cc5858;
+}
+
+#close_button:pressed {
+    -fx-background-color: #555555;
+}
+
+#icon_pane {
+    -fx-background-image: url("/white_icon.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#maximize_button {
+    -fx-background-color: #696969;
+    -fx-background-image: url("/white_maximize.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#maximize_button:hover {
+    -fx-background-color: #595959;
+}
+
+#maximize_button:pressed {
+    -fx-background-color: #555555;
+}
+
+#minimize_button {
+    -fx-background-color: #696969;
+    -fx-background-image: url("/white_minimize.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#minimize_button:hover {
+    -fx-background-color: #595959;
+}
+
+#minimize_button:pressed {
+    -fx-background-color: #555555;
+}
+
+#title_bar {
+    -fx-background-color: #696969;
 }

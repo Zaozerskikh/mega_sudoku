@@ -44,12 +44,12 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <CheckBox fx:id="fourBox" focusTraversable="false" layoutX="223.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#fourSelected" prefHeight="30.0" prefWidth="116.0" selected="true" text="16 x 16">
+      <CheckBox fx:id="box12" focusTraversable="false" layoutX="223.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#selected12" prefHeight="30.0" prefWidth="116.0" selected="true" text="12 х 12">
          <font>
             <Font size="20.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="fiveBox" focusTraversable="false" layoutX="350.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#fiveSelected" text="25 x 25">
+      <CheckBox fx:id="box16" focusTraversable="false" layoutX="350.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#selected16" text="16 х 16">
          <font>
             <Font size="20.0" />
          </font>

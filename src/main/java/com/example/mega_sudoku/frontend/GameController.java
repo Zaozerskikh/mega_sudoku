@@ -1,14 +1,12 @@
 package com.example.mega_sudoku.frontend;
 
-import com.example.mega_sudoku.backend.ColorThemeManager;
-import com.example.mega_sudoku.backend.Game;
-import com.example.mega_sudoku.backend.GameSaver;
-import com.example.mega_sudoku.backend.Sudoku;
+import com.example.mega_sudoku.backend.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
@@ -25,7 +23,7 @@ public class GameController {
     private static TextField currentTextField;
 
     @FXML
-    private Button returnButton, helpButton, resetButton, solutionButton, saveButton, closeButton;
+    private Button returnButton, helpButton, resetButton, solutionButton, saveButton, closeButton, checkButton;
 
     public static void createGame(Sudoku sudoku) throws IOException {
         game = new Game(sudoku);
@@ -33,6 +31,7 @@ public class GameController {
         ColorThemeManager.setThemeToScene(stage.getScene(),
                 GameController.class.getResource("/styles/dark_game_screen.css").toExternalForm(),
                 GameController.class.getResource("/styles/white_game_screen.css").toExternalForm());
+        game.resizeBoard(440);
         stage.show();
         stage.setOnCloseRequest(dialogEvent -> {
             String msg = (game.isSaved()) ? "Ваша игра успешно сохранена.\nВыйти в главное меню?" : "Ваша игра не сохранена.\nВы уверены, что хотите выйти?";
@@ -111,8 +110,6 @@ public class GameController {
             if (response.getText().equals("OK")) {
                 ((Stage)returnButton.getScene().getWindow()).close();;
                 HelloController.returnStartScreen();
-            } else {
-                e.consume();
             }
         });
     }
@@ -148,10 +145,10 @@ public class GameController {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Некорректное значение поля!\nДолжно быть целое число от 0 до " + game.getSudoku().getBoardSize());
                 ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
                 alert.showAndWait();
-                GameController.currentTextField.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
                 oldTextField.setFocusTraversable(true);
                 oldTextField.selectAll();
                 oldTextField.requestFocus();
+                oldTextField.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
@@ -163,7 +160,7 @@ public class GameController {
                         }
                         timer.cancel();
                     }
-                }, 2*1000);
+                }, 5*1000);
             }
         }
         if (isCorrect) {
@@ -171,5 +168,47 @@ public class GameController {
         } else {
             GameController.currentTextField = oldTextField;
         }
+    }
+
+    public void onMinimizeButtonClick(ActionEvent actionEvent) {
+        ToolBarManager.onMinimizeButtonClick(actionEvent, (Stage)helpButton.getScene().getWindow());
+    }
+
+    public void onMaximizeButtonClick(ActionEvent actionEvent) {
+        ToolBarManager.onMaximizeButtonClick(actionEvent, (Stage)helpButton.getScene().getWindow());
+        game.resizeBoard(((Stage)helpButton.getScene().getWindow()).getHeight() + 33);
+        if (((Stage)helpButton.getScene().getWindow()).isMaximized()) {
+            helpButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75) / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
+            solutionButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75) / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
+            checkButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75)  / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
+            returnButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75) / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
+            resetButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75) / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
+            saveButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75) / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
+        } else {
+            helpButton.setMaxSize(50,50);
+            solutionButton.setMaxSize(50,50);
+            checkButton.setMaxSize(50,50);
+            saveButton.setMaxSize(50,50);
+            resetButton.setMaxSize(50,50);
+            returnButton.setMaxSize(50,50);
+            helpButton.setMinSize(50,50);
+            solutionButton.setMinSize(50,50);
+            checkButton.setMinSize(50,50);
+            saveButton.setMinSize(50,50);
+            resetButton.setMinSize(50,50);
+            returnButton.setMinSize(50,50);
+        }
+    }
+
+    public void onCloseButtonClick(ActionEvent actionEvent) {
+        onReturnButtonClick(actionEvent);
+    }
+
+    public void onMousePressed(MouseEvent me) {
+        ToolBarManager.onMousePressed(me, (Stage)helpButton.getScene().getWindow());
+    }
+
+    public void onMouseMoved(MouseEvent me) {
+        ToolBarManager.onMouseMoved(me, (Stage)helpButton.getScene().getWindow());
     }
 }
