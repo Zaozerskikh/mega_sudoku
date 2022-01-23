@@ -1,5 +1,8 @@
 .root {
     -fx-background-color: #ffffff;
+    -fx-border-color: #191919;
+    -fx-border-width: 0.2;
+    -fx-border-style: solid solid hidden solid;
 }
 
 #check_button {
@@ -182,6 +185,9 @@
 
 #title_bar {
     -fx-background-color: #ffffff;
+    -fx-border-color: #191919;
+    -fx-border-width: 0.3;
+    -fx-border-style: solid solid hidden solid;
 }
 
 #icon_pane {

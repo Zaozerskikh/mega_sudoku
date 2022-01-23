@@ -1,5 +1,8 @@
 .root {
     -fx-background-color: #ffffff;
+    -fx-border-color: #191919;
+    -fx-border-width: 0.2;
+    -fx-border-style: solid solid hidden solid;
 }
 
 #new_game_button {
@@ -40,6 +43,13 @@
     -fx-border-radius: 16;
     -fx-border-color: #525252;
     -fx-background-color: #e2e2e2;
+}
+
+.slider .track {
+    -fx-background-image: url("/gradient.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
 }
 
 #close_button {
@@ -84,6 +94,9 @@
 
 #title_bar {
     -fx-background-color: #ffffff;
+    -fx-border-color: #191919;
+    -fx-border-width: 0.3;
+    -fx-border-style: solid solid hidden solid;
 }
 
 #icon_pane {

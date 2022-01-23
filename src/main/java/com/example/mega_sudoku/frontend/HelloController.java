@@ -1,9 +1,6 @@
 package com.example.mega_sudoku.frontend;
 
-import com.example.mega_sudoku.backend.ColorThemeManager;
-import com.example.mega_sudoku.backend.GameLoader;
-import com.example.mega_sudoku.backend.Sudoku;
-import com.example.mega_sudoku.backend.ToolBarManager;
+import com.example.mega_sudoku.backend.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -91,7 +88,7 @@ public class HelloController {
         }
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setMinWidth(600);
-        stage.setMinHeight(440);
+        stage.setMinHeight(400);
         stage.getIcons().add(new Image("/icon.png"));
         ColorThemeManager.setThemeToScene(scene,
                 HelloController.class.getResource("/styles/dark_start_screen.css").toExternalForm(),
@@ -99,7 +96,7 @@ public class HelloController {
         stage.show();
     }
 
-    public void onDarkThemeButtonClick(ActionEvent actionEvent) {
+    public void onDarkThemeButtonClick(ActionEvent actionEvent) throws IOException {
         ColorThemeManager.switchTheme();
         ColorThemeManager.setThemeToScene(helpButton.getScene(),
                 this.getClass().getResource("/styles/dark_start_screen.css").toExternalForm(),
@@ -114,16 +111,12 @@ public class HelloController {
         ToolBarManager.onMaximizeButtonClick(actionEvent, (Stage)helpButton.getScene().getWindow());
     }
 
-    public void onCloseButtonClick(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверены, что хотите выйти из игры?");
-        alert.setTitle("Подтвердите действие");
-        ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
-        alert.showAndWait().ifPresent(response -> {
-            if (response.getText().equals("OK")) {
-                ((Stage)helpButton.getScene().getWindow()).close();
-            }
-        });
+    public void onCloseButtonClick(ActionEvent actionEvent) throws IOException {
+        Dialog dialog = new Dialog("confirm", "Подтвердите действие", "Выйти из программы?", (Stage)helpButton.getScene().getWindow());
+        dialog.showDialog();
+        dialog.yesButton.setOnAction(x -> ((Stage)helpButton.getScene().getWindow()).close());
     }
+
 
     public void onMousePressed(MouseEvent me) {
         ToolBarManager.onMousePressed(me, (Stage)helpButton.getScene().getWindow());

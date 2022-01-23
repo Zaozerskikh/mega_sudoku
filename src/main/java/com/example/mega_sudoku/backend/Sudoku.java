@@ -3,6 +3,9 @@ package com.example.mega_sudoku.backend;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * Класс реализующий головоломку.
+ */
 public class Sudoku implements Serializable {
     // Поле для работы сериализации.
     @Serial

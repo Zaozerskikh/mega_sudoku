@@ -1,30 +1,81 @@
-.dialog-pane {
+.root {
     -fx-background-color: #ffffff;
+    -fx-border-color: #191919;
+    -fx-border-width: 0.2;
 }
 
-.dialog-pane .label{
+#icon_pane {
+    -fx-background-image: url("/icon.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+#title_bar {
     -fx-background-color: #ffffff;
+    -fx-border-color: #191919;
+    -fx-border-style: solid solid hidden solid;
+    -fx-border-width: 0.3;
+}
+
+.label {
     -fx-text-fill: #000000;
 }
 
-.dialog-pane .header-panel {
+#close_button {
     -fx-background-color: #ffffff;
-    -fx-text-fill: #000000;
+    -fx-background-image: url("/close.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
 }
 
-.button {
+#close_button:hover {
+    -fx-background-color: #cc5858;
+}
+
+#close_button:pressed {
+    -fx-background-color: #393939;
+}
+
+#no_button {
     -fx-background-radius: 15 15 15 15;
-    -fx-background-color: #ffffff;
+    -fx-background-color: #f2f2f2;
+    -fx-text-fill: #000000;
     -fx-border-width: 2;
     -fx-border-color: #525252;
     -fx-border-radius: 15 15 15 15;
 }
 
-.button:hover {
-    -fx-effect: innershadow(gaussian, rgba( 0, 0, 0, 0.3 ), 10, 0, 5, 5 );
+#no_button:hover {
+    -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.3 ), 10, 0, 5, 5 );
 }
 
-.button:pressed {
+#no_button:pressed {
     -fx-background-color: #e2e2e2;
+}
+
+#yes_button {
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #f2f2f2;
+    -fx-text-fill: #000000;
+    -fx-border-width: 2;
+    -fx-border-color: #525252;
+    -fx-border-radius: 15 15 15 15;
+}
+
+#yes_button:hover {
+    -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.3 ), 10, 0, 5, 5 );
+}
+
+#yes_button:pressed {
+    -fx-background-color: #e2e2e2;
+}
+
+#image_pane {
+    -fx-background-image: url("/info.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
 }
 

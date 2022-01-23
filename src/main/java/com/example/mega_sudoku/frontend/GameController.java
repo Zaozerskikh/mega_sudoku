@@ -3,7 +3,6 @@ package com.example.mega_sudoku.frontend;
 import com.example.mega_sudoku.backend.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -33,20 +32,6 @@ public class GameController {
                 GameController.class.getResource("/styles/white_game_screen.css").toExternalForm());
         game.resizeBoard(440);
         stage.show();
-        stage.setOnCloseRequest(dialogEvent -> {
-            String msg = (game.isSaved()) ? "Ваша игра успешно сохранена.\nВыйти в главное меню?" : "Ваша игра не сохранена.\nВы уверены, что хотите выйти?";
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, msg);
-            alert.setTitle("Подтвердите действие");
-            ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
-            alert.showAndWait().ifPresent(response -> {
-                if (response.getText().equals("OK")) {
-                    stage.close();
-                    HelloController.returnStartScreen();
-                } else {
-                    dialogEvent.consume();
-                }
-            });
-        });
     }
 
     @FXML
@@ -57,78 +42,69 @@ public class GameController {
     }
 
     @FXML
-    public void onSolutionButtonClick(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Вы уверены, что хотите сдаться и посмотреть решение?");
-        alert.setTitle("Подтвердите действие");
-        ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
-        alert.showAndWait().ifPresent(response -> {
-            if (response.getText().equals("OK")) {
-                game.showSolution();
-            }
+    public void onSolutionButtonClick(ActionEvent actionEvent) throws IOException {
+        Dialog dialog = new Dialog("confirm", "Подтвердите действие", "Вы уверены, что хотите\nпосмотреть решение?",
+                (Stage)helpButton.getScene().getWindow());
+        dialog.showDialog();
+        dialog.yesButton.setOnAction(x -> {
+            dialog.closeDialog();
+            game.showSolution();
         });
     }
 
     @FXML
-    public void onCheckButtonClick(ActionEvent actionEvent) {
+    public void onCheckButtonClick(ActionEvent actionEvent) throws IOException {
         String res = game.checkAnswer();
         switch (res) {
             case "empty_cell" -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Не все клетки заполнены.");
-                alert.setTitle("Судоку не решена");
-                ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
-                alert.show();
+                Dialog dialog = new Dialog("info", "Судоку не решена", "\nНе все клетки заполнены.",
+                        (Stage)helpButton.getScene().getWindow());
+                dialog.showDialog();
             }
             case "incorrect" -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Поле заполнено с ошибками :(");
-                alert.setTitle("Судоку решена неверно");
-                ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
-                alert.show();
+                Dialog dialog = new Dialog("info", "Судоку решена неверно", "\nПоле заполнено с ошибками :(",
+                        (Stage)helpButton.getScene().getWindow());
+                dialog.showDialog();
             }
             case "correct" -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Судоку решена правильно!");
-                alert.setTitle("Успех!");
-                ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
-                alert.show();
+                Dialog dialog = new Dialog("info", "Успех!", "\nСудоку решена верно!",
+                        (Stage)helpButton.getScene().getWindow());
+                dialog.showDialog();
             }
         }
     }
 
     @FXML
-    protected void onSaveButtonClick(ActionEvent e) {
+    protected void onSaveButtonClick(ActionEvent e) throws IOException {
         if(GameSaver.save(game.getSudoku(), (Stage)returnButton.getScene().getWindow())) {
             game.setSaved(true);
         }
     }
 
     @FXML
-    protected void onReturnButtonClick(ActionEvent e) {
-        String msg = (game.isSaved()) ? "Ваша игра успешно сохранена.\nВыйти в главное меню?" : "Ваша игра не сохранена.\nВы уверены, что хотите выйти?";
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, msg);
-        alert.setTitle("Подтвердите действие");
-        ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
-        alert.showAndWait().ifPresent(response -> {
-            if (response.getText().equals("OK")) {
-                ((Stage)returnButton.getScene().getWindow()).close();;
-                HelloController.returnStartScreen();
-            }
+    protected void onReturnButtonClick(ActionEvent e) throws IOException {
+        String msg = (game.isSaved()) ? "Ваша игра успешно сохранена.\nВыйти в главное меню?" : "Ваша игра не сохранена.\nВы уверены, что хотите\nвыйти в главное меню?";
+        Dialog dialog = new Dialog("confirm", "Подтвердите действие", msg,
+                (Stage)helpButton.getScene().getWindow());
+        dialog.showDialog();
+        dialog.yesButton.setOnAction(x -> {
+            ((Stage)helpButton.getScene().getWindow()).close();
+            HelloController.returnStartScreen();
         });
     }
 
     @FXML
-    protected void onResetButtonClick(ActionEvent e) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Ваше решение будет сброшено. Вы уверены?");
-        alert.setTitle("Подтвердите действие");
-        ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
-        alert.showAndWait().ifPresent(response -> {
-            if (response.getText().equals("OK")) {
-                game.reset();
-            } else {
-                e.consume();
-            }
+    protected void onResetButtonClick(ActionEvent e) throws IOException {
+        Dialog dialog = new Dialog("confirm", "Подтвердите действие", "Ваше решение будет\nсброшено. Вы уверены?",
+                 (Stage)helpButton.getScene().getWindow());
+        dialog.showDialog();
+        dialog.yesButton.setOnAction(x -> {
+            dialog.closeDialog();
+            game.reset();
         });
     }
 
-    public static void checkAndUpdateCurrTF(TextField currentTextField) {
+    public static void checkAndUpdateCurrTF(TextField currentTextField) throws IOException {
         TextField oldTextField = GameController.currentTextField;
         boolean isCorrect = true;
         if (GameController.currentTextField != null && !GameController.currentTextField.getText().equals("")) {
@@ -142,9 +118,9 @@ public class GameController {
                 game.setSaved(false);
                 game.updateCurrentPosition(GameController.currentTextField);
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Некорректное значение поля!\nДолжно быть целое число от 0 до " + game.getSudoku().getBoardSize());
-                ColorThemeManager.setThemeToDialogPane(alert.getDialogPane());
-                alert.showAndWait();
+                Dialog dialog = new Dialog("info", "Ошибка!", "\nНекорректное значение поля.",
+                         (Stage)Stage.getWindows().get(0));
+                dialog.showDialog();
                 oldTextField.setFocusTraversable(true);
                 oldTextField.selectAll();
                 oldTextField.requestFocus();
@@ -200,7 +176,7 @@ public class GameController {
         }
     }
 
-    public void onCloseButtonClick(ActionEvent actionEvent) {
+    public void onCloseButtonClick(ActionEvent actionEvent) throws IOException {
         onReturnButtonClick(actionEvent);
     }
 

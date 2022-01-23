@@ -1,16 +1,23 @@
 package com.example.mega_sudoku.backend;
 
-import com.example.mega_sudoku.frontend.HelloController;
 import javafx.scene.Scene;
-import javafx.scene.control.DialogPane;
 
+/**
+ * Класс, контролирующий изменения цветовой темы приложения.
+ */
 public class ColorThemeManager {
+
+    // Включена ли на данный момент тёмная тема или нет.
     private static boolean darkTheme = false;
 
     public static boolean isDarkTheme() {
         return darkTheme;
     }
 
+
+    /**
+     * Переключение темы со светлой на темную и обратно.
+     */
     public static void switchTheme() {
         if (isDarkTheme()) {
             darkTheme = false;
@@ -19,14 +26,13 @@ public class ColorThemeManager {
         }
     }
 
-    public static void setThemeToDialogPane(DialogPane dp) {
-        if(ColorThemeManager.isDarkTheme()) {
-            dp.getStylesheets().add(HelloController.class.getResource("/styles/dark_dialog_pane.css").toExternalForm());
-        } else {
-            dp.getStylesheets().add(HelloController.class.getResource("/styles/white_dialog_pane.css").toExternalForm());
-        }
-    }
 
+    /**
+     * Установка соответствующей темы окна.
+     * @param scene окно.
+     * @param darkPath путь к css файлу с темной темой.
+     * @param whitePath путь к css файлу со светлой темой.
+     */
     public static void setThemeToScene(Scene scene, String darkPath, String whitePath) {
         scene.getRoot().getStylesheets().clear();
         scene.getStylesheets().clear();

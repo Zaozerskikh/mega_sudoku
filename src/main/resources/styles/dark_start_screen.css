@@ -1,5 +1,7 @@
 .root {
-     -fx-background-color: #464646;
+    -fx-background-color: #464646;
+    -fx-border-color: #191919;
+    -fx-border-width: 0.2;
 }
 
 #new_game_button {
@@ -160,4 +162,7 @@
 
 #title_bar {
     -fx-background-color: #696969;
+    -fx-border-color: #191919;
+    -fx-border-width: 0.3;
+    -fx-border-style: solid solid hidden solid;
 }

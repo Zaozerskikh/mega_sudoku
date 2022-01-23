@@ -88,6 +88,7 @@ public class Game {
                 }
             }
         });
+        sudoku.setCurrentPosition(sudoku.getSolution());
     }
 
     /**
@@ -149,10 +150,18 @@ public class Game {
         sudoku.setCurrentPosition(sudoku.getProblem());
     }
 
+    /**
+     * Обновление текущей позиции на доске.
+     * @param currentTextField клетка в которой изменилось значение.
+     */
     public void updateCurrentPosition(TextField currentTextField) {
         sudoku.updateCurrentPosition(Integer.parseInt(currentTextField.getText()), GridPane.getColumnIndex(currentTextField), GridPane.getRowIndex(currentTextField));
     }
 
+    /**
+     * Изменение размера игровой доски.
+     * @param stageHeight текущая высота окна с игрой.
+     */
     public void resizeBoard(double stageHeight) {
         gameGrid.getChildren().forEach(x -> {
             ((TextField)x).setPrefSize((stageHeight - Math.sqrt(sudoku.getBoardSize())) / sudoku.getBoardSize(), (stageHeight - 52) / sudoku.getBoardSize());

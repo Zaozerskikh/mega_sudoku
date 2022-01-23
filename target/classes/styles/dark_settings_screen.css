@@ -1,5 +1,7 @@
 .root {
     -fx-background-color: #464646;
+    -fx-border-color: #191919;
+    -fx-border-width: 0.2;
 }
 
 #new_game_button {
@@ -45,7 +47,15 @@
 }
 
 .slider .track {
-    -fx-background-color: #707070;
+    -fx-background-image: url("/gradient.jpg");
+    -fx-background-color: #464646;
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.slider .tick-marks. {
+    -fx-background-color: #464646;
 }
 
 .slider .thumb {
@@ -119,4 +129,7 @@
 
 #title_bar {
     -fx-background-color: #696969;
+    -fx-border-color: #191919;
+    -fx-border-style: solid solid hidden solid;
+    -fx-border-width: 0.3;
 }
