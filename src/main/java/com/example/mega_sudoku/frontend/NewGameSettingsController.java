@@ -1,8 +1,8 @@
 package com.example.mega_sudoku.frontend;
 
+import com.example.mega_sudoku.backend.StartModel;
 import com.example.mega_sudoku.backend.SudokuBuilder;
 import com.example.mega_sudoku.backend.ToolBarManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -13,31 +13,51 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/**
+ * Контроллер для окна настроек.
+ */
 public class NewGameSettingsController {
+    // Размер доски, выбранный пользователем (по умолчанию - 12).
     private int boardSize = 12;
+
+    // Уровень сложности, выбранный пользователем (по умолчанию - 1).
     private int difficultyLevel = 1;
 
+    // Кнопка начала новой игры.
     @FXML
     protected Button startGameButton;
 
+    // Чекбокс для размера поля 12.
     @FXML
     protected CheckBox box12;
 
+    // Чекбокс для размера поля 16.
     @FXML
     protected CheckBox box16;
 
+    // Слайдер изменения уровня сложности.
     @FXML
-    protected Slider slider;
+    protected Slider diffSlider;
 
+    // Надпись легкого уровня сложности.
     @FXML
     protected Label easy;
 
+    // Надпись среднего уровня сложности.
     @FXML
     protected Label medium;
 
+    // Надпись сложного уровня сложности.
     @FXML
     protected Label hard;
 
+    private Stage getCurrentStage() {
+        return (Stage)startGameButton.getScene().getWindow();
+    }
+
+    /**
+     * Обработка выбора размера поля 16.
+     */
     @FXML
     protected void selected16() {
         if (box12.isSelected()) {
@@ -51,6 +71,9 @@ public class NewGameSettingsController {
         }
     }
 
+    /**
+     * Обработка выбора размера поля 12.
+     */
     @FXML
     protected void selected12() {
         if (box16.isSelected()) {
@@ -64,9 +87,12 @@ public class NewGameSettingsController {
         }
     }
 
+    /**
+     * Обработка изменения положения слайдера сложности генерируемой судоку
+     */
     @FXML
     protected void sliderChange() {
-        difficultyLevel = (int)slider.getValue();
+        difficultyLevel = (int) diffSlider.getValue();
         switch (difficultyLevel) {
             case 1 -> {
                 easy.setFont(new Font(19));
@@ -105,36 +131,55 @@ public class NewGameSettingsController {
         }
     }
 
+    /**
+     * Обработка нажатия на кнопку генерации судоку.
+     */
     @FXML
     protected void onNewGameButtonClick() throws IOException {
-        ((Stage)startGameButton.getScene().getWindow()).close();
+        getCurrentStage().close();
         GameController.createGame(new SudokuBuilder().generateSudoku(boardSize, difficultyLevel));
     }
 
+    /**
+     * Обработка нажатия на кнопку "Закрыть окно" в правом верхнем углу окна.
+     */
     @FXML
-    protected void onCloseButtonClick(ActionEvent e) throws IOException {
-        ToolBarManager.onCloseButtonClick(e, (Stage)startGameButton.getScene().getWindow());
-        HelloController.returnStartScreen();
+    protected void onCloseButtonClick() {
+        ToolBarManager.onCloseButtonClick(getCurrentStage());
+        StartModel.getStartModel().buildStartScreen().show();
     }
 
+    /**
+     * Обработка нажатия на кнопку "Свернуть окно" в правом верхнем углу окна.
+     */
     @FXML
-    protected void onMinimizeButtonClick(ActionEvent e) throws IOException {
-        ToolBarManager.onMinimizeButtonClick(e, (Stage)startGameButton.getScene().getWindow());
+    protected void onMinimizeButtonClick() {
+        ToolBarManager.onMinimizeButtonClick(getCurrentStage());
     }
 
+    /**
+     * Обработка нажатия на кнопку "Развернуть на весь экран" в правом верхнем углу окна.
+     */
     @FXML
-    protected void onMaximizeButtonClick(ActionEvent e) throws IOException {
-        ToolBarManager.onMaximizeButtonClick(e, (Stage)startGameButton.getScene().getWindow());
+    protected void onMaximizeButtonClick() {
+        ToolBarManager.onMaximizeButtonClick(getCurrentStage());
     }
 
+    /**
+     * Обработка перемещения мыши (необходимо для работы перетаскивания окна).
+     * @param e Mouse event.
+     */
     @FXML
-    protected void onMouseMoved(MouseEvent e) throws IOException {
-        ToolBarManager.onMouseMoved(e, (Stage)startGameButton.getScene().getWindow());
+    protected void onMouseMoved(MouseEvent e) {
+        ToolBarManager.onMouseMoved(e, getCurrentStage());
     }
 
+    /**
+     * Обработка нажатия мыши (необходимо для работы перетаскивания окна).
+     * @param e Mouse event.
+     */
     @FXML
-    protected void onMousePressed(MouseEvent e) throws IOException {
-        ToolBarManager.onMousePressed(e, (Stage)startGameButton.getScene().getWindow());
+    protected void onMousePressed(MouseEvent e) {
+        ToolBarManager.onMousePressed(e, getCurrentStage());
     }
-
 }

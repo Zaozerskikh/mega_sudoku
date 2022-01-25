@@ -4,9 +4,11 @@ import com.example.mega_sudoku.frontend.GameController;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-
 import java.io.IOException;
 
+/**
+ * Класс, отвечающий за построение игровой сетки заданного размера.
+ */
 public class GameGridBuilder {
     /**
      * Создает сетку игры по заданной судоку.

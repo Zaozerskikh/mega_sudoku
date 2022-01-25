@@ -10,6 +10,10 @@ public class ColorThemeManager {
     // Включена ли на данный момент тёмная тема или нет.
     private static boolean darkTheme = false;
 
+    /**
+     * Getter для darkTheme.
+     * @return установлена ли темная тема.
+     */
     public static boolean isDarkTheme() {
         return darkTheme;
     }
@@ -19,11 +23,7 @@ public class ColorThemeManager {
      * Переключение темы со светлой на темную и обратно.
      */
     public static void switchTheme() {
-        if (isDarkTheme()) {
-            darkTheme = false;
-        } else {
-            darkTheme = true;
-        }
+        darkTheme = !isDarkTheme();
     }
 
 

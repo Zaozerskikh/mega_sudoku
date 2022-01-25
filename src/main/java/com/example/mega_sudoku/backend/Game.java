@@ -1,6 +1,6 @@
 package com.example.mega_sudoku.backend;
 
-import com.example.mega_sudoku.frontend.HelloController;
+import com.example.mega_sudoku.frontend.StartController;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -19,6 +19,9 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Класс реализующий основную механику игры.
+ */
 public class Game {
     // Игровое поле.
     private GridPane gameGrid;
@@ -37,6 +40,10 @@ public class Game {
         return saved;
     }
 
+    /**
+     * Getter для sudoku.
+     * @return sudoku.
+     */
     public Sudoku getSudoku() {
         return this.sudoku;
     }
@@ -49,6 +56,10 @@ public class Game {
         this.saved = saved;
     }
 
+    /**
+     * Конструктор игры.
+     * @param sudoku судоку для данной игры.
+     */
     public Game(Sudoku sudoku) {
         this.sudoku = sudoku;
         this.saved = false;
@@ -62,7 +73,7 @@ public class Game {
     public Stage generateGameStage() throws IOException {
         gameGrid = new GameGridBuilder().buildGameGrid(sudoku.getBoardSize(), sudoku.getCurrentPosition());
         Stage stage = new Stage();
-        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(HelloController.class.getResource("/fxml_stages/game_screen.fxml"))));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(StartController.class.getResource("/fxml_stages/game_screen.fxml"))));
         gameGrid.setPadding(new Insets(11));
         ((GridPane)(scene.getRoot().getChildrenUnmodifiable().get(0))).add(gameGrid, 0, 0);
         stage.setScene(scene);

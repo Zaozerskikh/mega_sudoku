@@ -35,5 +35,5 @@ public class SudokuBuilder {
 
         //TODO implement solution generation.
         return solution;
-    };
+    }
 }

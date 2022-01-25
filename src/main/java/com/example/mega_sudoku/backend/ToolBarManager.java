@@ -1,12 +1,11 @@
 package com.example.mega_sudoku.backend;
 
-import javafx.event.ActionEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
- * Класс, отвечающий за обработку действий с кнопками toolbar'a сверху.
+ * Класс, отвечающий за обработку действий с кнопками toolbar'a сверху и за перемещение окна мышкой.
  */
 public class ToolBarManager {
     // Текущее положение окна по Х.
@@ -15,8 +14,11 @@ public class ToolBarManager {
     // Текущее положение окна по У.
     private static double initialY;
 
-    // Обработка закрытия окна.
-    public static void onCloseButtonClick(ActionEvent actionEvent, Stage stage) {
+    /**
+     * Обработка закрытия окна.
+     * @param stage окно, которое необходимо закрыть.
+     */
+    public static void onCloseButtonClick(Stage stage) {
         stage.close();
     }
 
@@ -49,27 +51,20 @@ public class ToolBarManager {
         }
     }
 
-
     /**
      * Обработка максимизации окна.
-     * @param actionEvent событие.
      * @param stage окно.
      */
-    public static void onMaximizeButtonClick(ActionEvent actionEvent, Stage stage) {
-        if (((Stage)stage.getScene().getWindow()).isMaximized()) {
-            ((Stage)stage.getScene().getWindow()).setMaximized(false);
-        } else {
-            ((Stage)stage.getScene().getWindow()).setMaximized(true);
-        }
+    public static void onMaximizeButtonClick(Stage stage) {
+        ((Stage)stage.getScene().getWindow()).setMaximized(!((Stage) stage.getScene().getWindow()).isMaximized());
     }
 
 
     /**
      * Обработка минимизации окна.
-     * @param actionEvent событие.
      * @param stage окно.
      */
-    public static void onMinimizeButtonClick(ActionEvent actionEvent, Stage stage) {
+    public static void onMinimizeButtonClick(Stage stage) {
         ((Stage)stage.getScene().getWindow()).setIconified(true);
     }
 }

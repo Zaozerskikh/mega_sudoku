@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseMoved" onMousePressed="#onMousePressed" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/white_start_screen.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.HelloController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseMoved" onMousePressed="#onMousePressed" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/white_start_screen.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mega_sudoku.frontend.StartController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -58,7 +58,7 @@
             <Insets bottom="10.0" left="120.0" right="120.0" top="10.0" />
          </GridPane.margin>
        </Button>
-       <Button id="load_game_button" fx:id="myGamesButton" alignment="TOP_CENTER" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoadSavedGameButtonClick" prefHeight="40.0" prefWidth="300.0" text="Загрузить сохранённую игру" GridPane.rowIndex="3" VBox.vgrow="SOMETIMES">
+       <Button id="load_game_button" fx:id="loadGameButton" alignment="TOP_CENTER" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoadSavedGameButtonClick" prefHeight="40.0" prefWidth="300.0" text="Загрузить сохранённую игру" GridPane.rowIndex="3" VBox.vgrow="SOMETIMES">
            <font>
                <Font size="20.0" />
            </font>

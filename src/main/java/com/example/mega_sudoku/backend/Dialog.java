@@ -1,6 +1,6 @@
 package com.example.mega_sudoku.backend;
 
-import com.example.mega_sudoku.frontend.HelloController;
+import com.example.mega_sudoku.frontend.StartController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -30,10 +30,14 @@ public class Dialog {
      * @param title заголовок диалога.
      * @param information информационное сообщение диалогового окна.
      * @param parent родительское окно.
-     * @throws IOException .
      */
-    public Dialog(String type, String title, String information, Stage parent) throws IOException {
-        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(HelloController.class.getResource("/fxml_stages/custom_dialog_screen.fxml"))));
+    public Dialog(String type, String title, String information, Stage parent) {
+        Scene scene = null;
+        try {
+            scene = new Scene(FXMLLoader.load(Objects.requireNonNull(StartController.class.getResource("/fxml_stages/custom_dialog_screen.fxml"))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         dialogStage.setScene(scene);
         dialogStage.initStyle(StageStyle.UNDECORATED);
         dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -47,8 +51,8 @@ public class Dialog {
         ((Label) ((GridPane) scene.getRoot().getChildrenUnmodifiable().get(0)).getChildren().get(2)).setText(title);
         ((Label) ((Pane) scene.getRoot().getChildrenUnmodifiable().get(1)).getChildren().get(0)).setText(information);
         ColorThemeManager.setThemeToScene(scene,
-                HelloController.class.getResource("/styles/dark_dialog_pane.css").toExternalForm(),
-                HelloController.class.getResource("/styles/white_dialog_pane.css").toExternalForm());
+                Objects.requireNonNull(StartController.class.getResource("/styles/dark_dialog_pane.css")).toExternalForm(),
+                Objects.requireNonNull(StartController.class.getResource("/styles/white_dialog_pane.css")).toExternalForm());
     }
 
     /**

@@ -22,7 +22,7 @@ public class GameController {
     private static TextField currentTextField;
 
     @FXML
-    private Button returnButton, helpButton, resetButton, solutionButton, saveButton, closeButton, checkButton;
+    private Button returnButton, helpButton, resetButton, solutionButton, saveButton, checkButton;
 
     public static void createGame(Sudoku sudoku) throws IOException {
         game = new Game(sudoku);
@@ -35,14 +35,14 @@ public class GameController {
     }
 
     @FXML
-    protected void onHelpButtonClick(ActionEvent e) {
+    protected void onHelpButtonClick() {
         if (currentTextField != null) {
             game.showTip(currentTextField);
         }
     }
 
     @FXML
-    public void onSolutionButtonClick(ActionEvent actionEvent) throws IOException {
+    public void onSolutionButtonClick() throws IOException {
         Dialog dialog = new Dialog("confirm", "Подтвердите действие", "Вы уверены, что хотите\nпосмотреть решение?",
                 (Stage)helpButton.getScene().getWindow());
         dialog.showDialog();
@@ -53,7 +53,7 @@ public class GameController {
     }
 
     @FXML
-    public void onCheckButtonClick(ActionEvent actionEvent) throws IOException {
+    public void onCheckButtonClick() {
         String res = game.checkAnswer();
         switch (res) {
             case "empty_cell" -> {
@@ -75,26 +75,26 @@ public class GameController {
     }
 
     @FXML
-    protected void onSaveButtonClick(ActionEvent e) throws IOException {
+    protected void onSaveButtonClick() throws IOException {
         if(GameSaver.save(game.getSudoku(), (Stage)returnButton.getScene().getWindow())) {
             game.setSaved(true);
         }
     }
 
     @FXML
-    protected void onReturnButtonClick(ActionEvent e) throws IOException {
+    protected void onReturnButtonClick() {
         String msg = (game.isSaved()) ? "Ваша игра успешно сохранена.\nВыйти в главное меню?" : "Ваша игра не сохранена.\nВы уверены, что хотите\nвыйти в главное меню?";
         Dialog dialog = new Dialog("confirm", "Подтвердите действие", msg,
                 (Stage)helpButton.getScene().getWindow());
         dialog.showDialog();
         dialog.yesButton.setOnAction(x -> {
             ((Stage)helpButton.getScene().getWindow()).close();
-            HelloController.returnStartScreen();
+            StartModel.getStartModel().buildStartScreen().show();
         });
     }
 
     @FXML
-    protected void onResetButtonClick(ActionEvent e) throws IOException {
+    protected void onResetButtonClick() {
         Dialog dialog = new Dialog("confirm", "Подтвердите действие", "Ваше решение будет\nсброшено. Вы уверены?",
                  (Stage)helpButton.getScene().getWindow());
         dialog.showDialog();
@@ -147,11 +147,11 @@ public class GameController {
     }
 
     public void onMinimizeButtonClick(ActionEvent actionEvent) {
-        ToolBarManager.onMinimizeButtonClick(actionEvent, (Stage)helpButton.getScene().getWindow());
+        ToolBarManager.onMinimizeButtonClick((Stage)helpButton.getScene().getWindow());
     }
 
     public void onMaximizeButtonClick(ActionEvent actionEvent) {
-        ToolBarManager.onMaximizeButtonClick(actionEvent, (Stage)helpButton.getScene().getWindow());
+        ToolBarManager.onMaximizeButtonClick((Stage)helpButton.getScene().getWindow());
         game.resizeBoard(((Stage)helpButton.getScene().getWindow()).getHeight() + 33);
         if (((Stage)helpButton.getScene().getWindow()).isMaximized()) {
             helpButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75) / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
@@ -176,8 +176,8 @@ public class GameController {
         }
     }
 
-    public void onCloseButtonClick(ActionEvent actionEvent) throws IOException {
-        onReturnButtonClick(actionEvent);
+    public void onCloseButtonClick() throws IOException {
+        onReturnButtonClick();
     }
 
     public void onMousePressed(MouseEvent me) {
