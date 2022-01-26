@@ -6,7 +6,6 @@ import javafx.scene.Scene;
  * Класс, контролирующий изменения цветовой темы приложения.
  */
 public class ColorThemeManager {
-
     // Включена ли на данный момент тёмная тема или нет.
     private static boolean darkTheme = false;
 
@@ -18,14 +17,12 @@ public class ColorThemeManager {
         return darkTheme;
     }
 
-
     /**
      * Переключение темы со светлой на темную и обратно.
      */
     public static void switchTheme() {
         darkTheme = !isDarkTheme();
     }
-
 
     /**
      * Установка соответствующей темы окна.

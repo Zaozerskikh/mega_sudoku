@@ -1,98 +1,110 @@
 package com.example.mega_sudoku.frontend;
 
 import com.example.mega_sudoku.backend.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class GameController {
-    // Текущая игра.
-    private static Game game;
+/**
+ * Контроллер для окна с игрой.
+ */
+public class GameController extends GameView {
 
-    // Текущая активная клетка.
-    private static TextField currentTextField;
-
+    // Кнопка проверки решения игрока.
     @FXML
-    private Button returnButton, helpButton, resetButton, solutionButton, saveButton, checkButton;
+    protected Button checkButton;
 
-    public static void createGame(Sudoku sudoku) throws IOException {
-        game = new Game(sudoku);
-        Stage stage = game.generateGameStage();
-        ColorThemeManager.setThemeToScene(stage.getScene(),
-                GameController.class.getResource("/styles/dark_game_screen.css").toExternalForm(),
-                GameController.class.getResource("/styles/white_game_screen.css").toExternalForm());
-        game.resizeBoard(440);
-        stage.show();
+    // Кнопка получения игроком подсказки.
+    @FXML
+    protected Button helpButton;
+
+    // Кнопка показа пользователю решения.
+    @FXML
+    protected Button solutionButton;
+
+    // Кнопка сохранения текущего состояни головоломки в файл.
+    @FXML
+    protected Button saveButton;
+
+    // Кнопка возврата на главный экран приложения.
+    @FXML
+    protected Button returnButton;
+
+    // Кнопка сброса решения пользователя и возврата головоломки к состоянию после генерации.
+    @FXML
+    protected Button resetButton;
+
+    /**
+     * Конструктор класса. (на все клетки игровой доски вешается событие на их изменение).
+     */
+    public GameController() {
+        gameBoard.getChildren().forEach(x -> x.setOnMousePressed(mouseEvent -> selectedCellChanged((TextField) mouseEvent.getSource())));
     }
 
+    /**
+     * Обработка изменения активной клетки игровой таблицы
+     * @param newTextField новая активная клетка.
+     */
+    public void selectedCellChanged(TextField newTextField) {
+        gameModel.selectedCellChanged(newTextField);
+    }
+
+    /**
+     * Обработка нажатия на кнопку подсказки.
+     */
     @FXML
     protected void onHelpButtonClick() {
-        if (currentTextField != null) {
-            game.showTip(currentTextField);
-        }
+        gameModel.showTip();
     }
 
+    /**
+     * Обработка нажатия на кнопку "Показать решение".
+     */
     @FXML
-    public void onSolutionButtonClick() throws IOException {
-        Dialog dialog = new Dialog("confirm", "Подтвердите действие", "Вы уверены, что хотите\nпосмотреть решение?",
-                (Stage)helpButton.getScene().getWindow());
+    public void onSolutionButtonClick() {
+        Dialog dialog = new Dialog("confirm", "Подтвердите действие", "Вы уверены, что хотите\nпосмотреть решение?", getCurrentStage());
         dialog.showDialog();
         dialog.yesButton.setOnAction(x -> {
             dialog.closeDialog();
-            game.showSolution();
+            gameModel.showSolution();
         });
     }
 
+    /**
+     * Обработка нажатия на кнопку проверки пользовательского решения.
+     */
     @FXML
     public void onCheckButtonClick() {
-        String res = game.checkAnswer();
-        switch (res) {
-            case "empty_cell" -> {
-                Dialog dialog = new Dialog("info", "Судоку не решена", "\nНе все клетки заполнены.",
-                        (Stage)helpButton.getScene().getWindow());
-                dialog.showDialog();
-            }
-            case "incorrect" -> {
-                Dialog dialog = new Dialog("info", "Судоку решена неверно", "\nПоле заполнено с ошибками :(",
-                        (Stage)helpButton.getScene().getWindow());
-                dialog.showDialog();
-            }
-            case "correct" -> {
-                Dialog dialog = new Dialog("info", "Успех!", "\nСудоку решена верно!",
-                        (Stage)helpButton.getScene().getWindow());
-                dialog.showDialog();
-            }
-        }
+        gameModel.checkAnswer();
     }
 
+    /**
+     * Обработка нажатия на кнопку "Сохранить игру".
+     */
     @FXML
-    protected void onSaveButtonClick() throws IOException {
-        if(GameSaver.save(game.getSudoku(), (Stage)returnButton.getScene().getWindow())) {
-            game.setSaved(true);
-        }
+    protected void onSaveButtonClick() {
+        gameModel.saveGame(getCurrentStage());
     }
 
+    /**
+     * Обработка нажатия на кнопку "Вернуться в меню".
+     */
     @FXML
     protected void onReturnButtonClick() {
-        String msg = (game.isSaved()) ? "Ваша игра успешно сохранена.\nВыйти в главное меню?" : "Ваша игра не сохранена.\nВы уверены, что хотите\nвыйти в главное меню?";
-        Dialog dialog = new Dialog("confirm", "Подтвердите действие", msg,
-                (Stage)helpButton.getScene().getWindow());
+        String msg = (gameModel.isSaved()) ? "Ваша игра успешно сохранена.\nВыйти в главное меню?" : "Ваша игра не сохранена.\nВы уверены, что хотите\nвыйти в главное меню?";
+        Dialog dialog = new Dialog("confirm", "Подтвердите действие", msg, getCurrentStage());
         dialog.showDialog();
         dialog.yesButton.setOnAction(x -> {
-            ((Stage)helpButton.getScene().getWindow()).close();
+            getCurrentStage().close();
             StartModel.getStartModel().buildStartScreen().show();
         });
     }
 
+    /**
+     * Обработка нажатия на кнопку сброса решения.
+     */
     @FXML
     protected void onResetButtonClick() {
         Dialog dialog = new Dialog("confirm", "Подтвердите действие", "Ваше решение будет\nсброшено. Вы уверены?",
@@ -100,91 +112,46 @@ public class GameController {
         dialog.showDialog();
         dialog.yesButton.setOnAction(x -> {
             dialog.closeDialog();
-            game.reset();
+            gameModel.resetPosition();
         });
     }
 
-    public static void checkAndUpdateCurrTF(TextField currentTextField) throws IOException {
-        TextField oldTextField = GameController.currentTextField;
-        boolean isCorrect = true;
-        if (GameController.currentTextField != null && !GameController.currentTextField.getText().equals("")) {
-            try {
-                int value = Integer.parseInt(GameController.currentTextField.getText());
-                isCorrect = value > 0 && value <= game.getSudoku().getBoardSize();
-            } catch (Exception e) {
-                isCorrect = false;
-            }
-            if (isCorrect) {
-                game.setSaved(false);
-                game.updateCurrentPosition(GameController.currentTextField);
-            } else {
-                Dialog dialog = new Dialog("info", "Ошибка!", "\nНекорректное значение поля.",
-                         (Stage)Stage.getWindows().get(0));
-                dialog.showDialog();
-                oldTextField.setFocusTraversable(true);
-                oldTextField.selectAll();
-                oldTextField.requestFocus();
-                oldTextField.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        if (ColorThemeManager.isDarkTheme()) {
-                            oldTextField.setBackground(new Background(new BackgroundFill(Color.valueOf("#525252"), null, null)));
-                        } else {
-                            oldTextField.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-                        }
-                        timer.cancel();
-                    }
-                }, 5*1000);
-            }
-        }
-        if (isCorrect) {
-            GameController.currentTextField = currentTextField;
-        } else {
-            GameController.currentTextField = oldTextField;
-        }
+    /**
+     * Обработка нажатия на кнопку "Свернуть окно" в правом верхнем углу окна.
+     */
+    public void onMinimizeButtonClick() {
+        ToolBarManager.onMinimizeButtonClick(getCurrentStage());
     }
 
-    public void onMinimizeButtonClick(ActionEvent actionEvent) {
-        ToolBarManager.onMinimizeButtonClick((Stage)helpButton.getScene().getWindow());
+    /**
+     * Обработка нажатия на кнопку "Развернуть на полный экран" в правом верхнем углу окна.
+     */
+    public void onMaximizeButtonClick() {
+        ToolBarManager.onMaximizeButtonClick(getCurrentStage());
+        var controls = new Button[] {checkButton, helpButton, solutionButton, saveButton, returnButton, resetButton};
+        gameModel.resizeStage(getCurrentStage().getHeight() + 33, controls);
     }
 
-    public void onMaximizeButtonClick(ActionEvent actionEvent) {
-        ToolBarManager.onMaximizeButtonClick((Stage)helpButton.getScene().getWindow());
-        game.resizeBoard(((Stage)helpButton.getScene().getWindow()).getHeight() + 33);
-        if (((Stage)helpButton.getScene().getWindow()).isMaximized()) {
-            helpButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75) / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
-            solutionButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75) / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
-            checkButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75)  / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
-            returnButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75) / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
-            resetButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75) / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
-            saveButton.setMinSize((helpButton.getScene().getWindow().getHeight() - 52 - 75) / 6, (helpButton.getScene().getWindow().getHeight() - 52 - 90) / 6);
-        } else {
-            helpButton.setMaxSize(50,50);
-            solutionButton.setMaxSize(50,50);
-            checkButton.setMaxSize(50,50);
-            saveButton.setMaxSize(50,50);
-            resetButton.setMaxSize(50,50);
-            returnButton.setMaxSize(50,50);
-            helpButton.setMinSize(50,50);
-            solutionButton.setMinSize(50,50);
-            checkButton.setMinSize(50,50);
-            saveButton.setMinSize(50,50);
-            resetButton.setMinSize(50,50);
-            returnButton.setMinSize(50,50);
-        }
-    }
-
-    public void onCloseButtonClick() throws IOException {
+    /**
+     * Обработка нажатия на кнопку "Закрыть окно" в правом верхнем углу окна.
+     */
+    public void onCloseButtonClick() {
         onReturnButtonClick();
     }
 
+    /**
+     * Обработка нажатия мыши (необходимо для работы перетаскивания окна).
+     * @param me Mouse event.
+     */
     public void onMousePressed(MouseEvent me) {
-        ToolBarManager.onMousePressed(me, (Stage)helpButton.getScene().getWindow());
+        ToolBarManager.onMousePressed(me, getCurrentStage());
     }
 
+    /**
+     * Обработка перемещения мыши (необходимо для работы перетаскивания окна).
+     * @param me Mouse event.
+     */
     public void onMouseMoved(MouseEvent me) {
-        ToolBarManager.onMouseMoved(me, (Stage)helpButton.getScene().getWindow());
+        ToolBarManager.onMouseMoved(me, getCurrentStage());
     }
 }

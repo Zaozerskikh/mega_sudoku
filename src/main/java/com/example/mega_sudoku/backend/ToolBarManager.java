@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
- * Класс, отвечающий за обработку действий с кнопками toolbar'a сверху и за перемещение окна мышкой.
+ * Класс, отвечающий за обработку действий с кнопками на панели сверху, и за перемещение окна мышкой.
  */
 public class ToolBarManager {
     // Текущее положение окна по Х.
@@ -37,7 +37,6 @@ public class ToolBarManager {
             initialY = stage.getScene().getWindow().getY();
         }
     }
-
 
     /**
      * Обработка перемещения мыши (необходимо для перемещения окна).

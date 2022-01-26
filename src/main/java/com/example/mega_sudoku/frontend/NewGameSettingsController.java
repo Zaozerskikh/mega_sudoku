@@ -1,8 +1,6 @@
 package com.example.mega_sudoku.frontend;
 
-import com.example.mega_sudoku.backend.StartModel;
-import com.example.mega_sudoku.backend.SudokuBuilder;
-import com.example.mega_sudoku.backend.ToolBarManager;
+import com.example.mega_sudoku.backend.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -11,7 +9,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import java.io.IOException;
 
 /**
  * Контроллер для окна настроек.
@@ -135,9 +132,10 @@ public class NewGameSettingsController {
      * Обработка нажатия на кнопку генерации судоку.
      */
     @FXML
-    protected void onNewGameButtonClick() throws IOException {
+    protected void onNewGameButtonClick() {
         getCurrentStage().close();
-        GameController.createGame(new SudokuBuilder().generateSudoku(boardSize, difficultyLevel));
+        SudokuBuilder.getSudokuBuilder().generateSudoku(boardSize, difficultyLevel);
+        GameStageBuilder.generateAndShowGameStage(SudokuBuilder.getSudokuBuilder().getGeneratedSudoku());
     }
 
     /**

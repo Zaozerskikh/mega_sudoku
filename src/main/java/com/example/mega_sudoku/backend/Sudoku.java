@@ -34,11 +34,16 @@ public class Sudoku implements Serializable {
     }
 
     /**
-     * Замена текущий позиции на доске (используется для сброса головоломки к изначальной).
-     * @param newPosition новая текущая позиция на доске.
+     * Замена текущей позиции на новую (для сброса и показа решения).
+     * @param newPos новая позиция.
      */
-    public void setCurrentPosition(int[][] newPosition) {
-        currentPosition = newPosition;
+    public void setCurrentPosition(int[][] newPos) {
+        // Создание независимой копии.
+        for (int i = 0; i < newPos.length; i++) {
+            for (int j = 0; j < newPos.length; j++) {
+                currentPosition[i][j] = newPos[i][j];
+            }
+        }
     }
 
     /**
@@ -90,7 +95,14 @@ public class Sudoku implements Serializable {
     public Sudoku(int[][] problem, int[][] solution, int diffLevel) {
         this.problem = problem;
         this.solution = solution;
-        this.currentPosition = problem;
+
+        // Создание независимой копии.
+        currentPosition = new int[problem.length][problem.length];
+        for (int i = 0; i < problem.length; i++) {
+            for (int j = 0; j < problem.length; j++) {
+                currentPosition[i][j] = problem[i][j];
+            }
+        }
         this.diffLevel = diffLevel;
     }
 }

@@ -17,7 +17,6 @@ import java.util.Objects;
  * Класс представляющий кастомное диалоговое окно.
  */
 public class Dialog {
-
     // Окно диалога.
     private final Stage dialogStage = new Stage();
 

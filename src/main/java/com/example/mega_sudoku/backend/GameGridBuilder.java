@@ -1,44 +1,46 @@
 package com.example.mega_sudoku.backend;
 
-import com.example.mega_sudoku.frontend.GameController;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-import java.io.IOException;
 
 /**
  * Класс, отвечающий за построение игровой сетки заданного размера.
  */
 public class GameGridBuilder {
+    // Простейшая реализация синглтона.
+    private static GameGridBuilder INSTANCE;
+
+    private GridPane generatedPane;
+
+    public static GameGridBuilder getBuilder() {
+        if (INSTANCE == null) {
+            INSTANCE = new GameGridBuilder();
+        }
+        return INSTANCE;
+    }
+
+    private GameGridBuilder() {}
+
     /**
      * Создает сетку игры по заданной судоку.
      * @param boardSize размер доски.
      * @param currentPosition судоку.
-     * @return игровая сетка.
      */
-    public GridPane buildGameGrid(int boardSize, int[][] currentPosition) {
+    public void buildGameGrid(int boardSize, int[][] currentPosition) {
         GridPane gridPane = new GridPane();
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 TextField textField = new TextField();
-                if (boardSize == 12) {
-                    textField.setFont(new Font(10));
-                } else {
-                    textField.setFont(new Font(5));
-                }
                 textField.setFocusTraversable(false);
                 if (currentPosition[i][j] != -1) {
                     textField.setText(Integer.toString(currentPosition[i][j]));
                     textField.setEditable(false);
                 }
+                textField.setPrefSize((440 - 52) / boardSize, (440 - 52) / boardSize);
+                textField.setFont(new Font((440 - 52) / (3 * boardSize) - 1));
                 textField.setMaxHeight(Double.MAX_VALUE);
                 textField.setMaxWidth(Double.MAX_VALUE);
-                textField.setOnMousePressed(mouseEvent -> {
-                    try {
-                        GameController.checkAndUpdateCurrTF((TextField) mouseEvent.getSource());
-                    } catch (IOException e) {
-                    }
-                });
                 gridPane.add(textField, i, j);
             }
         }
@@ -108,8 +110,23 @@ public class GameGridBuilder {
                     x.setStyle("-fx-text-fill: " + cellBorderColor + " ; -fx-border-style: solid solid solid solid; -fx-border-width: 1; -fx-border-color: " + cellBorderColor + "; -fx-background-color: " + cellBackgroundColor);
             }
         });
-
+        gridPane.getChildren().forEach(x -> {
+            if (GridPane.getRowIndex(x) % (int)(Math.ceil(Math.sqrt(boardSize))) == 0 || GridPane.getRowIndex(x) == boardSize - 1) {
+                ((TextField)x).setPrefHeight((440 - 52) / boardSize + 5);
+            }
+            if (GridPane.getColumnIndex(x) % (int)(Math.ceil(Math.sqrt(boardSize))) == 0 || GridPane.getColumnIndex(x) == boardSize - 1) {
+                ((TextField)x).setPrefWidth((440 - 52) / boardSize + 5);
+            }
+        });
         // END OF TODO
-        return gridPane;
+        generatedPane = gridPane;
+    }
+
+    /**
+     * Возвращает сгенерированное игровое поле.
+     * @return сгенерированное игровое поле.
+     */
+    public GridPane getGeneratedPane() {
+        return generatedPane;
     }
 }

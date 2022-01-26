@@ -1,6 +1,5 @@
 package com.example.mega_sudoku.backend;
 
-import com.example.mega_sudoku.frontend.GameController;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.*;
@@ -37,13 +36,7 @@ public class GameLoader {
             Sudoku sudoku = GameLoader.load(file);
             if (sudoku != null) {
                 parentStage.close();
-                try {
-                    GameController.createGame(sudoku);
-                } catch (IOException e) {
-                    StartModel.getStartModel().buildStartScreen();
-                    Dialog error = new Dialog("error", "Ошибка", "\nНе удалось загрузить игру.\nПопробуйте еще раз.", parentStage);
-                    error.showDialog();
-                }
+                GameStageBuilder.generateAndShowGameStage(sudoku);
             } else {
                 Dialog error = new Dialog("error", "Ошибка", "\nНе удалось загрузить игру.\nПопробуйте еще раз.", parentStage);
                 error.showDialog();

@@ -2,9 +2,40 @@ package com.example.mega_sudoku.backend;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Класс, отвечающий за генерацию судоку.
+ */
 public class SudokuBuilder {
-    public Sudoku generateSudoku(int boardSize, int diffLevel) {
-        return new Sudoku(this.generateProblem(boardSize, diffLevel), this.generateSolution(boardSize, diffLevel), diffLevel);
+    // Простейшая реализация синглетона.
+    private static SudokuBuilder INSTANCE;
+
+    private SudokuBuilder() {}
+
+    public static SudokuBuilder getSudokuBuilder() {
+        if (INSTANCE == null) {
+            INSTANCE = new SudokuBuilder();
+        }
+        return INSTANCE;
+    }
+
+    // Сгенерированная судоку.
+    private Sudoku generatedSudoku;
+
+    /**
+     * Генерация судоку с заданными параметрами.
+     * @param boardSize размер судоку.
+     * @param diffLevel уровень сложности судоку.
+     */
+    public void generateSudoku(int boardSize, int diffLevel) {
+        generatedSudoku = new Sudoku(this.generateProblem(boardSize, diffLevel), this.generateSolution(boardSize, diffLevel), diffLevel);
+    }
+
+    /**
+     * Получение сгенерированной судоку.
+     * @return сгенерированная судоку.
+     */
+    public Sudoku getGeneratedSudoku() {
+        return generatedSudoku;
     }
 
     private int[][] generateProblem(int boardSize, int diffLevel) {
@@ -13,7 +44,7 @@ public class SudokuBuilder {
         //TODO implement problem generation.
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                problem[i][j] = ThreadLocalRandom.current().nextInt(-1, 3);
+                problem[i][j] = -1;
                 if (problem[i][j] == 0) {
                     problem[i][j]++;
                 }
