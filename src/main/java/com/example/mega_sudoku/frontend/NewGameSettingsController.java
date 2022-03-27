@@ -69,7 +69,7 @@ public class NewGameSettingsController {
     }
 
     /**
-     * Обработка выбора размера поля 12.
+     * Обработка выбора размера поля 25.
      */
     @FXML
     protected void selected25() {

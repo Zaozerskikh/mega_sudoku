@@ -40,9 +40,7 @@ public class Sudoku implements Serializable {
     public void setCurrentPosition(int[][] newPos) {
         // Создание независимой копии.
         for (int i = 0; i < newPos.length; i++) {
-            for (int j = 0; j < newPos.length; j++) {
-                currentPosition[i][j] = newPos[i][j];
-            }
+            System.arraycopy(newPos[i], 0, currentPosition[i], 0, newPos.length);
         }
     }
 
@@ -99,9 +97,7 @@ public class Sudoku implements Serializable {
         // Создание независимой копии.
         currentPosition = new int[problem.length][problem.length];
         for (int i = 0; i < problem.length; i++) {
-            for (int j = 0; j < problem.length; j++) {
-                currentPosition[i][j] = problem[i][j];
-            }
+            System.arraycopy(problem[i], 0, currentPosition[i], 0, problem.length);
         }
         this.diffLevel = diffLevel;
     }
