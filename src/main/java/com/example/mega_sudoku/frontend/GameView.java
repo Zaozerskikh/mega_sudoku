@@ -32,6 +32,7 @@ public class GameView {
     public GameView() {
         gameModel = new GameModel(this);
         gameBoard = GameGridBuilder.getBuilder().getGeneratedPane();
+        return;
     }
 
     /**

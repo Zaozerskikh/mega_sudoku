@@ -17,6 +17,7 @@ public class GameModel {
     // Судоку.
     private final Sudoku sudoku;
 
+    // Текущее выбранное поле.
     private TextField selectedField;
 
     // Сохранено ли текущее состояние игры.
@@ -107,8 +108,8 @@ public class GameModel {
      * Обработка запроса на сброс головоломки к исходному состоянию.
      */
     public void resetPosition() {
-        view.resetPosition(sudoku.getProblem());
         sudoku.setCurrentPosition(sudoku.getProblem());
+        view.resetPosition(sudoku.getProblem());
     }
 
     /**

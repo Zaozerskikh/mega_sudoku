@@ -18,7 +18,7 @@ public class Sudoku implements Serializable {
     private final int[][] solution;
 
     // Текущая позиция на доске.
-    private int[][] currentPosition;
+    private final int[][] currentPosition;
 
     // Уровень сложности.
     private final int diffLevel;

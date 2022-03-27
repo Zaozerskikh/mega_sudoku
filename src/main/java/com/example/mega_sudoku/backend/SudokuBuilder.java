@@ -9,7 +9,7 @@ public class SudokuBuilder {
     // Простейшая реализация синглетона.
     private static SudokuBuilder INSTANCE;
 
-    private SudokuBuilder() {}
+    private SudokuBuilder() { }
 
     public static SudokuBuilder getSudokuBuilder() {
         if (INSTANCE == null) {
@@ -27,7 +27,9 @@ public class SudokuBuilder {
      * @param diffLevel уровень сложности судоку.
      */
     public void generateSudoku(int boardSize, int diffLevel) {
-        generatedSudoku = new Sudoku(this.generateProblem(boardSize, diffLevel), this.generateSolution(boardSize, diffLevel), diffLevel);
+        generatedSudoku = new Sudoku(
+                this.generateProblem(boardSize, diffLevel),
+                this.generateSolution(boardSize, diffLevel), diffLevel);
     }
 
     /**
@@ -62,7 +64,6 @@ public class SudokuBuilder {
                 solution[i][j] = ThreadLocalRandom.current().nextInt(2, 15);
             }
         }
-
 
         //TODO implement solution generation.
         return solution;

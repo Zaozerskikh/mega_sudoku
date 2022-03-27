@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class NewGameSettingsController {
     // Размер доски, выбранный пользователем (по умолчанию - 12).
-    private int boardSize = 12;
+    private int boardSize = 16;
 
     // Уровень сложности, выбранный пользователем (по умолчанию - 1).
     private int difficultyLevel = 1;
@@ -26,7 +26,7 @@ public class NewGameSettingsController {
 
     // Чекбокс для размера поля 12.
     @FXML
-    protected CheckBox box12;
+    protected CheckBox box25;
 
     // Чекбокс для размера поля 16.
     @FXML
@@ -57,14 +57,14 @@ public class NewGameSettingsController {
      */
     @FXML
     protected void selected16() {
-        if (box12.isSelected()) {
-            box12.setSelected(false);
+        if (box25.isSelected()) {
+            box25.setSelected(false);
             box16.setSelected(true);
             boardSize = 16;
         } else {
-            box12.setSelected(true);
+            box25.setSelected(true);
             box16.setSelected(false);
-            boardSize = 12;
+            boardSize = 25;
         }
     }
 
@@ -72,14 +72,14 @@ public class NewGameSettingsController {
      * Обработка выбора размера поля 12.
      */
     @FXML
-    protected void selected12() {
+    protected void selected25() {
         if (box16.isSelected()) {
             box16.setSelected(false);
-            box12.setSelected(true);
-            boardSize = 12;
+            box25.setSelected(true);
+            boardSize = 25;
         } else {
             box16.setSelected(true);
-            box12.setSelected(false);
+            box25.setSelected(false);
             boardSize = 16;
         }
     }
