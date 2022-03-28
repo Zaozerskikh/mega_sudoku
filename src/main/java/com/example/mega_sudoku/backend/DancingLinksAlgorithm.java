@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class DancingLinksAlgorithm {
     public static int boardSize;
+    private static boolean isOnlyOneSolution;
     private static int subsectionSize;
     private static final int NO_VALUE = -1;
     private static final int CONSTRAINTS = 4;
@@ -23,11 +24,16 @@ public class DancingLinksAlgorithm {
         DancingLinksAlgorithm.board = board;
     }
 
-    private void solve() {
+    public void solve() {
         boolean[][] cover = initializeExactCoverBoard(board);
         DancingLinks dlx = new DancingLinks(cover);
         dlx.runSolver();
+        isOnlyOneSolution = DancingLinks.isOneSolution();
         solution = dlx.getSolution();
+    }
+
+    public static boolean getIfOnlyOneSolution() {
+        return isOnlyOneSolution;
     }
 
     private int getIndex(int row, int column, int num) {

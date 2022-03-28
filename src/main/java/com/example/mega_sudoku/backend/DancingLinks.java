@@ -7,6 +7,7 @@ import java.util.List;
 public class DancingLinks {
     private final ColumnNode header;
     private List<DancingNode> answer;
+    private static int countSolutions = 0;
     private int[][] result;
 
     public int[][] getSolution() {
@@ -28,6 +29,8 @@ public class DancingLinks {
                 }
 
                 search(k + 1);
+
+                if (!isOneSolution()) { return; }
 
                 r = answer.remove(answer.size() - 1);
                 c = r.C;
@@ -96,6 +99,11 @@ public class DancingLinks {
 
     private void handleSolution(List<DancingNode> answer) {
         result = parseBoard(answer);
+        countSolutions++;
+    }
+
+    public static boolean isOneSolution() {
+        return countSolutions <= 1;
     }
 
     private int[][] parseBoard(List<DancingNode> answer) {

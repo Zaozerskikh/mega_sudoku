@@ -74,6 +74,11 @@ public class Grid {
         transpose();
     }
 
+    /**
+     * Метод, позволяющий рандомным образом переставить стандартную матрицу судоку.
+     *
+     * @param changesNumber Количество манипуляций для перестановки матрицы судоку.
+     */
     public void mix(int changesNumber) {
         for (int i = 0; i < changesNumber; i++) {
             int id = ThreadLocalRandom.current().nextInt(0, 5);
@@ -87,7 +92,8 @@ public class Grid {
         }
     }
 
-    public int[][] getGrid() {
+    public int[][] getMixedGrid(int changesNumber) {
+        mix(changesNumber);
         return table;
     }
 }

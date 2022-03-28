@@ -50,22 +50,24 @@ public class SudokuBuilder {
             System.arraycopy(solution[i], 0, problem[i], 0, boardSize);
         }
 
-        for (int i = 0; i < 500; i++) {
-            int n = ThreadLocalRandom.current().nextInt(0, boardSize);
-
-            int m = ThreadLocalRandom.current().nextInt(0, boardSize);
-            problem[n][m] = -1;
+        boolean isValid = false;
+        while (!isValid) {
+            for (int i = 0; i < 80; i++) {
+                int n = ThreadLocalRandom.current().nextInt(0, boardSize);
+                int m = ThreadLocalRandom.current().nextInt(0, boardSize);
+                problem[n][m] = -1;
+            }
+            DancingLinksAlgorithm dancingLinksAlgorithm = new DancingLinksAlgorithm(problem);
+            dancingLinksAlgorithm.solve();
+            isValid = DancingLinksAlgorithm.getIfOnlyOneSolution();
         }
-        //DancingLinksAlgorithm dancingLinksAlgorithm = new DancingLinksAlgorithm(problem);
-        //return DancingLinksAlgorithm.getSolution();
         this.problem = problem;
         return problem;
     }
 
     private int[][] generateSolution(int boardSize, int diffLevel) {
         Grid grid = new Grid(boardSize);
-        grid.mix(10);
-        solution = grid.getGrid();
-        return grid.getGrid();
+        solution = grid.getMixedGrid(10);
+        return grid.getMixedGrid(10);
     }
 }
