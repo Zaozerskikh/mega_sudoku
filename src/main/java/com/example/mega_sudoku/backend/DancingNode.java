@@ -1,9 +1,18 @@
 package com.example.mega_sudoku.backend;
 
 public class DancingNode {
+    /**
+     * Поля для доступа к соседним узлам.
+     */
     DancingNode L, R, U, D;
+
     ColumnNode C;
 
+    /**
+     * Метод для "отката" вниз данного узла.
+     * @param node данный узел
+     * @return
+     */
     DancingNode hookDown(DancingNode node) {
         assert (this.C == node.C);
         node.D = this.D;

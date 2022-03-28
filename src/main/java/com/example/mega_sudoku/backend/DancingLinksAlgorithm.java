@@ -3,17 +3,16 @@ package com.example.mega_sudoku.backend;
 import java.util.Arrays;
 
 public class DancingLinksAlgorithm {
-    public static int boardSize;
-    private static boolean isOnlyOneSolution;
-    private static int subsectionSize;
-    private static final int NO_VALUE = -1;
-    private static final int CONSTRAINTS = 4;
-    private static int minValue;
-    private static int maxValue;
-    private static final int COVER_START_INDEX = 1;
+    private final int boardSize;
+    private boolean isOnlyOneSolution;
+    private final int subsectionSize;
+    private final int NO_VALUE = -1;
+    private final int CONSTRAINTS = 4;
+    private final int minValue;
+    private final int maxValue;
+    private final int COVER_START_INDEX = 1;
 
-    private static int[][] board;
-    private static int[][] solution;
+    private final int[][] board;
 
     public DancingLinksAlgorithm(int[][] board) {
         int size = board.length;
@@ -21,7 +20,7 @@ public class DancingLinksAlgorithm {
         subsectionSize = (int)Math.sqrt(size);
         maxValue = size;
         minValue = 1;
-        DancingLinksAlgorithm.board = board;
+        this.board = board;
     }
 
     public void solve() {
@@ -29,10 +28,10 @@ public class DancingLinksAlgorithm {
         DancingLinks dlx = new DancingLinks(cover);
         dlx.runSolver();
         isOnlyOneSolution = DancingLinks.isOneSolution();
-        solution = dlx.getSolution();
     }
 
-    public static boolean getIfOnlyOneSolution() {
+    // Узнаем, является ли решение единственным.
+    public boolean getIfOnlyOneSolution() {
         return isOnlyOneSolution;
     }
 
@@ -119,9 +118,5 @@ public class DancingLinksAlgorithm {
             }
         }
         return coverBoard;
-    }
-
-    public static int[][] getSolution() {
-        return solution;
     }
 }

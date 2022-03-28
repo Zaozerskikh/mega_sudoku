@@ -8,37 +8,39 @@ public class DancingLinks {
     private final ColumnNode header;
     private List<DancingNode> answer;
     private static int countSolutions = 0;
-    private int[][] result;
-
-    public int[][] getSolution() {
-        return result;
-    }
 
     private void search(int k) {
         if (header.R == header) {
-            handleSolution(answer);
+            countSolutions++;
         } else {
+
+            if (countSolutions > 1) { return; }
+
             ColumnNode c = selectColumnNodeHeuristic();
             c.cover();
-
+            if (countSolutions > 1) { return; }
             for (DancingNode r = c.D; r != c; r = r.D) {
                 answer.add(r);
-
+                if (countSolutions > 1) { return; }
                 for (DancingNode j = r.R; j != r; j = j.R) {
+                    if (countSolutions > 1) { return; }
                     j.C.cover();
                 }
 
+                if (countSolutions > 1) { return; }
                 search(k + 1);
 
-                if (!isOneSolution()) { return; }
-
+                if (countSolutions > 1) { return; }
                 r = answer.remove(answer.size() - 1);
                 c = r.C;
 
+                if (countSolutions > 1) { return; }
                 for (DancingNode j = r.L; j != r; j = j.L) {
+                    if (countSolutions > 1) { return; }
                     j.C.uncover();
                 }
             }
+            if (countSolutions > 1) { return; }
             c.uncover();
         }
     }
@@ -97,35 +99,11 @@ public class DancingLinks {
         search(0);
     }
 
-    private void handleSolution(List<DancingNode> answer) {
-        result = parseBoard(answer);
-        countSolutions++;
+    public static void zeroSolutions() {
+        countSolutions = 0;
     }
 
     public static boolean isOneSolution() {
-        return countSolutions <= 1;
-    }
-
-    private int[][] parseBoard(List<DancingNode> answer) {
-        int size = DancingLinksAlgorithm.boardSize;
-        int[][] result = new int[size][size];
-        for (DancingNode n : answer) {
-            DancingNode rcNode = n;
-            int min = Integer.parseInt(rcNode.C.name);
-            for (DancingNode tmp = n.R; tmp != n; tmp = tmp.R) {
-                int val = Integer.parseInt(tmp.C.name);
-                if (val < min) {
-                    min = val;
-                    rcNode = tmp;
-                }
-            }
-            int ans1 = Integer.parseInt(rcNode.C.name);
-            int ans2 = Integer.parseInt(rcNode.R.C.name);
-            int r = ans1 / size;
-            int c = ans1 % size;
-            int num = (ans2 % size) + 1;
-            result[r][c] = num;
-        }
-        return result;
+        return countSolutions == 1;
     }
 }
