@@ -1,6 +1,10 @@
-package com.example.mega_sudoku.backend;
+package mega_sudoku.backend.game;
 
-import com.example.mega_sudoku.frontend.StartController;
+import mega_sudoku.backend.models.StartModel;
+import mega_sudoku.backend.sudoku.Sudoku;
+import mega_sudoku.backend.sudoku.SudokuBuilder;
+import mega_sudoku.backend.utils.ColorThemeManager;
+import mega_sudoku.frontend.controllers.StartController;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;

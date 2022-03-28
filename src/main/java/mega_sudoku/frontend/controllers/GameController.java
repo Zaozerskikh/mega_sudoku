@@ -1,11 +1,14 @@
-package com.example.mega_sudoku.frontend;
+package mega_sudoku.frontend.controllers;
 
-import com.example.mega_sudoku.backend.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import mega_sudoku.backend.models.StartModel;
+import mega_sudoku.backend.utils.Dialog;
+import mega_sudoku.backend.utils.ToolBarManager;
+import mega_sudoku.frontend.views.GameView;
 
 /**
  * Контроллер для окна с игрой.

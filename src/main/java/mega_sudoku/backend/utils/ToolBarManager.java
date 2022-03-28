@@ -1,4 +1,4 @@
-package com.example.mega_sudoku.backend;
+package mega_sudoku.backend.utils;
 
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;

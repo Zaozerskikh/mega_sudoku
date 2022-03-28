@@ -1,6 +1,6 @@
-package com.example.mega_sudoku.frontend;
+package mega_sudoku.frontend.controllers;
 
-import com.example.mega_sudoku.backend.ToolBarManager;
+import mega_sudoku.backend.utils.ToolBarManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;

@@ -1,6 +1,6 @@
-package com.example.mega_sudoku.backend;
+package mega_sudoku.backend.utils;
 
-import com.example.mega_sudoku.frontend.StartController;
+import mega_sudoku.frontend.controllers.StartController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

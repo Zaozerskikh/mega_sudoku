@@ -1,7 +1,10 @@
-package com.example.mega_sudoku.backend;
+package mega_sudoku.backend.game;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import mega_sudoku.backend.sudoku.Sudoku;
+import mega_sudoku.backend.utils.Dialog;
+
 import java.io.*;
 
 /**

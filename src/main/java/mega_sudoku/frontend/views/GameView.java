@@ -1,6 +1,5 @@
-package com.example.mega_sudoku.frontend;
+package mega_sudoku.frontend.views;
 
-import com.example.mega_sudoku.backend.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -10,6 +9,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import mega_sudoku.backend.game.GameGridBuilder;
+import mega_sudoku.backend.models.GameModel;
+import mega_sudoku.backend.utils.ColorThemeManager;
+import mega_sudoku.backend.utils.Dialog;
+
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;

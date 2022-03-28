@@ -66,7 +66,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.mega_sudoku/com.example.mega_sudoku.frontend.MainAppClass</mainClass>
+                            <mainClass>com.example.mega_sudoku/mega_sudoku.frontend.MainAppClass</mainClass>
                         </configuration>
                     </execution>
                 </executions>

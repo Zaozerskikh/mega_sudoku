@@ -1,6 +1,6 @@
-package com.example.mega_sudoku.frontend;
+package mega_sudoku.frontend.main;
 
-import com.example.mega_sudoku.backend.StartModel;
+import mega_sudoku.backend.models.StartModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

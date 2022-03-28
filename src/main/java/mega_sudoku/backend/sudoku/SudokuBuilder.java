@@ -1,4 +1,7 @@
-package com.example.mega_sudoku.backend;
+package mega_sudoku.backend.sudoku;
+
+import mega_sudoku.backend.dlx.DancingLinks;
+import mega_sudoku.backend.dlx.DancingLinksAlgorithm;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -111,7 +114,7 @@ public class SudokuBuilder {
      * @return Одно из всевозможных заполненных судоку (рандомный выбор).
      */
     private int[][] generateSolution(int boardSize, int diffLevel) {
-        Grid grid = new Grid(boardSize);
+        SudokuGrid grid = new SudokuGrid(boardSize);
         solution = grid.getMixedGrid(10);
         return grid.getMixedGrid(10);
     }

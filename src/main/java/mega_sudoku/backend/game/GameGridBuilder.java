@@ -1,8 +1,9 @@
-package com.example.mega_sudoku.backend;
+package mega_sudoku.backend.game;
 
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import mega_sudoku.backend.utils.ColorThemeManager;
 
 /**
  * Класс, отвечающий за построение игровой сетки заданного размера.

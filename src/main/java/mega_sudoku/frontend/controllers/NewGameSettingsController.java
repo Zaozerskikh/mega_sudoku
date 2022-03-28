@@ -1,6 +1,5 @@
-package com.example.mega_sudoku.frontend;
+package mega_sudoku.frontend.controllers;
 
-import com.example.mega_sudoku.backend.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -9,6 +8,10 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import mega_sudoku.backend.game.GameStageBuilder;
+import mega_sudoku.backend.models.StartModel;
+import mega_sudoku.backend.sudoku.SudokuBuilder;
+import mega_sudoku.backend.utils.ToolBarManager;
 
 /**
  * Контроллер для окна настроек.

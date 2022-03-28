@@ -1,13 +1,13 @@
-package com.example.mega_sudoku.backend;
+package mega_sudoku.backend.sudoku;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Grid {
+public class SudokuGrid {
     private final int boardSize;
 
     private final int[][] table;
 
-    public Grid(int size) {
+    public SudokuGrid(int size) {
         table = new int[size][];
         boardSize = (int)Math.sqrt(size);
         for (int i = 0; i < size; i++) {

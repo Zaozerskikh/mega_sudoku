@@ -1,4 +1,4 @@
-package com.example.mega_sudoku.backend;
+package mega_sudoku.backend.sudoku;
 
 import java.io.Serial;
 import java.io.Serializable;

@@ -1,6 +1,9 @@
-package com.example.mega_sudoku.backend;
+package mega_sudoku.backend.models;
 
-import com.example.mega_sudoku.frontend.GameView;
+import mega_sudoku.backend.game.GameSaver;
+import mega_sudoku.backend.sudoku.Sudoku;
+import mega_sudoku.backend.sudoku.SudokuBuilder;
+import mega_sudoku.frontend.views.GameView;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;

@@ -1,4 +1,4 @@
-package com.example.mega_sudoku.backend;
+package mega_sudoku.backend.dlx;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
