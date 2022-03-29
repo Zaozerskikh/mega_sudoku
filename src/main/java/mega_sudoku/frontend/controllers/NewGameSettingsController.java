@@ -8,20 +8,20 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import mega_sudoku.backend.game.GameStageBuilder;
+import mega_sudoku.backend.models.NewGameSettingsModel;
 import mega_sudoku.backend.models.StartModel;
-import mega_sudoku.backend.sudoku.SudokuBuilder;
 import mega_sudoku.backend.utils.ToolBarManager;
 
 /**
  * Контроллер для окна настроек.
  */
 public class NewGameSettingsController {
-    // Размер доски, выбранный пользователем (по умолчанию - 12).
-    private int boardSize = 16;
+    public NewGameSettingsController() {
+        model = new NewGameSettingsModel();
+    }
 
-    // Уровень сложности, выбранный пользователем (по умолчанию - 1).
-    private int difficultyLevel = 1;
+    // Модель окна настроек новой игры.
+    private final NewGameSettingsModel model;
 
     // Кнопка начала новой игры.
     @FXML
@@ -41,15 +41,15 @@ public class NewGameSettingsController {
 
     // Надпись легкого уровня сложности.
     @FXML
-    protected Label easy;
+    protected Label easyLabel;
 
     // Надпись среднего уровня сложности.
     @FXML
-    protected Label medium;
+    protected Label mediumLabel;
 
     // Надпись сложного уровня сложности.
     @FXML
-    protected Label hard;
+    protected Label hardLabel;
 
     private Stage getCurrentStage() {
         return (Stage)startGameButton.getScene().getWindow();
@@ -63,11 +63,11 @@ public class NewGameSettingsController {
         if (box25.isSelected()) {
             box25.setSelected(false);
             box16.setSelected(true);
-            boardSize = 16;
+            model.setBoardSize(16);
         } else {
             box25.setSelected(true);
             box16.setSelected(false);
-            boardSize = 25;
+            model.setBoardSize(25);
         }
     }
 
@@ -79,11 +79,11 @@ public class NewGameSettingsController {
         if (box16.isSelected()) {
             box16.setSelected(false);
             box25.setSelected(true);
-            boardSize = 25;
+            model.setBoardSize(25);
         } else {
             box16.setSelected(true);
             box25.setSelected(false);
-            boardSize = 16;
+            model.setBoardSize(16);
         }
     }
 
@@ -92,43 +92,36 @@ public class NewGameSettingsController {
      */
     @FXML
     protected void sliderChange() {
-        difficultyLevel = (int) diffSlider.getValue();
-        switch (difficultyLevel) {
-            case 1 -> {
-                easy.setFont(new Font(19));
-                easy.setLayoutY(252);
-                easy.setOpacity(1);
-                medium.setFont(new Font(16));
-                medium.setLayoutY(255);
-                medium.setOpacity(0.6);
-                hard.setFont(new Font(16));
-                hard.setLayoutY(255);
-                hard.setOpacity(0.6);
-            }
+        model.setDifficultyLevel((int)diffSlider.getValue());
+        switch (model.getDifficultyLevel()) {
+            case 1 -> changeFontSize(easyLabel, hardLabel);
             case 2 -> {
-                medium.setFont(new Font(19));
-                medium.setLayoutY(252);
-                medium.setOpacity(1);
-                easy.setFont(new Font(16));
-                easy.setLayoutY(255);
-                easy.setOpacity(0.6);
-                hard.setOpacity(0.6);
-                hard.setFont(new Font(16));
-                hard.setLayoutY(255);
-                hard.setOpacity(0.6);
+                mediumLabel.setFont(new Font(19));
+                mediumLabel.setLayoutY(252);
+                mediumLabel.setOpacity(1);
+                easyLabel.setFont(new Font(16));
+                easyLabel.setLayoutY(255);
+                easyLabel.setOpacity(0.6);
+                hardLabel.setOpacity(0.6);
+                hardLabel.setFont(new Font(16));
+                hardLabel.setLayoutY(255);
+                hardLabel.setOpacity(0.6);
             }
-            case 3 -> {
-                hard.setFont(new Font(19));
-                hard.setLayoutY(252);
-                hard.setOpacity(1);
-                medium.setFont(new Font(16));
-                medium.setLayoutY(255);
-                medium.setOpacity(0.6);
-                easy.setFont(new Font(16));
-                easy.setLayoutY(255);
-                easy.setOpacity(0.6);
-            }
+            case 3 -> changeFontSize(hardLabel, easyLabel);
         }
+    }
+
+    // Изменение размера шрифта при перетаскивании ползунка слайдера.
+    private void changeFontSize(Label hard, Label easy) {
+        hard.setFont(new Font(19));
+        hard.setLayoutY(252);
+        hard.setOpacity(1);
+        mediumLabel.setFont(new Font(16));
+        mediumLabel.setLayoutY(255);
+        mediumLabel.setOpacity(0.6);
+        easy.setFont(new Font(16));
+        easy.setLayoutY(255);
+        easy.setOpacity(0.6);
     }
 
     /**
@@ -136,9 +129,8 @@ public class NewGameSettingsController {
      */
     @FXML
     protected void onNewGameButtonClick() {
+        model.newGameStartProcess();
         getCurrentStage().close();
-        SudokuBuilder.getSudokuBuilder().generateSudoku(boardSize, difficultyLevel);
-        GameStageBuilder.generateAndShowGameStage(SudokuBuilder.getSudokuBuilder().getGeneratedSudoku());
     }
 
     /**

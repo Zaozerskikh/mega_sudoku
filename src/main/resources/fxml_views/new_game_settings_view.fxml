@@ -17,15 +17,15 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="easy" layoutX="70.0" layoutY="252.0" prefHeight="17.0" prefWidth="80.0" text="простой">
+      <Label fx:id="easyLabel" layoutX="70.0" layoutY="252.0" prefHeight="17.0" prefWidth="80.0" text="простой">
          <font>
             <Font size="19.0" />
          </font></Label>
-      <Label id="medium" fx:id="medium" layoutX="219.0" layoutY="254.0" opacity="0.6" text="средний">
+      <Label id="medium" fx:id="mediumLabel" layoutX="219.0" layoutY="254.0" opacity="0.6" text="средний">
          <font>
             <Font size="16.0" />
          </font></Label>
-      <Label id="hard" fx:id="hard" layoutX="366.0" layoutY="253.0" opacity="0.6" text="сложный">
+      <Label id="hard" fx:id="hardLabel" layoutX="366.0" layoutY="253.0" opacity="0.6" text="сложный">
          <font>
             <Font size="16.0" />
          </font></Label>

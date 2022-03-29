@@ -89,6 +89,7 @@
                                     <mainClass>mega_sudoku.main.JarLauncher</mainClass>
                                 </transformer>
                             </transformers>
+                            <finalName>mega sudoku</finalName>
                         </configuration>
                     </execution>
                 </executions>

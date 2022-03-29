@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="37.0" layoutY="20.0" text="Идет генерация судоку...">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+       <Label fx:id="progressBarLabel" layoutX="78.0" layoutY="75.0" text="00,00%  /  100%">
+           <font>
+               <Font size="20.0" />
+           </font>
+       </Label>
+   </children>
+</Pane>

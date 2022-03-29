@@ -3,15 +3,16 @@ package mega_sudoku.backend.game;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import mega_sudoku.backend.sudoku.Sudoku;
+import mega_sudoku.backend.sudoku.SudokuBuilder;
 import mega_sudoku.backend.utils.Dialog;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 
 /**
  * Класс, отвечающий за загрузку сохранённой игры.
  */
 public class GameLoader {
-
     /**
      * Загрузка судоку из файла.
      * @param file файл с сохранённой игрой.
@@ -21,8 +22,11 @@ public class GameLoader {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            return (Sudoku)objectInputStream.readObject();
+            var sudoku = (Sudoku)objectInputStream.readObject();
+            SudokuBuilder.getSudokuBuilder().setGeneratedSudoku(sudoku);
+            return sudoku;
         } catch (Exception ex) {
+            ex.printStackTrace();
             return null;
         }
     }

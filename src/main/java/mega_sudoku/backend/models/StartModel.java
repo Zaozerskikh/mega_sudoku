@@ -41,7 +41,7 @@ public class StartModel {
         Stage stage = new Stage();
         Scene scene = null;
         try {
-            scene = new Scene(FXMLLoader.load(Objects.requireNonNull(StartController.class.getResource("/fxml_stages/start_screen.fxml"))));
+            scene = new Scene(FXMLLoader.load(Objects.requireNonNull(StartController.class.getResource("/fxml_views/start_view.fxml"))));
             stage.setScene(scene);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -53,36 +53,6 @@ public class StartModel {
         ColorThemeManager.setThemeToScene(scene,
                 Objects.requireNonNull(StartController.class.getResource("/styles/dark_start_screen.css")).toExternalForm(),
                 Objects.requireNonNull(StartController.class.getResource("/styles/white_start_screen.css")).toExternalForm());
-        return stage;
-    }
-
-    /**
-     * Генерация дочернего окна.
-     * @param parentStage родительское окно.
-     * @param resource ссылка на fxml дочернего окна.
-     * @param stageName название дочернего окна.
-     * @param darkPath путь к css файлу с темной темой дочернего окна.
-     * @param whitePath путь к css файлу со светлой темой дочернего окна.
-     * @return сгенерированное дочернее окно.
-     */
-    public Stage buildChildStage(Stage parentStage, URL resource, String stageName, String darkPath, String whitePath) {
-        Stage stage = new Stage();
-        stage.setTitle(stageName);
-        Scene scene = null;
-        try {
-            scene = new Scene(FXMLLoader.load(Objects.requireNonNull(resource)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        ColorThemeManager.setThemeToScene(scene, darkPath, whitePath);
-        stage.setScene(scene);
-        stage.getIcons().add(new Image("/icon.png"));
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.initOwner(parentStage);
-        if (stageName.equals("Новая игра")) {
-            stage.setResizable(false);
-        }
         return stage;
     }
 }

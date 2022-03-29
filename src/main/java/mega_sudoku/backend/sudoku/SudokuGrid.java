@@ -83,11 +83,11 @@ public class SudokuGrid {
         for (int i = 0; i < changesNumber; i++) {
             int id = ThreadLocalRandom.current().nextInt(0, 5);
             switch (id) {
-                case (0) -> transpose();
-                case (1) -> swapRows();
-                case (2) -> swapColumns();
-                case (3) -> swapRowsArea();
-                case (4) -> swapColumnsArea();
+                case 0 -> transpose();
+                case 1 -> swapRows();
+                case 2 -> swapColumns();
+                case 3 -> swapRowsArea();
+                case 4 -> swapColumnsArea();
             }
         }
     }

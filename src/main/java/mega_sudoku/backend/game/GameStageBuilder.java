@@ -30,7 +30,7 @@ public class GameStageBuilder {
         Stage stage = new Stage();
         Scene scene ;
         try {
-            scene = new Scene(FXMLLoader.load(Objects.requireNonNull(StartController.class.getResource("/fxml_stages/game_screen.fxml"))));
+            scene = new Scene(FXMLLoader.load(Objects.requireNonNull(StartController.class.getResource("/fxml_views/game_view.fxml"))));
         } catch (IOException e) {
             StartModel.getStartModel().buildStartScreen();
             return;

@@ -33,7 +33,7 @@ public class Dialog {
     public Dialog(String type, String title, String information, Stage parent) {
         Scene scene = null;
         try {
-            scene = new Scene(FXMLLoader.load(Objects.requireNonNull(StartController.class.getResource("/fxml_stages/custom_dialog_screen.fxml"))));
+            scene = new Scene(FXMLLoader.load(Objects.requireNonNull(StartController.class.getResource("/fxml_views/custom_dialog_view.fxml"))));
         } catch (IOException e) {
             e.printStackTrace();
         }

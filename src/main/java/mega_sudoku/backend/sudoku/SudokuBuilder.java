@@ -15,7 +15,17 @@ public class SudokuBuilder {
     /**
      * Поле определяющее сложность (количество пустых клеток).
      */
-    private int difficulty;
+    private int difficulty = 1000;
+
+    private int count = 0;
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public int getCount() {
+        return count;
+    }
 
     private int[][] solution;
 
@@ -30,6 +40,10 @@ public class SudokuBuilder {
 
     // Сгенерированная судоку.
     private Sudoku generatedSudoku;
+
+    public void setGeneratedSudoku(Sudoku sudoku) {
+        this.generatedSudoku = sudoku;
+    }
 
     /**
      * Генерация судоку с заданными параметрами.
@@ -64,7 +78,7 @@ public class SudokuBuilder {
      * Метод позволяющий корректно(оставляя судоку однозначно решаемым) удалить некоторые клетки.
      *
      * @param boardSize Размер доски.
-     * @param diffLevel
+     * @param diffLevel Уровень сложности.
      * @return Доска с некоторыми незаполненными клетками.
      */
     private int[][] generateProblem(int boardSize, int diffLevel) {
@@ -81,7 +95,7 @@ public class SudokuBuilder {
             }
         }
 
-        int count = 0, iterator = 0;
+        int iterator = 0;
         while (iterator < boardSize * boardSize) {
             if (count > difficulty) break;
             //System.out.println(count);
@@ -110,7 +124,7 @@ public class SudokuBuilder {
     /**
      *
      * @param boardSize Размер доски.
-     * @param diffLevel
+     * @param diffLevel уровень сложности.
      * @return Одно из всевозможных заполненных судоку (рандомный выбор).
      */
     private int[][] generateSolution(int boardSize, int diffLevel) {

@@ -78,10 +78,12 @@ public class GameModel {
      * Обработка запроса на получение подсказки.
      */
     public void showTip() {
-        sudoku.updateCurrentPosition(sudoku.getSolution()[GridPane.getColumnIndex(selectedField)][GridPane.getRowIndex(selectedField)],
-                GridPane.getColumnIndex(selectedField), GridPane.getRowIndex(selectedField));
-        if (selectedField != null && selectedField.editableProperty().getValue()) {
-            view.showTip(selectedField, sudoku.getSolution()[GridPane.getColumnIndex(selectedField)][GridPane.getRowIndex(selectedField)]);
+        if (selectedField != null) {
+            sudoku.updateCurrentPosition(sudoku.getSolution()[GridPane.getColumnIndex(selectedField)][GridPane.getRowIndex(selectedField)],
+                    GridPane.getColumnIndex(selectedField), GridPane.getRowIndex(selectedField));
+            if (selectedField.editableProperty().getValue()) {
+                view.showTip(selectedField, sudoku.getSolution()[GridPane.getColumnIndex(selectedField)][GridPane.getRowIndex(selectedField)]);
+            }
         }
     }
 
