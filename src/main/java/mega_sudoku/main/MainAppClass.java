@@ -1,4 +1,4 @@
-package mega_sudoku.frontend.main;
+package mega_sudoku.main;
 
 import mega_sudoku.backend.models.StartModel;
 import javafx.application.Application;
