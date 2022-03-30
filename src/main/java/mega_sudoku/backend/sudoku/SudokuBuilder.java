@@ -82,6 +82,7 @@ public class SudokuBuilder {
      * @return Доска с некоторыми незаполненными клетками.
      */
     private int[][] generateProblem(int boardSize, int diffLevel) {
+        count = 0;
         int[][] problem = new int[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
             System.arraycopy(solution[i], 0, problem[i], 0, boardSize);
@@ -129,7 +130,6 @@ public class SudokuBuilder {
      */
     private int[][] generateSolution(int boardSize, int diffLevel) {
         SudokuGrid grid = new SudokuGrid(boardSize);
-        solution = grid.getMixedGrid(10);
-        return grid.getMixedGrid(10);
+        return solution = grid.getMixedGrid(10);
     }
 }

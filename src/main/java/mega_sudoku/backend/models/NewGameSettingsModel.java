@@ -71,7 +71,7 @@ public class NewGameSettingsModel {
             SudokuBuilder.getSudokuBuilder().generateSudoku(boardSize, difficultyLevel);
             Platform.runLater(() -> {
                 progressLine.stop();
-                GameStageBuilder.generateAndShowGameStage(SudokuBuilder.getSudokuBuilder().getGeneratedSudoku());
+                GameStageBuilder.generateAndShowGameStage(builder.getGeneratedSudoku());
                 progressStage.close();
             });
         }).start();
