@@ -4,14 +4,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseMoved" onMouseMoved="#onMousePressed" prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mega_sudoku.frontend.controllers.ProgressBarController">
    <children>
       <Label layoutX="37.0" layoutY="20.0" text="Идет генерация судоку...">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-       <Label layoutX="84.0" layoutY="75.0" text="00,00% / 100%">
+       <Label fx:id="progressLabel" layoutX="101.0" layoutY="75.0" text="   00,00%   ">
            <font>
                <Font size="20.0" />
            </font>

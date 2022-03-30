@@ -9,7 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import mega_sudoku.backend.models.NewGameSettingsModel;
-import mega_sudoku.backend.models.StartModel;
+import mega_sudoku.backend.sudoku.DifficultyLevel;
+import mega_sudoku.backend.utils.CommonStageBuilder;
 import mega_sudoku.backend.utils.ToolBarManager;
 
 /**
@@ -92,10 +93,15 @@ public class NewGameSettingsController {
      */
     @FXML
     protected void sliderChange() {
-        model.setDifficultyLevel((int)diffSlider.getValue());
+        switch ((int)diffSlider.getValue()) {
+            case 1 -> model.setDifficultyLevel(DifficultyLevel.EASY);
+            case 2 -> model.setDifficultyLevel(DifficultyLevel.MEDIUM);
+            case 3 -> model.setDifficultyLevel(DifficultyLevel.HARD);
+        }
+
         switch (model.getDifficultyLevel()) {
-            case 1 -> changeFontSize(easyLabel, hardLabel);
-            case 2 -> {
+            case EASY -> changeFontSize(easyLabel, hardLabel);
+            case MEDIUM -> {
                 mediumLabel.setFont(new Font(19));
                 mediumLabel.setLayoutY(252);
                 mediumLabel.setOpacity(1);
@@ -107,7 +113,7 @@ public class NewGameSettingsController {
                 hardLabel.setLayoutY(255);
                 hardLabel.setOpacity(0.6);
             }
-            case 3 -> changeFontSize(hardLabel, easyLabel);
+            case HARD -> changeFontSize(hardLabel, easyLabel);
         }
     }
 
@@ -139,7 +145,7 @@ public class NewGameSettingsController {
     @FXML
     protected void onCloseButtonClick() {
         ToolBarManager.onCloseButtonClick(getCurrentStage());
-        StartModel.getStartModel().buildStartScreen().show();
+        CommonStageBuilder.buildStartStage().show();
     }
 
     /**

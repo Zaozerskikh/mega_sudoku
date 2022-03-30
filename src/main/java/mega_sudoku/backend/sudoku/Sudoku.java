@@ -21,7 +21,7 @@ public class Sudoku implements Serializable {
     private final int[][] currentPosition;
 
     // Уровень сложности.
-    private final int diffLevel;
+    private final DifficultyLevel diffLevel;
 
     /**
      * Обновление текущей позиции на доске.
@@ -80,7 +80,7 @@ public class Sudoku implements Serializable {
      * Getter для diffLevel.
      * @return уровень сложности судоку.
      */
-    public int getDiffLevel() {
+    public DifficultyLevel getDiffLevel() {
         return diffLevel;
     }
 
@@ -90,7 +90,7 @@ public class Sudoku implements Serializable {
      * @param solution судоку (решение).
      * @param diffLevel уровень сложности судоку.
      */
-    public Sudoku(int[][] problem, int[][] solution, int diffLevel) {
+    public Sudoku(int[][] problem, int[][] solution, DifficultyLevel diffLevel) {
         this.problem = problem;
         this.solution = solution;
 

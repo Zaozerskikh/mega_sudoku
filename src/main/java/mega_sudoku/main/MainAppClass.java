@@ -1,8 +1,8 @@
 package mega_sudoku.main;
 
-import mega_sudoku.backend.models.StartModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import mega_sudoku.backend.utils.CommonStageBuilder;
 
 /**
  * Главный класс приложения, который отвечает за первичный запуск.
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class MainAppClass extends Application {
     @Override
     public void start(Stage stage) {
-        StartModel.getStartModel().buildStartScreen().show();
+        CommonStageBuilder.buildStartStage().show();
     }
 
     public static void main(String[] args) {

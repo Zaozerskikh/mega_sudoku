@@ -1,9 +1,10 @@
 package mega_sudoku.backend.game;
 
-import mega_sudoku.backend.models.StartModel;
+import mega_sudoku.backend.sudoku.DifficultyLevel;
 import mega_sudoku.backend.sudoku.Sudoku;
 import mega_sudoku.backend.sudoku.SudokuBuilder;
 import mega_sudoku.backend.utils.ColorThemeManager;
+import mega_sudoku.backend.utils.CommonStageBuilder;
 import mega_sudoku.frontend.controllers.StartController;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -32,7 +33,7 @@ public class GameStageBuilder {
         try {
             scene = new Scene(FXMLLoader.load(Objects.requireNonNull(StartController.class.getResource("/fxml_views/game_view.fxml"))));
         } catch (IOException e) {
-            StartModel.getStartModel().buildStartScreen();
+            CommonStageBuilder.buildStartStage().show();
             return;
         }
         gameGrid.setPadding(new Insets(11));
@@ -42,8 +43,8 @@ public class GameStageBuilder {
         ColorThemeManager.setThemeToScene(stage.getScene(),
                 Objects.requireNonNull(SudokuBuilder.class.getResource("/styles/dark_game_screen.css")).toExternalForm(),
                 Objects.requireNonNull(SudokuBuilder.class.getResource("/styles/white_game_screen.css")).toExternalForm());
-        String diffInfo = (sudoku.getDiffLevel() == 1) ?
-                "Простой" : (sudoku.getDiffLevel() == 2) ?
+        String diffInfo = (sudoku.getDiffLevel() == DifficultyLevel.EASY) ?
+                "Простой" : (sudoku.getDiffLevel() == DifficultyLevel.MEDIUM) ?
                 "Средний" : "Сложный";
         ((Label)((GridPane)scene.getRoot().getChildrenUnmodifiable().get(1)).getChildren().get(4)).
                 setText("Мега-Cудоку " + sudoku.getBoardSize()

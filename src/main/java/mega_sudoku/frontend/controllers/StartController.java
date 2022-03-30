@@ -5,10 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import mega_sudoku.backend.game.GameLoader;
-import mega_sudoku.backend.models.StartModel;
 import mega_sudoku.backend.utils.ColorThemeManager;
-import mega_sudoku.backend.utils.Dialog;
 import mega_sudoku.backend.utils.CommonStageBuilder;
+import mega_sudoku.backend.utils.Dialog;
 import mega_sudoku.backend.utils.ToolBarManager;
 
 import java.util.Objects;
@@ -41,9 +40,6 @@ public class StartController {
     @FXML
     protected Button closeButton;
 
-    // Модель начального экрана приложения с бизнес логикой.
-    private final StartModel startModel = StartModel.getStartModel();
-
     /**
      * Получение текущего окна как объект Stage.
      * @return stage.
@@ -59,9 +55,7 @@ public class StartController {
     @FXML
     protected void onNewGameButtonClick() {
         getCurrentStage().close();
-        CommonStageBuilder.buildStage(getCurrentStage(), getClass().getResource("/fxml_views/new_game_settings_view.fxml"), "Новая игра",
-                Objects.requireNonNull(this.getClass().getResource("/styles/dark_settings_screen.css")).toExternalForm(),
-                Objects.requireNonNull(this.getClass().getResource("/styles/white_settings_screen.css")).toExternalForm()).show();
+        CommonStageBuilder.buildNewGameSettingsStage(getCurrentStage()).show();
     }
 
     /**
@@ -77,9 +71,7 @@ public class StartController {
      */
     @FXML
     protected void onHelpButtonClick() {
-        CommonStageBuilder.buildStage(getCurrentStage(), getClass().getResource("/fxml_views/help_view.fxml"),"Помощь",
-                Objects.requireNonNull(this.getClass().getResource("/styles/dark_info_screen.css")).toExternalForm(),
-                Objects.requireNonNull(this.getClass().getResource("/styles/white_info_screen.css")).toExternalForm()).show();
+        CommonStageBuilder.buildHelpStage(getCurrentStage()).show();
     }
 
     /**
@@ -87,9 +79,7 @@ public class StartController {
      */
     @FXML
     protected void onInfoButtonClick() {
-        CommonStageBuilder.buildStage(getCurrentStage(), getClass().getResource("/fxml_views/dev_info_view.fxml"), "О разработчиках",
-                Objects.requireNonNull(this.getClass().getResource("/styles/dark_info_screen.css")).toExternalForm(),
-                Objects.requireNonNull(this.getClass().getResource("/styles/white_info_screen.css")).toExternalForm()).show();
+        CommonStageBuilder.buildDevInfoStage(getCurrentStage()).show();
     }
 
     /**

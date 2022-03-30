@@ -5,12 +5,12 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import mega_sudoku.backend.game.GameStageBuilder;
+import mega_sudoku.backend.sudoku.DifficultyLevel;
 import mega_sudoku.backend.sudoku.SudokuBuilder;
 import mega_sudoku.backend.utils.CommonStageBuilder;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.Objects;
 
 /**
  * Класс модели настроек новой игры.
@@ -18,16 +18,16 @@ import java.util.Objects;
 public class NewGameSettingsModel {
     public NewGameSettingsModel() {
         this.boardSize = 16;
-        this.difficultyLevel = 1;
+        this.difficultyLevel = DifficultyLevel.EASY;
     }
 
     // Уровень сложности.
-    private int difficultyLevel;
+    private DifficultyLevel difficultyLevel;
 
     // Размер доски.
     private int boardSize;
 
-    public void setDifficultyLevel(int difficultyLevel) {
+    public void setDifficultyLevel(DifficultyLevel difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
     }
 
@@ -35,7 +35,7 @@ public class NewGameSettingsModel {
         this.boardSize = boardSize;
     }
 
-    public int getDifficultyLevel() {
+    public DifficultyLevel getDifficultyLevel() {
         return difficultyLevel;
     }
 
@@ -45,10 +45,7 @@ public class NewGameSettingsModel {
      */
     public void newGameStartProcess() {
         // Генерация progress bar.
-        var progressStage = CommonStageBuilder.buildStage(null,
-                getClass().getResource("/fxml_views/progress_check_view.fxml"), "Пожалуйста подождите...",
-                Objects.requireNonNull(this.getClass().getResource("/styles/dark_progress_bar.css")).toExternalForm(),
-                Objects.requireNonNull(this.getClass().getResource("/styles/white_progress_bar.css")).toExternalForm());
+        var progressStage = CommonStageBuilder.buildProgressBarStage();
         Label progressLabel = (Label)progressStage.getScene().getRoot().getChildrenUnmodifiable().get(1);
         progressStage.show();
 
@@ -57,10 +54,10 @@ public class NewGameSettingsModel {
         DecimalFormat df = new DecimalFormat("00.00");
         df.setRoundingMode(RoundingMode.DOWN);
         var progressLine = new Timeline(new KeyFrame(new javafx.util.Duration(100), event -> {
-            if (builder.getCount() / (float) builder.getDifficulty() * 100 < 100) {
-                progressLabel.setText(df.format(builder.getCount() / (float) builder.getDifficulty() * 100) + "%  /  100%");
+            if (builder.getCount() / (float) builder.getEmtyCellsCount() * 100 < 100) {
+                progressLabel.setText("   " + df.format(builder.getCount() / (float) builder.getEmtyCellsCount() * 100) + "%   ");
             } else {
-                progressLabel.setText("  Отрисовка... ");
+                progressLabel.setText("Отрисовка...");
             }
         }));
         progressLine.setCycleCount(Timeline.INDEFINITE);

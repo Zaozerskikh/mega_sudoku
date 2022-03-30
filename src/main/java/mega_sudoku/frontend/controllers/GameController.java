@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import mega_sudoku.backend.models.StartModel;
+import mega_sudoku.backend.utils.CommonStageBuilder;
 import mega_sudoku.backend.utils.Dialog;
 import mega_sudoku.backend.utils.ToolBarManager;
 import mega_sudoku.frontend.views.GameView;
@@ -101,7 +101,7 @@ public class GameController extends GameView {
         dialog.showDialog();
         dialog.yesButton.setOnAction(x -> {
             getCurrentStage().close();
-            StartModel.getStartModel().buildStartScreen().show();
+            CommonStageBuilder.buildStartStage().show();
         });
     }
 

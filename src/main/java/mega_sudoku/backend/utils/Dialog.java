@@ -42,10 +42,12 @@ public class Dialog {
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(parent);
         if (!type.equals("confirm")) {
+            assert scene != null;
             ((Pane) scene.getRoot().getChildrenUnmodifiable().get(1)).getChildren().get(1).setVisible(false);
             ((Pane) scene.getRoot().getChildrenUnmodifiable().get(1)).getChildren().get(1).setDisable(true);
             ((Button) ((Pane) scene.getRoot().getChildrenUnmodifiable().get(1)).getChildren().get(2)).setText("Ок");
         }
+        assert scene != null;
         yesButton = ((Button)((Pane) scene.getRoot().getChildrenUnmodifiable().get(1)).getChildren().get(1));
         ((Label) ((GridPane) scene.getRoot().getChildrenUnmodifiable().get(0)).getChildren().get(2)).setText(title);
         ((Label) ((Pane) scene.getRoot().getChildrenUnmodifiable().get(1)).getChildren().get(0)).setText(information);

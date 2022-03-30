@@ -13,7 +13,6 @@ import java.io.ObjectOutputStream;
  * Класс, отвечающий за сохранение игры в файл.
  */
 public class GameSaver {
-
     /**
      * Сохранение игры в файл.
      * @param sudoku судоку для сохранения.

@@ -15,12 +15,12 @@ public class SudokuBuilder {
     /**
      * Поле определяющее сложность (количество пустых клеток).
      */
-    private int difficulty = 1000;
+    private int emtyCellsCount = 1000;
 
     private int count = 0;
 
-    public int getDifficulty() {
-        return difficulty;
+    public int getEmtyCellsCount() {
+        return emtyCellsCount;
     }
 
     public int getCount() {
@@ -50,19 +50,22 @@ public class SudokuBuilder {
      * @param boardSize размер судоку.
      * @param diffLevel уровень сложности судоку.
      */
-    public void generateSudoku(int boardSize, int diffLevel) {
+    public void generateSudoku(int boardSize, DifficultyLevel diffLevel) {
         if (boardSize == 16) {
-            difficulty = switch (diffLevel) { case 1 -> 100; case 2 -> 120; case 3 -> 148;
-                default -> throw new IllegalStateException("Unexpected value: " + diffLevel);
+            emtyCellsCount = switch (diffLevel) {
+                case EASY -> 100;
+                case MEDIUM -> 120;
+                case HARD -> 148;
+            };
+        } else {
+            emtyCellsCount = switch (diffLevel) {
+                case EASY -> 240;
+                case MEDIUM -> 270;
+                case HARD -> 300;
             };
         }
-        else if (boardSize == 25) {
-            difficulty = switch (diffLevel) { case 1 -> 240; case 2 -> 270; case 3 -> 300;
-                default -> throw new IllegalStateException("Unexpected value: " + diffLevel);
-            };
-        }
-        int[][] sol = this.generateSolution(boardSize, diffLevel);
-        int[][] pr = this.generateProblem(boardSize, diffLevel);
+        int[][] sol = this.generateSolution(boardSize);
+        int[][] pr = this.generateProblem(boardSize);
         generatedSudoku = new Sudoku(pr, sol, diffLevel);
     }
 
@@ -78,10 +81,9 @@ public class SudokuBuilder {
      * Метод позволяющий корректно(оставляя судоку однозначно решаемым) удалить некоторые клетки.
      *
      * @param boardSize Размер доски.
-     * @param diffLevel Уровень сложности.
      * @return Доска с некоторыми незаполненными клетками.
      */
-    private int[][] generateProblem(int boardSize, int diffLevel) {
+    private int[][] generateProblem(int boardSize) {
         count = 0;
         int[][] problem = new int[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
@@ -98,7 +100,7 @@ public class SudokuBuilder {
 
         int iterator = 0;
         while (iterator < boardSize * boardSize) {
-            if (count > difficulty) break;
+            if (count > emtyCellsCount) break;
             //System.out.println(count);
             int i = ThreadLocalRandom.current().nextInt(0, boardSize);
             int j = ThreadLocalRandom.current().nextInt(0, boardSize);
@@ -125,10 +127,9 @@ public class SudokuBuilder {
     /**
      *
      * @param boardSize Размер доски.
-     * @param diffLevel уровень сложности.
      * @return Одно из всевозможных заполненных судоку (рандомный выбор).
      */
-    private int[][] generateSolution(int boardSize, int diffLevel) {
+    private int[][] generateSolution(int boardSize) {
         SudokuGrid grid = new SudokuGrid(boardSize);
         return solution = grid.getMixedGrid(10);
     }
