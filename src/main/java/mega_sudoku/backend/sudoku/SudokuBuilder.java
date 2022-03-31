@@ -1,6 +1,5 @@
 package mega_sudoku.backend.sudoku;
 
-import mega_sudoku.backend.dlx.DancingLinks;
 import mega_sudoku.backend.dlx.DancingLinksAlgorithm;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -15,12 +14,12 @@ public class SudokuBuilder {
     /**
      * Поле определяющее сложность (количество пустых клеток).
      */
-    private int emtyCellsCount = 1000;
+    private int emptyCellsCount = 1000;
 
     private int count = 0;
 
-    public int getEmtyCellsCount() {
-        return emtyCellsCount;
+    public int getEmptyCellsCount() {
+        return emptyCellsCount;
     }
 
     public int getCount() {
@@ -52,13 +51,13 @@ public class SudokuBuilder {
      */
     public void generateSudoku(int boardSize, DifficultyLevel diffLevel) {
         if (boardSize == 16) {
-            emtyCellsCount = switch (diffLevel) {
+            emptyCellsCount = switch (diffLevel) {
                 case EASY -> 100;
                 case MEDIUM -> 120;
                 case HARD -> 148;
             };
         } else {
-            emtyCellsCount = switch (diffLevel) {
+            emptyCellsCount = switch (diffLevel) {
                 case EASY -> 240;
                 case MEDIUM -> 270;
                 case HARD -> 300;
@@ -100,7 +99,7 @@ public class SudokuBuilder {
 
         int iterator = 0;
         while (iterator < boardSize * boardSize) {
-            if (count > emtyCellsCount) break;
+            if (count > emptyCellsCount) break;
             //System.out.println(count);
             int i = ThreadLocalRandom.current().nextInt(0, boardSize);
             int j = ThreadLocalRandom.current().nextInt(0, boardSize);
@@ -117,8 +116,6 @@ public class SudokuBuilder {
                     problem[i][j] = back;
                     count--;
                 }
-                // Обнуляем счетчик решений.
-                DancingLinks.zeroSolutions();
             }
         }
         return problem;

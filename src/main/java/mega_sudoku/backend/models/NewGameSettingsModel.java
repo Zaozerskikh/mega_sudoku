@@ -54,8 +54,8 @@ public class NewGameSettingsModel {
         DecimalFormat df = new DecimalFormat("00.00");
         df.setRoundingMode(RoundingMode.DOWN);
         var progressLine = new Timeline(new KeyFrame(new javafx.util.Duration(100), event -> {
-            if (builder.getCount() / (float) builder.getEmtyCellsCount() * 100 < 100) {
-                progressLabel.setText("   " + df.format(builder.getCount() / (float) builder.getEmtyCellsCount() * 100) + "%   ");
+            if (builder.getCount() / (float) builder.getEmptyCellsCount() * 100 < 100) {
+                progressLabel.setText("   " + df.format(builder.getCount() / (float) builder.getEmptyCellsCount() * 100) + "%   ");
             } else {
                 progressLabel.setText("Отрисовка...");
             }

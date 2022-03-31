@@ -6,8 +6,13 @@ import java.util.List;
 
 public class DancingLinks {
     private final ColumnNode header;
+
     private List<DancingNode> answer;
-    private static int countSolutions = 0;
+
+    /**
+     * Счетчик решений для проверки единственности решения.
+     */
+    private int countSolutions = 0;
 
     private void search(int k) {
         if (header.R == header) {
@@ -99,11 +104,9 @@ public class DancingLinks {
         search(0);
     }
 
-    public static void zeroSolutions() {
+    public boolean isOneSolution() {
+        boolean isOneSol = countSolutions == 1;
         countSolutions = 0;
-    }
-
-    public static boolean isOneSolution() {
-        return countSolutions == 1;
+        return isOneSol;
     }
 }
