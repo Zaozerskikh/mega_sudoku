@@ -105,7 +105,7 @@ public class GameView {
                 ((TextField) x).setPrefWidth((stageHeight - 52) / boardSize + 7);
             }
         });
-        if (getCurrentStage().isMaximized()) {
+        if (getCurrentStage().isFullScreen()) {
             Arrays.stream(controls).toList().forEach(x -> x.setMinSize((stageHeight - 172) / 6, (stageHeight - 172) / 6));
             Arrays.stream(controls).toList().forEach(x -> x.setMaxSize((stageHeight - 172) / 6, (stageHeight - 172) / 6));
         } else {

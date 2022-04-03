@@ -1,5 +1,6 @@
 package mega_sudoku.backend.game;
 
+import javafx.scene.input.KeyCombination;
 import mega_sudoku.backend.sudoku.DifficultyLevel;
 import mega_sudoku.backend.sudoku.Sudoku;
 import mega_sudoku.backend.sudoku.SudokuBuilder;
@@ -51,6 +52,7 @@ public class GameStageBuilder {
                         + " x " + sudoku.getBoardSize()
                         + " " + diffInfo);
         stage.getIcons().add(new Image("/icon.png"));
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
     }
 }

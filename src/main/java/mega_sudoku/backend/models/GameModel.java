@@ -55,6 +55,8 @@ public class GameModel {
      * Обработка запроса на проверку решения пользователя.
      */
     public void checkAnswer() {
+        selectedCellChanged(selectedField);
+
         for (int i = 0; i < sudoku.getBoardSize(); i++) {
             for (int j = 0; j < sudoku.getBoardSize(); j++) {
                 if (sudoku.getCurrentPosition()[i][j] == -1) {
@@ -78,6 +80,8 @@ public class GameModel {
      * Обработка запроса на получение подсказки.
      */
     public void showTip() {
+        selectedCellChanged(selectedField);
+
         if (selectedField != null) {
             sudoku.updateCurrentPosition(sudoku.getSolution()[GridPane.getColumnIndex(selectedField)][GridPane.getRowIndex(selectedField)],
                     GridPane.getColumnIndex(selectedField), GridPane.getRowIndex(selectedField));
@@ -100,6 +104,8 @@ public class GameModel {
      * @param parentStage родительское окно, из которого был послан запрос.
      */
     public void saveGame(Stage parentStage) {
+        selectedCellChanged(selectedField);
+
         try {
             if(GameSaver.save(sudoku, parentStage)) {
                 setSaved(true);
@@ -146,6 +152,8 @@ public class GameModel {
             } else {
                 view.showErrorByIncorrectCellValue(selectedField);
             }
+        } else if (selectedField != null && selectedField.getText().equals("")) {
+            sudoku.updateCurrentPosition(-1, GridPane.getColumnIndex(selectedField), GridPane.getRowIndex(selectedField));
         }
         if (isCorrect) {
             this.selectedField = newTextField;

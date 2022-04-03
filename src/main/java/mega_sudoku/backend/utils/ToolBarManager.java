@@ -55,7 +55,10 @@ public class ToolBarManager {
      * @param stage окно.
      */
     public static void onMaximizeButtonClick(Stage stage) {
-        ((Stage)stage.getScene().getWindow()).setMaximized(!((Stage) stage.getScene().getWindow()).isMaximized());
+        // stage.setWidth(Screen.getPrimary().getBounds().getWidth());
+        // stage.setHeight(Screen.getPrimary().getBounds().getHeight());
+        stage.setFullScreen(!stage.isFullScreen());
+        // ((Stage)stage.getScene().getWindow()).setMaximized(!((Stage) stage.getScene().getWindow()).isMaximized());
     }
 
 

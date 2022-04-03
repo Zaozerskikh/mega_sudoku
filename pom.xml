@@ -15,35 +15,99 @@
     </properties>
 
     <dependencies>
+        <!-- controls -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>17-ea+11</version>
+            <classifier>win</classifier>
         </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17-ea+11</version>
+            <classifier>linux</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17-ea+11</version>
+            <classifier>mac</classifier>
+        </dependency>
+
+
+        <!-- fxml -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>17-ea+11</version>
+            <classifier>win</classifier>
         </dependency>
 
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>17-ea+11</version>
+            <classifier>linux</classifier>
         </dependency>
+
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>17-ea+11</version>
+            <classifier>mac</classifier>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
+
+        <!-- [JAR] To build correct cross-platform jar uncomment this code! [JAR] -->
+        <!-- [JAR] Building: mvn clean package or maven->package  [JAR] -->
+
+        <!--        &lt;!&ndash; media &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.openjfx</groupId>-->
+<!--            <artifactId>javafx-media</artifactId>-->
+<!--            <version>17-ea+11</version>-->
+<!--            <classifier>win</classifier>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.openjfx</groupId>-->
+<!--            <artifactId>javafx-media</artifactId>-->
+<!--            <version>17-ea+11</version>-->
+<!--            <classifier>linux</classifier>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.openjfx</groupId>-->
+<!--            <artifactId>javafx-media</artifactId>-->
+<!--            <version>17-ea+11</version>-->
+<!--            <classifier>mac</classifier>-->
+<!--        </dependency>-->
+
+
+<!--        &lt;!&ndash; graphics &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.openjfx</groupId>-->
+<!--            <artifactId>javafx-graphics</artifactId>-->
+<!--            <version>17-ea+11</version>-->
+<!--            <classifier>win</classifier>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.openjfx</groupId>-->
+<!--            <artifactId>javafx-graphics</artifactId>-->
+<!--            <version>17-ea+11</version>-->
+<!--            <classifier>linux</classifier>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.openjfx</groupId>-->
+<!--            <artifactId>javafx-graphics</artifactId>-->
+<!--            <version>17-ea+11</version>-->
+<!--            <classifier>mac</classifier>-->
+<!--        </dependency>-->
+
     </dependencies>
 
     <build>
@@ -56,20 +120,6 @@
                     <source>17</source>
                     <target>17</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.6</version>
-                <executions>
-                    <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
-                        <id>default-cli</id>
-                        <configuration>
-                            <mainClass>com.example.mega_sudoku/mega_sudoku.frontend.MainAppClass</mainClass>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
@@ -89,7 +139,7 @@
                                     <mainClass>mega_sudoku.main.JarLauncher</mainClass>
                                 </transformer>
                             </transformers>
-                            <finalName>mega sudoku</finalName>
+                            <finalName>mega_sudoku</finalName>
                         </configuration>
                     </execution>
                 </executions>
