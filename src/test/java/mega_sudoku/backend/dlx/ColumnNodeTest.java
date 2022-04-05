@@ -10,7 +10,7 @@ class ColumnNodeTest {
 
     @BeforeEach
     void setUp() {
-        C = new ColumnNode();
+
     }
 
     @Test

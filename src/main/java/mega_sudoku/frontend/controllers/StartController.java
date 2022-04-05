@@ -5,10 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import mega_sudoku.backend.game.GameLoader;
-import mega_sudoku.backend.utils.ColorThemeManager;
-import mega_sudoku.backend.utils.CommonStageBuilder;
-import mega_sudoku.backend.utils.Dialog;
-import mega_sudoku.backend.utils.ToolBarManager;
+import mega_sudoku.backend.utils.*;
 
 import java.util.Objects;
 
@@ -114,7 +111,7 @@ public class StartController {
      */
     @FXML
     public void onCloseButtonClick() {
-        Dialog dialog = new Dialog("confirm", "Подтвердите действие", "\nВыйти из программы?", getCurrentStage());
+        Dialog dialog = new Dialog(DualogType.CONFIRM, "Подтвердите действие", "\nВыйти из программы?", getCurrentStage());
         dialog.showDialog();
         dialog.yesButton.setOnAction(x -> getCurrentStage().close());
     }

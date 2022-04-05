@@ -28,6 +28,7 @@ public class GameGridBuilder {
      * @param boardSize размер доски.
      * @param currentPosition судоку.
      */
+    @SuppressWarnings("all")
     public void buildGameGrid(int boardSize, int[][] currentPosition) {
         GridPane gridPane = new GridPane();
         for (int i = 0; i < boardSize; i++) {
@@ -46,7 +47,6 @@ public class GameGridBuilder {
             }
         }
 
-        // TODO Если будет время - заменить этот ужас нормальным кодом.
         String cellBorderColor = (ColorThemeManager.isDarkTheme()) ? "#ffffff" : "#464646";
         String cellBackgroundColor = (ColorThemeManager.isDarkTheme()) ? "#464646" : "#ffffff";
         gridPane.getChildren().forEach(x -> {
@@ -119,7 +119,6 @@ public class GameGridBuilder {
                 ((TextField)x).setPrefWidth((440 - 52) / boardSize + 5);
             }
         });
-        // END OF TODO
         generatedPane = gridPane;
     }
 

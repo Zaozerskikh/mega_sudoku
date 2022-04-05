@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import mega_sudoku.backend.utils.CommonStageBuilder;
 import mega_sudoku.backend.utils.Dialog;
+import mega_sudoku.backend.utils.DualogType;
 import mega_sudoku.backend.utils.ToolBarManager;
 import mega_sudoku.frontend.views.GameView;
 
@@ -67,7 +68,7 @@ public class GameController extends GameView {
      */
     @FXML
     public void onSolutionButtonClick() {
-        Dialog dialog = new Dialog("confirm", "Подтвердите действие", "Вы уверены, что хотите\nпосмотреть решение?", getCurrentStage());
+        Dialog dialog = new Dialog(DualogType.CONFIRM, "Подтвердите действие", "Вы уверены, что хотите\nпосмотреть решение?", getCurrentStage());
         dialog.showDialog();
         dialog.yesButton.setOnAction(x -> {
             dialog.closeDialog();
@@ -97,11 +98,11 @@ public class GameController extends GameView {
     @FXML
     protected void onReturnButtonClick() {
         String msg = (gameModel.isSaved()) ? "Ваша игра успешно сохранена.\nВыйти в главное меню?" : "Ваша игра не сохранена.\nВы уверены, что хотите\nвыйти в главное меню?";
-        Dialog dialog = new Dialog("confirm", "Подтвердите действие", msg, getCurrentStage());
+        Dialog dialog = new Dialog(DualogType.CONFIRM, "Подтвердите действие", msg, getCurrentStage());
         dialog.showDialog();
         dialog.yesButton.setOnAction(x -> {
-            getCurrentStage().close();
             CommonStageBuilder.buildStartStage().show();
+            getCurrentStage().close();
         });
     }
 
@@ -110,7 +111,7 @@ public class GameController extends GameView {
      */
     @FXML
     protected void onResetButtonClick() {
-        Dialog dialog = new Dialog("confirm", "Подтвердите действие", "Ваше решение будет\nсброшено. Вы уверены?",
+        Dialog dialog = new Dialog(DualogType.CONFIRM, "Подтвердите действие", "Ваше решение будет\nсброшено. Вы уверены?",
                  (Stage)helpButton.getScene().getWindow());
         dialog.showDialog();
         dialog.yesButton.setOnAction(x -> {

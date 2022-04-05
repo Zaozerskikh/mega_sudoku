@@ -144,8 +144,8 @@ public class NewGameSettingsController {
      */
     @FXML
     protected void onCloseButtonClick() {
-        ToolBarManager.onCloseButtonClick(getCurrentStage());
         CommonStageBuilder.buildStartStage().show();
+        ToolBarManager.onCloseButtonClick(getCurrentStage());
     }
 
     /**

@@ -60,7 +60,7 @@ public class GameModel {
         for (int i = 0; i < sudoku.getBoardSize(); i++) {
             for (int j = 0; j < sudoku.getBoardSize(); j++) {
                 if (sudoku.getCurrentPosition()[i][j] == -1) {
-                    view.displayCheckAnswerResult("empty_cell");
+                    view.displayCheckAnswerResult(GameCheckResult.EMPTY_CELLS);
                     return;
                 }
             }
@@ -68,12 +68,12 @@ public class GameModel {
         for (int i = 0; i < sudoku.getBoardSize(); i++) {
             for (int j = 0; j < sudoku.getBoardSize(); j++) {
                 if (sudoku.getCurrentPosition()[i][j] != sudoku.getSolution()[i][j]) {
-                    view.displayCheckAnswerResult("incorrect");
+                    view.displayCheckAnswerResult(GameCheckResult.INCORRECT);
                     return;
                 }
             }
         }
-        view.displayCheckAnswerResult("correct");
+        view.displayCheckAnswerResult(GameCheckResult.CORRECT);
     }
 
     /**
