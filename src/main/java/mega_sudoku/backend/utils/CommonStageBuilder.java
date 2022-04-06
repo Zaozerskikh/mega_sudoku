@@ -66,7 +66,7 @@ public class CommonStageBuilder {
      * @return окно информации о разработчиках.
      */
     public static Stage buildDevInfoStage(Stage parentStage) {
-        return buildStage(parentStage, CommonStageBuilder.class.getResource("/fxml_views/dev_info_view.fxml"), "Помощь",
+        return buildStage(parentStage, CommonStageBuilder.class.getResource("/fxml_views/dev_info_view.fxml"), "О разработчиках",
                 Objects.requireNonNull(CommonStageBuilder.class.getResource("/styles/dark_info_screen.css")).toExternalForm(),
                 Objects.requireNonNull(CommonStageBuilder.class.getResource("/styles/white_info_screen.css")).toExternalForm());
     }
@@ -76,7 +76,7 @@ public class CommonStageBuilder {
      * @return окно информации об игре.
      */
     public static Stage buildHelpStage(Stage parentStage) {
-        return buildStage(parentStage, CommonStageBuilder.class.getResource("/fxml_views/help_view.fxml"), "Мега Судоку",
+        return buildStage(parentStage, CommonStageBuilder.class.getResource("/fxml_views/help_view.fxml"), "Помощь",
                 Objects.requireNonNull(CommonStageBuilder.class.getResource("/styles/dark_info_screen.css")).toExternalForm(),
                 Objects.requireNonNull(CommonStageBuilder.class.getResource("/styles/white_info_screen.css")).toExternalForm());
     }
@@ -86,7 +86,7 @@ public class CommonStageBuilder {
      * @return окно настроек новой игры.
      */
     public static Stage buildNewGameSettingsStage(Stage parentStage) {
-        return buildStage(parentStage, CommonStageBuilder.class.getResource("/fxml_views/new_game_settings_view.fxml"), "Новая игра",
+        return buildStage(parentStage, CommonStageBuilder.class.getResource("/fxml_views/new_game_settings_view.fxml"), "Новая Игра",
                 Objects.requireNonNull(CommonStageBuilder.class.getResource("/styles/dark_settings_screen.css")).toExternalForm(),
                 Objects.requireNonNull(CommonStageBuilder.class.getResource("/styles/white_settings_screen.css")).toExternalForm());
     }

@@ -1,4 +1,4 @@
-module com.example.mega_sudoku {
+module mega_sudoku {
     requires javafx.controls;
     requires javafx.fxml;
 

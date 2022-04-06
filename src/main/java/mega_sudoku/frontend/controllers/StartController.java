@@ -99,14 +99,6 @@ public class StartController {
     }
 
     /**
-     * Обработка нажатия на кнопку "Развернуть на полный экран" в правом верхнем углу окна.
-     */
-    @FXML
-    public void onMaximizeButtonClick() {
-        ToolBarManager.onMaximizeButtonClick(getCurrentStage());
-    }
-
-    /**
      * Обработка нажатия на кнопку "Закрыть окно" в правом верхнем углу окна.
      */
     @FXML

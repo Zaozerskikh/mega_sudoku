@@ -37,6 +37,7 @@ public class Dialog {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        dialogStage.setTitle("dialog");
         dialogStage.setScene(scene);
         dialogStage.initStyle(StageStyle.UNDECORATED);
         dialogStage.initModality(Modality.WINDOW_MODAL);
