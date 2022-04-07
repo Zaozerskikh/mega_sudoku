@@ -156,12 +156,6 @@
                     <argLine>
                         --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                     </argLine>
-                    <systemPropertyVariables>
-                        <java.awt.headless>true</java.awt.headless>
-                    </systemPropertyVariables>
-                    <systemProperties>
-                        <java.awt.headless>true</java.awt.headless>
-                    </systemProperties>
                 </configuration>
             </plugin>
 

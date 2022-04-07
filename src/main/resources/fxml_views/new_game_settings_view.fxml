@@ -65,7 +65,7 @@
                   <Insets bottom="7.0" left="570.0" right="10.0" top="7.0" />
                </GridPane.margin>
             </Button>
-            <Button id="maximize_button" fx:id="maximizeButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" onAction="#onMaximizeButtonClick" prefHeight="16.0" prefWidth="16.0" GridPane.halignment="RIGHT">
+            <Button id="maximize_button" fx:id="maximizeButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" GridPane.halignment="RIGHT">
                <font>
                   <Font size="8.0" />
                </font>

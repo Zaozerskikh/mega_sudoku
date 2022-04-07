@@ -15,6 +15,9 @@ import mega_sudoku.frontend.views.GameView;
  * Контроллер для окна с игрой.
  */
 public class GameController extends GameView {
+    // Кнопка раскрытия окна на полный экран.
+    @FXML
+    protected Button maximizeButton;
 
     // Кнопка проверки решения игрока.
     @FXML

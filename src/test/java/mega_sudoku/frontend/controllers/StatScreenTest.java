@@ -1,7 +1,6 @@
 package mega_sudoku.frontend.controllers;
 
 import javafx.scene.Node;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -13,7 +12,6 @@ import org.testfx.api.FxAssert;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
-import org.testfx.robot.Motion;
 import org.testfx.util.NodeQueryUtils;
 import java.util.Arrays;
 import java.util.NoSuchElementException;

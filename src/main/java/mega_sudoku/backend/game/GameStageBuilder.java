@@ -30,6 +30,7 @@ public class GameStageBuilder {
         GameGridBuilder.getBuilder().buildGameGrid(sudoku.getBoardSize(), sudoku.getCurrentPosition());
         var gameGrid = GameGridBuilder.getBuilder().getGeneratedPane();
         Stage stage = new Stage();
+        stage.setTitle("Игра");
         Scene scene ;
         try {
             scene = new Scene(FXMLLoader.load(Objects.requireNonNull(StartController.class.getResource("/fxml_views/game_view.fxml"))));

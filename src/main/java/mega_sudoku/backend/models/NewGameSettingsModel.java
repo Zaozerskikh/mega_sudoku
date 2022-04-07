@@ -39,6 +39,10 @@ public class NewGameSettingsModel {
         return difficultyLevel;
     }
 
+    public int getBoardSize() {
+        return this.boardSize;
+    }
+
     /**
      * Обработка нажатия кнопки начала новой игры:
      * Запуск progress bar, запуск генерации судоку.

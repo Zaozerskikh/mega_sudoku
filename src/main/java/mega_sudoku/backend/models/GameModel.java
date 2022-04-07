@@ -20,6 +20,10 @@ public class GameModel {
     // Судоку.
     private final Sudoku sudoku;
 
+    public Sudoku getSudoku() {
+        return sudoku;
+    }
+
     // Текущее выбранное поле.
     private TextField selectedField;
 

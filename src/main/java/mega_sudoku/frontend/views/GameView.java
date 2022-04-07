@@ -28,9 +28,17 @@ public class GameView {
     // Объект модели данного представления
     protected final GameModel gameModel;
 
+    public GameModel getGameModel() {
+        return this.gameModel;
+    }
+
     // Игровое поле.
     @FXML
     protected final GridPane gameBoard;
+
+    public GridPane getGameBoard() {
+        return gameBoard;
+    }
 
     /**
      * Конструктор, в котором происходит инициализация модели и игровой доски.

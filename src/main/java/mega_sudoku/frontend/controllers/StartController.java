@@ -52,7 +52,7 @@ public class StartController {
     @FXML
     protected void onNewGameButtonClick() {
         getCurrentStage().close();
-        CommonStageBuilder.buildNewGameSettingsStage(getCurrentStage()).show();
+        CommonStageBuilder.buildNewGameSettingsStage().show();
     }
 
     /**

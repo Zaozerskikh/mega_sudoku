@@ -85,8 +85,8 @@ public class CommonStageBuilder {
      * Фасад генерации окна настроек новой игры.
      * @return окно настроек новой игры.
      */
-    public static Stage buildNewGameSettingsStage(Stage parentStage) {
-        return buildStage(parentStage, CommonStageBuilder.class.getResource("/fxml_views/new_game_settings_view.fxml"), "Новая Игра",
+    public static Stage buildNewGameSettingsStage() {
+        return buildStage(null, CommonStageBuilder.class.getResource("/fxml_views/new_game_settings_view.fxml"), "Новая Игра",
                 Objects.requireNonNull(CommonStageBuilder.class.getResource("/styles/dark_settings_screen.css")).toExternalForm(),
                 Objects.requireNonNull(CommonStageBuilder.class.getResource("/styles/white_settings_screen.css")).toExternalForm());
     }
@@ -96,7 +96,7 @@ public class CommonStageBuilder {
      * @return окно progress bar.
      */
     public static Stage buildProgressBarStage() {
-        return buildStage(null, CommonStageBuilder.class.getResource("/fxml_views/progress_check_view.fxml"), "Пожалуйста подождите...",
+        return buildStage(null, CommonStageBuilder.class.getResource("/fxml_views/progress_check_view.fxml"), "Загрузка Игры",
                 Objects.requireNonNull(CommonStageBuilder.class.getResource("/styles/dark_progress_bar.css")).toExternalForm(),
                 Objects.requireNonNull(CommonStageBuilder.class.getResource("/styles/white_progress_bar.css")).toExternalForm());
     }

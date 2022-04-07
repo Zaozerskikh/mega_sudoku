@@ -157,14 +157,6 @@ public class NewGameSettingsController {
     }
 
     /**
-     * Обработка нажатия на кнопку "Развернуть на весь экран" в правом верхнем углу окна.
-     */
-    @FXML
-    protected void onMaximizeButtonClick() {
-        ToolBarManager.onMaximizeButtonClick(getCurrentStage());
-    }
-
-    /**
      * Обработка перемещения мыши (необходимо для работы перетаскивания окна).
      * @param e Mouse event.
      */
