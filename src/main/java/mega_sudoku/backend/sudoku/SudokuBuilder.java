@@ -128,6 +128,6 @@ public class SudokuBuilder {
      */
     private int[][] generateSolution(int boardSize) {
         SudokuGrid grid = new SudokuGrid(boardSize);
-        return solution = grid.getMixedGrid(10);
+        return solution = grid.getMixedGrid();
     }
 }

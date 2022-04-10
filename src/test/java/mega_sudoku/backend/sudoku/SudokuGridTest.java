@@ -1,129 +1,63 @@
 package mega_sudoku.backend.sudoku;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SudokuGridTest {
-    int[][] grid16, grid25;
-
-    @BeforeEach
-    void setUp() {
-        grid16 = new SudokuGrid(16).getMixedGrid(10);
-        grid25 = new SudokuGrid(25).getMixedGrid(10);
+    @Test
+    void sudokuGrid16Test() {
+        checkSudokuGrid(new SudokuGrid(16).getMixedGrid());
     }
 
     @Test
-    void checkMixedGrid25Rows() {
-        boolean checkFlag = true;
-        for (int[] row : grid25) {
-            for (int num : row) {
-                if (Arrays.stream(row).filter(n -> n == num).count() != 1) checkFlag = false;
-            }
-        }
-        assertTrue(checkFlag);
+    void sudokuGrid25Test() {
+        checkSudokuGrid(new SudokuGrid(25).getMixedGrid());
     }
 
-    @Test
-    void checkMixedGrid16Rows() {
-        boolean checkFlag = true;
-        for (int[] row : grid16) {
-            for (int num : row) {
-                if (Arrays.stream(row).filter(n -> n == num).count() != 1) checkFlag = false;
-            }
-        }
-        assertTrue(checkFlag);
-    }
+    private void checkSudokuGrid(int[][] board) {
+        int boardSize = board.length;
+        int sectorSize = (int)Math.sqrt(boardSize);
 
-    @Test
-    void checkMixedGrid16Columns() {
-        boolean checkFlag = true;
-        for (int i = 0; i < grid16.length; i++) {
-            for (int j = i + 1; j < grid16[i].length; j++) {
-                int tmp = grid16[i][j];
-                grid16[i][j] = grid16[j][i];
-                grid16[j][i] = tmp;
-            }
-        }
-        for (int[] row : grid16) {
-            for (int num : row) {
-                if (Arrays.stream(row).filter(n -> n == num).count() != 1) checkFlag = false;
-            }
-        }
-        assertTrue(checkFlag);
-    }
+        var fragments = new ArrayList<HashSet<Integer>>();
+        IntStream.range(0, boardSize).forEach(idx -> fragments.add(new HashSet<>()));
 
-    @Test
-    void checkMixedGrid25Columns() {
-        boolean checkFlag = true;
-        for (int i = 0; i < grid25.length; i++) {
-            for (int j = i + 1; j < grid25[i].length; j++) {
-                int tmp = grid25[i][j];
-                grid25[i][j] = grid25[j][i];
-                grid25[j][i] = tmp;
-            }
-        }
-        for (int[] row : grid25) {
-            for (int num : row) {
-                if (Arrays.stream(row).filter(n -> n == num).count() != 1) checkFlag = false;
-            }
-        }
-        assertTrue(checkFlag);
-    }
+        // verticals.
+        IntStream.range(0, boardSize)
+                .forEach(i -> IntStream.range(0, boardSize)
+                        .forEach(j -> fragments.get(i).add(board[i][j])));
+        fragments.forEach(x -> {
+            assertEquals(x.size(), boardSize);
+            x.clear();
+        });
 
-    @Test
-    void checkMixedGrid25Sectors() {
-        boolean checkFlag = true;
-        int size = 25;
-        int sectorSize = (int)Math.sqrt(size);
-        int[][][] sectors = new int[size][sectorSize][sectorSize];
-        for (int i = 0; i < sectors.length; i++) {
-            for (int j = 0; j < sectors[i].length; j++) {
-                sectors[i][j] = Arrays.copyOfRange(grid25[i], sectorSize * j, sectorSize * (j  + 1));
-            }
-        }
-        for (int[][] sector : sectors) {
-            int[] snake = new int[size];
-            int count = 0;
-            for (int[] row : sector) {
-                for (int num : row) {
-                    snake[count++] = num;
+        // horizontals.
+        IntStream.range(0, boardSize)
+                .forEach(i -> IntStream.range(0, boardSize)
+                        .forEach(j -> fragments.get(j).add(board[i][j])));
+        fragments.forEach(x -> {
+            assertEquals(x.size(), boardSize);
+            x.clear();
+        });
+
+        // sectors.
+        for (int sector_i = 0; sector_i < boardSize; sector_i += sectorSize) {
+            for (int sector_j = 0; sector_j < boardSize; sector_j += sectorSize) {
+                for (int i = 0; i < sectorSize; ++i) {
+                    for (int j = 0; j < sectorSize; ++j) {
+                        fragments.get(sector_i + sector_j / sectorSize).add(board[sector_i + i][sector_j + j]);
+                    }
                 }
             }
-            for (int num : snake) {
-                if (Arrays.stream(snake).filter(n -> n == num).count() != 1) checkFlag = false;
-            }
         }
-        assertTrue(checkFlag);
-    }
 
-    @Test
-    void checkMixedGrid16Sectors() {
-        boolean checkFlag = true;
-        int size = 16;
-        int sectorSize = (int)Math.sqrt(size);
-        int[][][] sectors = new int[size][sectorSize][sectorSize];
-        for (int i = 0; i < sectors.length; i++) {
-            for (int j = 0; j < sectors[i].length; j++) {
-                sectors[i][j] = Arrays.copyOfRange(grid16[i], sectorSize * j, sectorSize * (j  + 1));
-            }
-        }
-        for (int[][] sector : sectors) {
-            int[] snake = new int[size];
-            int count = 0;
-            for (int[] row : sector) {
-                for (int num : row) {
-                    snake[count++] = num;
-                }
-            }
-            for (int num : snake) {
-                if (Arrays.stream(snake).filter(n -> n == num).count() != 1) checkFlag = false;
-            }
-        }
-        assertTrue(checkFlag);
+        fragments.forEach(x -> {
+            assertEquals(x.size(), boardSize);
+            x.clear();
+        });
     }
 }

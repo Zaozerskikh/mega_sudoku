@@ -76,10 +76,9 @@ public class SudokuGrid {
 
     /**
      * Метод, позволяющий рандомным образом переставить стандартную матрицу судоку.
-     *
-     * @param changesNumber Количество манипуляций для перестановки матрицы судоку.
      */
-    private void mix(int changesNumber) {
+    private void mix() {
+        final int changesNumber = 100;
         for (int i = 0; i < changesNumber; i++) {
             int id = ThreadLocalRandom.current().nextInt(0, 5);
             switch (id) {
@@ -92,8 +91,8 @@ public class SudokuGrid {
         }
     }
 
-    public int[][] getMixedGrid(int changesNumber) {
-        mix(changesNumber);
+    public int[][] getMixedGrid() {
+        mix();
         return table;
     }
 }
