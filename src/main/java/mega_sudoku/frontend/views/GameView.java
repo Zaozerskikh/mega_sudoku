@@ -14,7 +14,7 @@ import mega_sudoku.backend.models.GameCheckResult;
 import mega_sudoku.backend.models.GameModel;
 import mega_sudoku.backend.utils.ColorThemeManager;
 import mega_sudoku.backend.utils.Dialog;
-import mega_sudoku.backend.utils.DualogType;
+import mega_sudoku.backend.utils.DialogType;
 
 import java.util.Arrays;
 import java.util.Timer;
@@ -130,7 +130,7 @@ public class GameView {
      * @param selectedField клетка с ошибочным значением.
      */
     public void showErrorByIncorrectCellValue(TextField selectedField) {
-        Dialog dialog = new Dialog(DualogType.ERROR, "Ошибка!", "\nНекорректное значение поля.", getCurrentStage());
+        Dialog dialog = new Dialog(DialogType.ERROR, "Ошибка!", "\nНекорректное значение поля.", getCurrentStage());
         dialog.showDialog();
         selectedField.setFocusTraversable(true);
         selectedField.selectAll();
@@ -157,15 +157,15 @@ public class GameView {
     public void displayCheckAnswerResult(GameCheckResult result) {
         switch (result) {
             case EMPTY_CELLS -> {
-                Dialog dialog = new Dialog(DualogType.ERROR, "Судоку не решена", "\nНе все клетки заполнены.", getCurrentStage());
+                Dialog dialog = new Dialog(DialogType.ERROR, "Судоку не решена", "\nНе все клетки заполнены.", getCurrentStage());
                 dialog.showDialog();
             }
             case INCORRECT -> {
-                Dialog dialog = new Dialog(DualogType.ERROR, "Судоку решена неверно", "\nПоле заполнено с ошибками :(", getCurrentStage());
+                Dialog dialog = new Dialog(DialogType.ERROR, "Судоку решена неверно", "\nПоле заполнено с ошибками :(", getCurrentStage());
                 dialog.showDialog();
             }
             default -> {
-                Dialog dialog = new Dialog(DualogType.INFO, "Успех!", "\nСудоку решена верно!", getCurrentStage());
+                Dialog dialog = new Dialog(DialogType.INFO, "Успех!", "\nСудоку решена верно!", getCurrentStage());
                 dialog.showDialog();
             }
         }

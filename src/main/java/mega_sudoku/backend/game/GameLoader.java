@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import mega_sudoku.backend.sudoku.Sudoku;
 import mega_sudoku.backend.sudoku.SudokuBuilder;
 import mega_sudoku.backend.utils.Dialog;
-import mega_sudoku.backend.utils.DualogType;
+import mega_sudoku.backend.utils.DialogType;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,7 +46,7 @@ public class GameLoader {
                 parentStage.close();
                 GameStageBuilder.generateAndShowGameStage(sudoku);
             } else {
-                Dialog error = new Dialog(DualogType.ERROR, "Ошибка", "\nНе удалось загрузить игру.\nПопробуйте еще раз.", parentStage);
+                Dialog error = new Dialog(DialogType.ERROR, "Ошибка", "\nНе удалось загрузить игру.\nПопробуйте еще раз.", parentStage);
                 error.showDialog();
             }
         }

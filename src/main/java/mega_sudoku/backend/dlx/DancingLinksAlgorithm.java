@@ -3,20 +3,28 @@ package mega_sudoku.backend.dlx;
 import java.util.Arrays;
 
 public class DancingLinksAlgorithm {
+    /**
+     * Значение в пустой клетке.
+     */
+    private final int noValue;
+    /**
+     * Размер доски.
+     */
     private final int boardSize;
     /**
      * Размер подполя.
      */
     private final int subsectionSize;
-    private final int NO_VALUE = -1;
-
     /**
-     * Количество ограничений для матрицы покрытия.
+     * Минимальное значение в клетке.
      */
-    private final int CONSTRAINTS = 4;
     private final int minValue;
+    /**
+     * Максимальное значение в клетке.
+     */
     private final int maxValue;
-    private final int COVER_START_INDEX = 1;
+
+    private final int coverStartIndex = 1;
     /**
      * Объект для взаимодействия с танцующими ссылками.
      */
@@ -28,10 +36,10 @@ public class DancingLinksAlgorithm {
      */
     public DancingLinksAlgorithm(int[][] board) {
         int size = board.length;
-        boardSize = size;
+        boardSize = maxValue = size;
         subsectionSize = (int)Math.sqrt(size);
-        maxValue = size;
         minValue = 1;
+        noValue = -1;
         dlx = new DancingLinks(initializeExactCoverBoard(board));
     }
 
@@ -63,7 +71,8 @@ public class DancingLinksAlgorithm {
      * @return Матрица покрытия.
      */
     private boolean[][] createExactCoverBoard() {
-        boolean[][] coverBoard = new boolean[boardSize * boardSize * maxValue][boardSize * boardSize * CONSTRAINTS];
+        final int constraints = 4;
+        boolean[][] coverBoard = new boolean[boardSize * boardSize * maxValue][boardSize * boardSize * constraints];
 
         int hBase = 0;
         hBase = checkCellConstraint(coverBoard, hBase);
@@ -77,13 +86,11 @@ public class DancingLinksAlgorithm {
     /**
      * Проверка выполнений ограничений в подполе.
      * @param coverBoard Матрица покрытия.
-     * @param hBase
-     * @return
      */
-    private int checkSubsectionConstraint(boolean[][] coverBoard, int hBase) {
-        for (int row = COVER_START_INDEX; row <= boardSize; row += subsectionSize) {
-            for (int column = COVER_START_INDEX; column <= boardSize; column += subsectionSize) {
-                for (int n = COVER_START_INDEX; n <= boardSize; n++, hBase++) {
+    private void checkSubsectionConstraint(boolean[][] coverBoard, int hBase) {
+        for (int row = coverStartIndex; row <= boardSize; row += subsectionSize) {
+            for (int column = coverStartIndex; column <= boardSize; column += subsectionSize) {
+                for (int n = coverStartIndex; n <= boardSize; n++, hBase++) {
                     for (int rowDelta = 0; rowDelta < subsectionSize; rowDelta++) {
                         for (int columnDelta = 0; columnDelta < subsectionSize; columnDelta++) {
                             int index = getIndex(row + rowDelta, column + columnDelta, n);
@@ -93,19 +100,16 @@ public class DancingLinksAlgorithm {
                 }
             }
         }
-        return hBase;
     }
 
     /**
      * Проверка выполнения ограничений в столбце.
      * @param coverBoard Матрица покртыия.
-     * @param hBase
-     * @return
      */
     private int checkColumnConstraint(boolean[][] coverBoard, int hBase) {
-        for (int column = COVER_START_INDEX; column <= boardSize; column++) {
-            for (int n = COVER_START_INDEX; n <= boardSize; n++, hBase++) {
-                for (int row = COVER_START_INDEX; row <= boardSize; row++) {
+        for (int column = coverStartIndex; column <= boardSize; column++) {
+            for (int n = coverStartIndex; n <= boardSize; n++, hBase++) {
+                for (int row = coverStartIndex; row <= boardSize; row++) {
                     int index = getIndex(row, column, n);
                     coverBoard[index][hBase] = true;
                 }
@@ -117,13 +121,11 @@ public class DancingLinksAlgorithm {
     /**
      * Проверка выполнения ограничений в ряду.
      * @param coverBoard Матрица покртыия.
-     * @param hBase
-     * @return
      */
     private int checkRowConstraint(boolean[][] coverBoard, int hBase) {
-        for (int row = COVER_START_INDEX; row <= boardSize; row++) {
-            for (int n = COVER_START_INDEX; n <= boardSize; n++, hBase++) {
-                for (int column = COVER_START_INDEX; column <= boardSize; column++) {
+        for (int row = coverStartIndex; row <= boardSize; row++) {
+            for (int n = coverStartIndex; n <= boardSize; n++, hBase++) {
+                for (int column = coverStartIndex; column <= boardSize; column++) {
                     int index = getIndex(row, column, n);
                     coverBoard[index][hBase] = true;
                 }
@@ -135,13 +137,11 @@ public class DancingLinksAlgorithm {
     /**
      * Проверка выполнения ограничений в клетке.
      * @param coverBoard Матрица покрытия.
-     * @param hBase
-     * @return
      */
     private int checkCellConstraint(boolean[][] coverBoard, int hBase) {
-        for (int row = COVER_START_INDEX; row <= boardSize; row++) {
-            for (int column = COVER_START_INDEX; column <= boardSize; column++, hBase++) {
-                for (int n = COVER_START_INDEX; n <= boardSize; n++) {
+        for (int row = coverStartIndex; row <= boardSize; row++) {
+            for (int column = coverStartIndex; column <= boardSize; column++, hBase++) {
+                for (int n = coverStartIndex; n <= boardSize; n++) {
                     int index = getIndex(row, column, n);
                     coverBoard[index][hBase] = true;
                 }
@@ -157,10 +157,10 @@ public class DancingLinksAlgorithm {
      */
     private boolean[][] initializeExactCoverBoard(int[][] board) {
         boolean[][] coverBoard = createExactCoverBoard();
-        for (int row = COVER_START_INDEX; row <= boardSize; row++) {
-            for (int column = COVER_START_INDEX; column <= boardSize; column++) {
+        for (int row = coverStartIndex; row <= boardSize; row++) {
+            for (int column = coverStartIndex; column <= boardSize; column++) {
                 int n = board[row - 1][column - 1];
-                if (n != NO_VALUE) {
+                if (n != noValue) {
                     for (int num = minValue; num <= maxValue; num++) {
                         if (num != n) {
                             Arrays.fill(coverBoard[getIndex(row, column, num)], false);

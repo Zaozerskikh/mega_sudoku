@@ -47,8 +47,8 @@ class SudokuGridTest {
         // sectors.
         for (int sector_i = 0; sector_i < boardSize; sector_i += sectorSize) {
             for (int sector_j = 0; sector_j < boardSize; sector_j += sectorSize) {
-                for (int i = 0; i < sectorSize; ++i) {
-                    for (int j = 0; j < sectorSize; ++j) {
+                for (int i = 0; i < sectorSize; i++) {
+                    for (int j = 0; j < sectorSize; j++) {
                         fragments.get(sector_i + sector_j / sectorSize).add(board[sector_i + i][sector_j + j]);
                     }
                 }

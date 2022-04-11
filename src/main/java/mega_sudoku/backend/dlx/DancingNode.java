@@ -4,56 +4,55 @@ public class DancingNode {
     /**
      * Поля для доступа к соседним узлам.
      */
-    DancingNode L, R, U, D;
+    DancingNode left, right, up, down;
 
-    ColumnNode C;
+    ColumnNode column;
 
     /**
      * Метод для "отката" вниз данного узла.
-     * @param node данный узел
-     * @return
+     * @param node новый узел.
      */
     DancingNode hookDown(DancingNode node) {
-        assert (this.C == node.C);
-        node.D = this.D;
-        node.D.U = node;
-        node.U = this;
-        this.D = node;
+        assert (this.column == node.column);
+        node.down = this.down;
+        node.down.up = node;
+        node.up = this;
+        this.down = node;
         return node;
     }
 
     DancingNode hookRight(DancingNode node) {
-        node.R = this.R;
-        node.R.L = node;
-        node.L = this;
-        this.R = node;
+        node.right = this.right;
+        node.right.left = node;
+        node.left = this;
+        this.right = node;
         return node;
     }
 
     void unlinkLR() {
-        this.L.R = this.R;
-        this.R.L = this.L;
+        this.left.right = this.right;
+        this.right.left = this.left;
     }
 
     void relinkLR() {
-        this.L.R = this.R.L = this;
+        this.left.right = this.right.left = this;
     }
 
     void unlinkUD() {
-        this.U.D = this.D;
-        this.D.U = this.U;
+        this.up.down = this.down;
+        this.down.up = this.up;
     }
 
     void relinkUD() {
-        this.U.D = this.D.U = this;
+        this.up.down = this.down.up = this;
     }
 
     DancingNode() {
-        L = R = U = D = this;
+        left = right = up = down = this;
     }
 
-    DancingNode(ColumnNode c) {
+    DancingNode(ColumnNode column) {
         this();
-        C = c;
+        this.column = column;
     }
 }

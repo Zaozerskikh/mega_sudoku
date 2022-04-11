@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StatScreenTest extends ApplicationTest {
+class StartScreenTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) {

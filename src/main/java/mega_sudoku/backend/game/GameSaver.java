@@ -4,7 +4,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import mega_sudoku.backend.sudoku.Sudoku;
 import mega_sudoku.backend.utils.Dialog;
-import mega_sudoku.backend.utils.DualogType;
+import mega_sudoku.backend.utils.DialogType;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,14 +34,14 @@ public class GameSaver {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
                 objectOutputStream.writeObject(sudoku);
                 objectOutputStream.close();
-                Dialog dialog = new Dialog(DualogType.INFO, "Успех!", "\nВаша игра успешно сохранена!",
+                Dialog dialog = new Dialog(DialogType.INFO, "Успех!", "\nВаша игра успешно сохранена!",
                         (Stage)Stage.getWindows().get(0));
                 dialog.showDialog();
                 return true;
             }
         } catch (Exception ex) {
             String exMsg = (ex.getMessage().equals("incorrect_ext") ? "Не удалось сохранить\nневерное расширение файла" : "К сожалению,\nигру сохранить не удалось.\nПопробуйте еще раз.");
-            Dialog dialog = new Dialog(DualogType.INFO, "Успех!", exMsg,
+            Dialog dialog = new Dialog(DialogType.INFO, "Успех!", exMsg,
                     (Stage)Stage.getWindows().get(0));
             dialog.showDialog();
             return false;

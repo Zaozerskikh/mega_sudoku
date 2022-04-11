@@ -30,7 +30,7 @@ public class Dialog {
      * @param information информационное сообщение диалогового окна.
      * @param parent родительское окно.
      */
-    public Dialog(DualogType type, String title, String information, Stage parent) {
+    public Dialog(DialogType type, String title, String information, Stage parent) {
         Scene scene = null;
         try {
             scene = new Scene(FXMLLoader.load(Objects.requireNonNull(StartController.class.getResource("/fxml_views/custom_dialog_view.fxml"))));
@@ -42,7 +42,7 @@ public class Dialog {
         dialogStage.initStyle(StageStyle.UNDECORATED);
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(parent);
-        if (type != DualogType.CONFIRM) {
+        if (type != DialogType.CONFIRM) {
             assert scene != null;
             ((Pane) scene.getRoot().getChildrenUnmodifiable().get(1)).getChildren().get(1).setVisible(false);
             ((Pane) scene.getRoot().getChildrenUnmodifiable().get(1)).getChildren().get(1).setDisable(true);

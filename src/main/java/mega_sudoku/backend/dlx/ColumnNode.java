@@ -2,29 +2,27 @@ package mega_sudoku.backend.dlx;
 
 public class ColumnNode extends DancingNode {
     int size;
-    String name;
 
-    ColumnNode(String n) {
+    ColumnNode() {
         super();
         size = 0;
-        name = n;
-        C = this;
+        column = this;
     }
 
     void cover() {
         unlinkLR();
-        for (DancingNode i = this.D; i != this; i = i.D) {
-            for (DancingNode j = i.R; j != i; j = j.R) {
+        for (DancingNode i = this.down; i != this; i = i.down) {
+            for (DancingNode j = i.right; j != i; j = j.right) {
                 j.unlinkUD();
-                j.C.size--;
+                j.column.size--;
             }
         }
     }
 
     void uncover() {
-        for (DancingNode i = this.U; i != this; i = i.U) {
-            for (DancingNode j = i.L; j != i; j = j.L) {
-                j.C.size++;
+        for (DancingNode i = this.up; i != this; i = i.up) {
+            for (DancingNode j = i.left; j != i; j = j.left) {
+                j.column.size++;
                 j.relinkUD();
             }
         }

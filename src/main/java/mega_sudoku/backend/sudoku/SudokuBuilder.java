@@ -28,7 +28,8 @@ public class SudokuBuilder {
 
     private int[][] solution;
 
-    private SudokuBuilder() { }
+    private SudokuBuilder() {
+    }
 
     public static SudokuBuilder getSudokuBuilder() {
         if (INSTANCE == null) {
@@ -64,8 +65,7 @@ public class SudokuBuilder {
             };
         }
         int[][] sol = this.generateSolution(boardSize);
-        int[][] pr = this.generateProblem(boardSize);
-        generatedSudoku = new Sudoku(pr, sol, diffLevel);
+        generatedSudoku = new Sudoku(this.generateProblem(boardSize), sol, diffLevel);
     }
 
     /**
@@ -78,7 +78,6 @@ public class SudokuBuilder {
 
     /**
      * Метод позволяющий корректно(оставляя судоку однозначно решаемым) удалить некоторые клетки.
-     *
      * @param boardSize Размер доски.
      * @return Доска с некоторыми незаполненными клетками.
      */
@@ -90,22 +89,23 @@ public class SudokuBuilder {
         }
 
         // Вспомогательная матрица (-1, если в основной матрице клетка заполненна; 1, если не заполненна).
-        int[][] flook = new int[boardSize][boardSize];
+        int[][] checkMatrix = new int[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                flook[i][j] = -1;
+                checkMatrix[i][j] = -1;
             }
         }
 
         int iterator = 0;
         while (iterator < boardSize * boardSize) {
-            if (count > emptyCellsCount) break;
-            //System.out.println(count);
+            if (count > emptyCellsCount) {
+                break;
+            }
             int i = ThreadLocalRandom.current().nextInt(0, boardSize);
             int j = ThreadLocalRandom.current().nextInt(0, boardSize);
-            if (flook[i][j] == -1) {
+            if (checkMatrix[i][j] == -1) {
                 iterator++;
-                flook[i][j] = 1;
+                checkMatrix[i][j] = 1;
                 int back = problem[i][j]; // Запоминаем цифру прежду чем удалить, на случай, если без нее решение будет не единственное.
                 problem[i][j] = -1;
                 count++;
@@ -122,12 +122,11 @@ public class SudokuBuilder {
     }
 
     /**
-     *
+     * Создание корректной полной судоку.
      * @param boardSize Размер доски.
      * @return Одно из всевозможных заполненных судоку (рандомный выбор).
      */
     private int[][] generateSolution(int boardSize) {
-        SudokuGrid grid = new SudokuGrid(boardSize);
-        return solution = grid.getMixedGrid();
+        return solution = new SudokuGrid(boardSize).getMixedGrid();
     }
 }

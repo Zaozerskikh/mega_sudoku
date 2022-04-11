@@ -15,7 +15,7 @@
       <RowConstraints maxHeight="10.0" minHeight="10.0" percentHeight="8.0" prefHeight="10.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="400.0" prefWidth="600.0" style="-fx-background: transparent; -fx-background-color: transparent;" GridPane.rowIndex="1">
-        <TextArea editable="false" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="358.0" prefWidth="596.0" text="Разработчики: &#10;      Заозерских Сергей (tg: @sergvhn) - GUI&#10;      Зимовнов Никита (tg: @nmzimovnov) - Генерация головоломки (dancing links)&#10;&#10;Приложение разработано как прикладной курсовой проект НИУ ВШЭ ФКН ПИ 2022г.&#10;Научный руководитель - Чуйкин Николай Константинович.&#10;">
+        <TextArea editable="false" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="358.0" prefWidth="596.0" text="Разработчики: &#10;      Заозерских Сергей (tg: @sergvhn) - GUI&#10;      Зимовнов Никита (tg: @krasava_boy) - Алгоритм генерации головоломки (dancing links and algorithm X)&#10;&#10;Приложение разработано как прикладной курсовой проект НИУ ВШЭ ФКН ПИ 2022г.&#10;Научный руководитель - Чуйкин Николай Константинович.&#10;">
             <font>
                 <Font size="16.0" />
             </font>

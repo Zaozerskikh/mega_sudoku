@@ -103,7 +103,7 @@ public class StartController {
      */
     @FXML
     public void onCloseButtonClick() {
-        Dialog dialog = new Dialog(DualogType.CONFIRM, "Подтвердите действие", "\nВыйти из программы?", getCurrentStage());
+        Dialog dialog = new Dialog(DialogType.CONFIRM, "Подтвердите действие", "\nВыйти из программы?", getCurrentStage());
         dialog.showDialog();
         dialog.yesButton.setOnAction(x -> getCurrentStage().close());
     }

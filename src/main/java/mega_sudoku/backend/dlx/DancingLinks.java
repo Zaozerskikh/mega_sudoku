@@ -15,82 +15,77 @@ public class DancingLinks {
     private int countSolutions = 0;
 
     private void search(int k) {
-        if (header.R == header) {
+        if (header.right == header) {
             countSolutions++;
         } else {
+            ColumnNode columnNode = selectColumnNodeHeuristic();
+            columnNode.cover();
 
-            if (countSolutions > 1) { return; }
-
-            ColumnNode c = selectColumnNodeHeuristic();
-            c.cover();
-            if (countSolutions > 1) { return; }
-            for (DancingNode r = c.D; r != c; r = r.D) {
+            for (DancingNode r = columnNode.down; r != columnNode; r = r.down) {
                 answer.add(r);
-                if (countSolutions > 1) { return; }
-                for (DancingNode j = r.R; j != r; j = j.R) {
-                    if (countSolutions > 1) { return; }
-                    j.C.cover();
-                }
 
-                if (countSolutions > 1) { return; }
+                for (DancingNode j = r.right; j != r; j = j.right) {
+                    j.column.cover();
+                }
                 search(k + 1);
 
-                if (countSolutions > 1) { return; }
-                r = answer.remove(answer.size() - 1);
-                c = r.C;
+                if (countSolutions > 1) {
+                    return;
+                }
 
-                if (countSolutions > 1) { return; }
-                for (DancingNode j = r.L; j != r; j = j.L) {
-                    if (countSolutions > 1) { return; }
-                    j.C.uncover();
+                r = answer.remove(answer.size() - 1);
+                columnNode = r.column;
+
+                for (DancingNode j = r.left; j != r; j = j.left) {
+                    j.column.uncover();
                 }
             }
-            if (countSolutions > 1) { return; }
-            c.uncover();
+            columnNode.uncover();
         }
     }
 
     private ColumnNode selectColumnNodeHeuristic() {
         int min = Integer.MAX_VALUE;
-        ColumnNode ret = null;
-        for (ColumnNode c = (ColumnNode) header.R; c != header; c = (ColumnNode) c.R) {
-            if (c.size < min) {
-                min = c.size;
-                ret = c;
+        ColumnNode resultColumn = null;
+        for (ColumnNode column = (ColumnNode) header.right; column != header; column = (ColumnNode) column.right) {
+            if (column.size < min) {
+                min = column.size;
+                resultColumn = column;
             }
         }
-        return ret;
+        return resultColumn;
     }
 
     private ColumnNode makeDLXBoard(boolean[][] grid) {
-        final int COLS = grid[0].length;
+        final int size = grid[0].length;
 
-        ColumnNode headerNode = new ColumnNode("header");
+        ColumnNode headerNode = new ColumnNode();
         List<ColumnNode> columnNodes = new ArrayList<>();
 
-        for (int i = 0; i < COLS; i++) {
-            ColumnNode n = new ColumnNode(Integer.toString(i));
+        for (int i = 0; i < size; i++) {
+            ColumnNode n = new ColumnNode();
             columnNodes.add(n);
             headerNode = (ColumnNode) headerNode.hookRight(n);
         }
-        headerNode = headerNode.R.C;
+        headerNode = headerNode.right.column;
 
         for (boolean[] aGrid : grid) {
             DancingNode prev = null;
-            for (int j = 0; j < COLS; j++) {
+            for (int j = 0; j < size; j++) {
                 if (aGrid[j]) {
                     ColumnNode col = columnNodes.get(j);
                     DancingNode newNode = new DancingNode(col);
-                    if (prev == null)
+                    if (prev == null) {
                         prev = newNode;
-                    col.U.hookDown(newNode);
+                    }
+                    col.up.hookDown(newNode);
                     prev = prev.hookRight(newNode);
                     col.size++;
                 }
             }
         }
 
-        headerNode.size = COLS;
+        headerNode.size = size;
 
         return headerNode;
     }
