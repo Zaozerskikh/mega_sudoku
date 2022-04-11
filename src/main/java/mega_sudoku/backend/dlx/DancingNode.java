@@ -1,5 +1,8 @@
 package mega_sudoku.backend.dlx;
 
+/**
+ * Класс отвечающий за работу "танцующих" узлов.
+ */
 public class DancingNode {
     /**
      * Поля для доступа к соседним узлам.

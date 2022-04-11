@@ -27,7 +27,7 @@ public class GameSaver {
         var file = fc.showSaveDialog(parentStage);
         try {
             if (file != null) {
-                if (!file.getPath().substring(file.getPath().indexOf('.') +1).equals("sudoku")) {
+                if (!file.getPath().substring(file.getPath().indexOf('.') + 1).equals("sudoku")) {
                     throw new Exception("incorrect_ext");
                 }
                 FileOutputStream outputStream = new FileOutputStream(file);

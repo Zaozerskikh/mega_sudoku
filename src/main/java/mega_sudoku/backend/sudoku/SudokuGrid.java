@@ -3,21 +3,33 @@ package mega_sudoku.backend.sudoku;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SudokuGrid {
+    /**
+     * Размер поля.
+     */
     private final int boardSize;
 
+    /**
+     * Изначально правильно выстроенное поле.
+     */
     private final int[][] table;
 
-    public SudokuGrid(int size) {
-        table = new int[size][];
-        boardSize = (int)Math.sqrt(size);
-        for (int i = 0; i < size; i++) {
-            table[i] = new int[size];
-            for (int j = 0; j < size; j++) {
-                table[i][j] = (i * boardSize + i / boardSize + j) % (boardSize * boardSize) + 1;
+    /**
+     * Конструктор, создающий изначально правильно выстроенное поля для дальнейших перестановок.
+     * @param boardSize Размер поля.
+     */
+    public SudokuGrid(int boardSize) {
+        table = new int[boardSize][boardSize];
+        this.boardSize = (int)Math.sqrt(boardSize);
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                table[i][j] = (i * this.boardSize + i / this.boardSize + j) % (this.boardSize * this.boardSize) + 1;
             }
         }
     }
 
+    /**
+     * Метод транспонирования.
+     */
     private void transpose() {
         for (int i = 0; i < table.length; i++) {
             for (int j = i + 1; j < table[i].length; j++) {
@@ -28,14 +40,20 @@ public class SudokuGrid {
         }
     }
 
-    private void swapTwoArraysInTable(int a, int b) {
-        for (int i = 0; i < table[a].length; i++) {
-            int tmp = table[a][i];
-            table[a][i] = table[b][i];
-            table[b][i] = tmp;
-        }
+    /**
+     * Метод замены двух рядов в таблице.
+     * @param firstRowIndex Номер первого ряда.
+     * @param secondRowIndex Номер второго ряда.
+     */
+    private void swapTwoArraysInTable(int firstRowIndex, int secondRowIndex) {
+        int[] tmp = table[firstRowIndex];
+        table[firstRowIndex] = table[secondRowIndex];
+        table[secondRowIndex] = tmp;
     }
 
+    /**
+     * Замена двух рандомных рядов.
+     */
     private void swapRows() {
         int area = ThreadLocalRandom.current().nextInt(0, boardSize);
         int line1 = ThreadLocalRandom.current().nextInt(0, boardSize);
@@ -48,12 +66,18 @@ public class SudokuGrid {
         swapTwoArraysInTable(N1, N2);
     }
 
+    /**
+     * Метод замены двух столбцов.
+     */
     private void swapColumns() {
         transpose();
         swapRows();
         transpose();
     }
 
+    /**
+     * Метод замены группы рядов.
+     */
     private void swapRowsArea() {
         int area1 = ThreadLocalRandom.current().nextInt(0, boardSize);
         int area2 = ThreadLocalRandom.current().nextInt(0, boardSize);
@@ -68,6 +92,9 @@ public class SudokuGrid {
         }
     }
 
+    /**
+     * Метод замены группы столбцов.
+     */
     private void swapColumnsArea() {
         transpose();
         swapRowsArea();

@@ -1,19 +1,10 @@
 package mega_sudoku.backend.sudoku;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SudokuBuilderTest {
-    SudokuBuilder builder;
-
-    @BeforeEach
-    void setUp() {
-        builder = SudokuBuilder.getSudokuBuilder();
-        //builder.generateSudoku();
-    }
-
     @Test
     void getCount16EASYTest() {
         checkCount(16, DifficultyLevel.EASY);

@@ -4,7 +4,7 @@ import mega_sudoku.backend.sudoku.DifficultyLevel;
 import mega_sudoku.backend.sudoku.SudokuBuilder;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DancingLinksAlgorithmTest {
 

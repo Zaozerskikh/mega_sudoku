@@ -3,7 +3,7 @@ package mega_sudoku.backend.utils;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class ColorThemeManagerTest extends ApplicationTest {
 

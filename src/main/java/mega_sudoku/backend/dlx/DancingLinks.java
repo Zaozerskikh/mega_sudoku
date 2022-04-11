@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Класс, отвечающий за работу и реализацию алгоритма "танцующих" ссылок.
+ */
 public class DancingLinks {
     private final ColumnNode header;
 
