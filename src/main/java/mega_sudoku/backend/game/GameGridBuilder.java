@@ -9,11 +9,17 @@ import mega_sudoku.backend.utils.ColorThemeManager;
  * Класс, отвечающий за построение игровой сетки заданного размера.
  */
 public class GameGridBuilder {
-    // Простейшая реализация синглтона.
+     //Холдер для объекта синглтона.
     private static GameGridBuilder INSTANCE;
 
+
+    // Сгенерированная игровая сетка.
     private GridPane generatedPane;
 
+    /**
+     * Синглтон.
+     * @return объект синглтона.
+     */
     public static GameGridBuilder getBuilder() {
         if (INSTANCE == null) {
             INSTANCE = new GameGridBuilder();
@@ -21,6 +27,9 @@ public class GameGridBuilder {
         return INSTANCE;
     }
 
+    /**
+     * Приватный конструктор для реализации синглтона.
+     */
     private GameGridBuilder() {}
 
     /**

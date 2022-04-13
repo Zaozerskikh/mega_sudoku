@@ -3,6 +3,7 @@ package mega_sudoku.backend.utils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -48,6 +49,7 @@ public class CommonStageBuilder {
             stage.setMinHeight(400);
             stage.setMinWidth(600);
         }
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         return stage;
     }
 
