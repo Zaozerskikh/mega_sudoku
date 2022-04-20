@@ -84,53 +84,50 @@
         </dependency>
 
 
-        <!-- [JAR] To build correct cross-platform jar uncomment this code! [JAR] -->
-        <!-- [JAR] Building: mvn clean package or maven->package  [JAR] -->
+        <!-- [JAR] To build correct cross-platform jar uncomment code below! [JAR] -->
+        <!-- [JAR] Building: mvn clean package -Dmaven.test.skip=true [JAR] -->
 
-        <!--        &lt;!&ndash; media &ndash;&gt;-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.openjfx</groupId>-->
-        <!--            <artifactId>javafx-media</artifactId>-->
-        <!--            <version>17-ea+11</version>-->
-        <!--            <classifier>win</classifier>-->
-        <!--        </dependency>-->
+        <!--<dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>17-ea+11</version>
+            <classifier>win</classifier>
+        </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.openjfx</groupId>-->
-        <!--            <artifactId>javafx-media</artifactId>-->
-        <!--            <version>17-ea+11</version>-->
-        <!--            <classifier>linux</classifier>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>17-ea+11</version>
+            <classifier>linux</classifier>
+        </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.openjfx</groupId>-->
-        <!--            <artifactId>javafx-media</artifactId>-->
-        <!--            <version>17-ea+11</version>-->
-        <!--            <classifier>mac</classifier>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>17-ea+11</version>
+            <classifier>mac</classifier>
+        </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>17-ea+11</version>
+            <classifier>win</classifier>
+        </dependency>
 
-        <!--        &lt;!&ndash; graphics &ndash;&gt;-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.openjfx</groupId>-->
-        <!--            <artifactId>javafx-graphics</artifactId>-->
-        <!--            <version>17-ea+11</version>-->
-        <!--            <classifier>win</classifier>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>17-ea+11</version>
+            <classifier>linux</classifier>
+        </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.openjfx</groupId>-->
-        <!--            <artifactId>javafx-graphics</artifactId>-->
-        <!--            <version>17-ea+11</version>-->
-        <!--            <classifier>linux</classifier>-->
-        <!--        </dependency>-->
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.openjfx</groupId>-->
-        <!--            <artifactId>javafx-graphics</artifactId>-->
-        <!--            <version>17-ea+11</version>-->
-        <!--            <classifier>mac</classifier>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>17-ea+11</version>
+            <classifier>mac</classifier>
+        </dependency> -->
 
     </dependencies>
 

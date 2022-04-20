@@ -1,13 +1,14 @@
 package mega_sudoku.backend.models;
 
-import mega_sudoku.backend.game.GameSaver;
-import mega_sudoku.backend.sudoku.Sudoku;
-import mega_sudoku.backend.sudoku.SudokuBuilder;
-import mega_sudoku.frontend.views.GameView;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import mega_sudoku.backend.game.GameSaver;
+import mega_sudoku.backend.sudoku.Sudoku;
+import mega_sudoku.backend.sudoku.SudokuBuilder;
+import mega_sudoku.frontend.views.GameView;
+
 import java.io.IOException;
 
 /**
@@ -60,11 +61,10 @@ public class GameModel {
      */
     public void checkAnswer() {
         selectedCellChanged(selectedField);
-
         for (int i = 0; i < sudoku.getBoardSize(); i++) {
             for (int j = 0; j < sudoku.getBoardSize(); j++) {
                 if (sudoku.getCurrentPosition()[i][j] == -1) {
-                    view.displayCheckAnswerResult(GameCheckResult.EMPTY_CELLS);
+                    view.displayCheckAnswerResult(GameCheckResult.EMPTY_CELLS, sudoku.getSolution());
                     return;
                 }
             }
@@ -72,20 +72,20 @@ public class GameModel {
         for (int i = 0; i < sudoku.getBoardSize(); i++) {
             for (int j = 0; j < sudoku.getBoardSize(); j++) {
                 if (sudoku.getCurrentPosition()[i][j] != sudoku.getSolution()[i][j]) {
-                    view.displayCheckAnswerResult(GameCheckResult.INCORRECT);
+                    view.displayCheckAnswerResult(GameCheckResult.INCORRECT, sudoku.getSolution());
                     return;
                 }
             }
         }
-        view.displayCheckAnswerResult(GameCheckResult.CORRECT);
+        view.displayCheckAnswerResult(GameCheckResult.CORRECT, sudoku.getSolution());
     }
 
     /**
      * Обработка запроса на получение подсказки.
      */
     public void showTip() {
+        GameView.resetCellsColor(view.getGameBoard());
         selectedCellChanged(selectedField);
-
         if (selectedField != null) {
             sudoku.updateCurrentPosition(sudoku.getSolution()[GridPane.getColumnIndex(selectedField)][GridPane.getRowIndex(selectedField)],
                     GridPane.getColumnIndex(selectedField), GridPane.getRowIndex(selectedField));
@@ -108,8 +108,8 @@ public class GameModel {
      * @param parentStage родительское окно, из которого был послан запрос.
      */
     public void saveGame(Stage parentStage) {
+        GameView.resetCellsColor(view.getGameBoard());
         selectedCellChanged(selectedField);
-
         try {
             if(GameSaver.save(sudoku, parentStage)) {
                 setSaved(true);
@@ -133,7 +133,7 @@ public class GameModel {
      * @param controls все кнопки, находящиеся в этом окне.
      */
     public void resizeStage(double stageHeight, Button[] controls) {
-        view.resizeStage(stageHeight, sudoku.getBoardSize(), controls);
+        view.resizeStage(stageHeight, sudoku.getBoardSize(), controls, sudoku.getProblem());
     }
 
     /**

@@ -30,10 +30,14 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Интеграционные тесты для окна с игрой.
+ */
 class GameScreenTest extends ApplicationTest {
-
+    // объект модели.
     GameModel model;
 
+    // объект контроллера.
     GameController controller;
 
     @Override
@@ -74,6 +78,11 @@ class GameScreenTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
+    /**
+     * Заполнение поля некорректными цифрами и попытка проверки решения.
+     * Тестирование вывода сообщения об ошибке.
+     * Тестирование закрашивания некорректных клеток красным цветом.
+     */
     @Test
     void incorrectFillingTest() {
         controller.getGameBoard().getChildren().forEach(x -> {
@@ -83,19 +92,51 @@ class GameScreenTest extends ApplicationTest {
         });
         clickOn(controller.checkButton);
         FxAssert.verifyThat(window("dialog"), WindowMatchers.isShowing());
-        assertEquals("\nПоле заполнено с ошибками :(", ((Label) ((Pane) ((GridPane) NodeQueryUtils.rootOfWindow(window("dialog")).toArray()[0])
-                .getChildren().get(1)).getChildren().get(0)).getText());
+        assertAll(
+                () -> assertEquals("\nПоле заполнено с ошибками :(", ((Label) ((Pane) ((GridPane) NodeQueryUtils.rootOfWindow(window("dialog")).toArray()[0])
+                        .getChildren().get(1)).getChildren().get(0)).getText()),
+                () -> controller.getGameBoard().getChildren().stream()
+                        .filter(x -> x.getClass() == TextField.class)
+                        .forEach(x -> {
+                            if (((TextField)x).getText().equals(String.valueOf(model.getSudoku()
+                                    .getSolution()[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)]))) {
+                                assertNotEquals(Color.RED, ((TextField)x).getBackground().getFills().get(0).getFill());
+                            }
+                        })
+        );
     }
 
+
+    /**
+     * Попытка проверки решения с пустыми клетками.
+     * Тестирование вывода ифнормационного сообщения об ошибке.
+     * Тестирование закрашивания красным цветом пустых клеток.
+     */
     @Test
     void notCompleteCellsTest() {
         clickOn(controller.checkButton);
         FxAssert.verifyThat(window("dialog"), WindowMatchers.isShowing());
-        assertEquals("\nНе все клетки заполнены.",
-                ((Label) ((Pane) ((GridPane) NodeQueryUtils.rootOfWindow(window("dialog")).toArray()[0])
-                .getChildren().get(1)).getChildren().get(0)).getText());
+        assertAll(
+                () -> assertEquals("\nНе все клетки заполнены.",
+                        ((Label) ((Pane) ((GridPane) NodeQueryUtils.rootOfWindow(window("dialog")).toArray()[0])
+                                .getChildren().get(1)).getChildren().get(0)).getText()),
+                () -> controller.getGameBoard().getChildren().stream()
+                        .filter(x -> x.getClass() == TextField.class)
+                        .forEach(x -> {
+                            if (((TextField)x).getText().equals("")) {
+                                assertEquals(Color.RED, ((TextField)x).getBackground().getFills().get(0).getFill());
+                            } else {
+                                assertNotEquals(Color.RED, ((TextField)x).getBackground().getFills().get(0).getFill());
+                            }
+                        })
+        );
     }
 
+
+    /**
+     * Корректное заполнение игровой сетки судоку и проверка решения.
+     * Тестирование вывода информационного сообщения с успехом.
+     */
     @Test
     void correctFillingTest() {
         controller.getGameBoard().getChildren().forEach(x -> {
@@ -110,9 +151,20 @@ class GameScreenTest extends ApplicationTest {
                 .getChildren().get(1)).getChildren().get(0)).getText());
     }
 
+
+    /**
+     * Попытка получения подсказки.
+     * Тестирование поведения при попытке вызвать подсказу без выбранной клетки.
+     * Тестирование показа подсказки на экране.
+     * Тестирование корректности подсказки.
+     * Тестирование обновления текущей позиции на доске в объекте модели.
+     * Тестирование закрашивания клетки с подсказкой зеленым цветом.
+     * Тестирование автоматического возврата исходного цвета клетки.
+     */
     @Test
     @SuppressWarnings("all")
-    void hintTest() {
+    void hintTest() throws InterruptedException {
+        clickOn(controller.helpButton);
         var cell = (TextField)controller.getGameBoard().getChildren().stream()
                 .filter(x -> x.getClass() == TextField.class && ((TextField)x).isEditable())
                 .findAny().get();
@@ -129,11 +181,19 @@ class GameScreenTest extends ApplicationTest {
                         model.getSudoku().getCurrentPosition()[GridPane.getColumnIndex(cell)][GridPane.getRowIndex(cell)]
                 )
         );
+        Thread.sleep(5000);
+        assertNotEquals(Color.GREEN, cell.getBackground().getFills().get(0).getFill());
     }
 
+
+    /**
+     * Заполнение клетки игрового поля валидным значением.
+     * Тестирование отсутствия сообщений об ошибке на экране.
+     * Тестирование обновления текущей позиции в объекте модели.
+     */
     @Test
     @SuppressWarnings("all")
-    void correctCellValueTest() {
+    void cellValidValueTest() {
         var cell = (TextField)controller.getGameBoard().getChildren().stream()
                 .filter(x -> x.getClass() == TextField.class && ((TextField)x).isEditable())
                 .findAny().get();
@@ -144,9 +204,18 @@ class GameScreenTest extends ApplicationTest {
         );
     }
 
+
+    /**
+     * Попытка ввода в клетку невалидного значения.
+     * Ввод строки.
+     * Тестирование показа информационного сообщения об ошибке.
+     * Ввод слишком большого числового значения.
+     * Тестирование показа информационного сообщения об ошибке.
+     * Тестирования отсутствия обновления текущей позиции в объекте модели.
+     */
     @Test
     @SuppressWarnings("all")
-    void incorrectCellValueTest() {
+    void cellInvalidValueTest() {
         var cell = (TextField)controller.getGameBoard().getChildren().stream()
                 .filter(x -> x.getClass() == TextField.class && ((TextField)x).isEditable())
                 .findAny().get();
@@ -159,8 +228,7 @@ class GameScreenTest extends ApplicationTest {
                         .rootOfWindow(window("dialog")).toArray()[0])
                         .getChildren().get(1)).getChildren().get(0)).getText()
                 ),
-                () -> assertEquals("abc", cell.selectedTextProperty().get()),
-                () -> assertNotEquals(666, model.getSudoku().getCurrentPosition()[GridPane.getColumnIndex(cell)][GridPane.getRowIndex(cell)])
+                () -> assertEquals("abc", cell.selectedTextProperty().get())
         );
         clickOn(
                 ((Pane) ((GridPane) NodeQueryUtils
@@ -181,6 +249,12 @@ class GameScreenTest extends ApplicationTest {
         );
     }
 
+    /**
+     * Отображение полного решения головоломки.
+     * Тестирование показа предупреждения.
+     * Тестирования корректности отображенного решения.
+     * Тестирование обновления текущей позиции в объекте model.
+     */
     @Test
     void checkSolutionTest() {
         clickOn(controller.solutionButton);
@@ -204,6 +278,12 @@ class GameScreenTest extends ApplicationTest {
                 ));
     }
 
+
+    /**
+     * Рандомное заполнение поля и его сброс обратно.
+     * Тестирование показа предупреждения ресета.
+     * Тестирование ресета текущей позиции в объекте модели.
+     */
     @Test
     @SuppressWarnings("all")
     void resetUserSolutionTest() {
@@ -240,6 +320,53 @@ class GameScreenTest extends ApplicationTest {
                 });
     }
 
+
+    /**
+     * Дабл-клик по рандомной клетке с цифрой.
+     * Тестирование подсвечивания всех аналогичных цифр на игровом поле.
+     * Тестирование очистки подсветки клеток после клика в другом месте.
+     */
+    @Test
+    @SuppressWarnings("all")
+    void equalNumsColoringTest() {
+        // fill
+        var target = controller.getGameBoard().getChildren().stream()
+                .filter(x -> x.getClass() == TextField.class)
+                .filter(x -> !((TextField)x).getText().equals(""))
+                .findAny().get();
+        doubleClickOn(target);
+
+        controller.getGameBoard().getChildren().stream()
+                .filter(x -> x.getClass() == TextField.class)
+                .forEach(x -> {
+                    if (((TextField)x).getText().equals(((TextField)target).getText())) {
+                        assertEquals(Color.DARKORANGE, ((TextField)x).getBackground().getFills().get(0).getFill());
+                    } else {
+                        assertNotEquals(Color.DARKORANGE, ((TextField)x).getBackground().getFills().get(0).getFill());
+                    }
+                });
+
+        // reset
+        var newTarget = controller.getGameBoard().getChildren().stream()
+                .filter(x -> x.getClass() == TextField.class)
+                .filter(x -> !((TextField)x).getText().equals(""))
+                .filter(x -> !Objects.equals(GridPane.getRowIndex(x), GridPane.getRowIndex(target)))
+                .findAny().get();
+        clickOn(target);
+
+        controller.getGameBoard().getChildren().stream()
+                .filter(x -> x.getClass() == TextField.class)
+                .forEach(x -> assertNotEquals(Color.DARKORANGE,
+                        ((TextField)x).getBackground().getFills().get(0).getFill()));
+    }
+
+
+    /**
+     * Развертывание окна с игрой на полный экран.
+     * Тестирование ресайза окна.
+     * Выход из полноэкранного режима.
+     * Тестирование ресайза окна.
+     */
     @Test
     void maximizeTest() {
         clickOn(controller.maximizeButton);

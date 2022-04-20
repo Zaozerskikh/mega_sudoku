@@ -19,16 +19,19 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.util.NodeQueryUtils;
-
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Интеграционные тесты окна настроек новой игры.
+ */
 class NewGameSettingsScreenTest extends ApplicationTest {
-
+    // объект модели.
     NewGameSettingsModel model;
 
+    // объект контроллера.
     NewGameSettingsController controller;
 
     @Override
@@ -58,6 +61,11 @@ class NewGameSettingsScreenTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
+    /**
+     * Клик по чекбоксу 16.
+     * Тестирование изменения выбранного чекбокса.
+     * Тестирование изменения размера поля в объекте model.
+     */
     @Test
     void selected16Test() {
         assertAll(
@@ -79,6 +87,11 @@ class NewGameSettingsScreenTest extends ApplicationTest {
         );
     }
 
+    /**
+     * Клик по чекбоксу 25.
+     * Тестирование изменения выбранного чекбокса.
+     * Тестирование изменения размера поля в объекте model.
+     */
     @Test
     void selected25Test() {
         assertAll(
@@ -100,6 +113,10 @@ class NewGameSettingsScreenTest extends ApplicationTest {
         );
     }
 
+    /**
+     * Изменение положения слайдера.
+     * Тестирование изменения уровня сложности в объекте model.
+     */
     @Test
     void sliderEasyToMediumTest() throws InterruptedException {
         assertEquals(DifficultyLevel.EASY, model.getDifficultyLevel());
@@ -188,6 +205,13 @@ class NewGameSettingsScreenTest extends ApplicationTest {
     }
 
 
+    /**
+     * Начало новой игры.
+     * Тестирование закрытия окна настроек.
+     * Тестирование отображения окна загрузки новой игры.
+     * Тестирование закрытия окна загрузки.
+     * Тестирование отображения окна с игрой.
+     */
     @Test
     void onNewGameButtonClickTest() throws InterruptedException {
         clickOn(controller.startGameButton);

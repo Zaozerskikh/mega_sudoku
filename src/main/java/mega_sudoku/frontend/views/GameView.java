@@ -8,6 +8,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import mega_sudoku.backend.game.GameGridBuilder;
 import mega_sudoku.backend.models.GameCheckResult;
@@ -15,7 +17,6 @@ import mega_sudoku.backend.models.GameModel;
 import mega_sudoku.backend.utils.ColorThemeManager;
 import mega_sudoku.backend.utils.Dialog;
 import mega_sudoku.backend.utils.DialogType;
-
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -57,32 +58,11 @@ public class GameView {
     }
 
     /**
-     * Показ подсказки игроку.
-     * @param selectedField клетка, в которой нужно показать число.
-     * @param value само число.
-     */
-    public void showTip(TextField selectedField, int value) {
-        selectedField.setText(Integer.toString(value));
-        selectedField.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (ColorThemeManager.isDarkTheme()) {
-                    selectedField.setBackground(new Background(new BackgroundFill(Color.valueOf("#464646"), null, null)));
-                } else {
-                    selectedField.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-                }
-                timer.cancel();
-            }
-        }, 3*1000);
-    }
-
-    /**
      * Показ решения.
      * @param solution решение, которое необходимо отобразить.
      */
     public void showSolution(int[][] solution) {
+        resetCellsColor(gameBoard);
         this.gameBoard.getChildren().forEach(x -> ((TextField)x).setText(Integer.toString(solution[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)])));
     }
 
@@ -91,6 +71,7 @@ public class GameView {
      * @param problem позиция, которую необходимо отобразить.
      */
     public void resetPosition(int[][] problem) {
+        resetCellsColor(gameBoard);
         gameBoard.getChildren().forEach(x -> {
             if (problem[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)] == -1) {
                 ((TextField)x).setText("");
@@ -103,12 +84,17 @@ public class GameView {
      * @param stageHeight текущая высота окна с игрой.
      * @param boardSize размер доски текущего судоку.
      * @param controls массив кнопок, размер которых необходимо изменить.
+     * @param problem изначальная головоломка (для выделения изначально заполненных клеток жирным уветом).
      */
     @SuppressWarnings("all")
-    public void resizeStage(double stageHeight, int boardSize, Button[] controls) {
+    public void resizeStage(double stageHeight, int boardSize, Button[] controls, int[][] problem) {
         gameBoard.getChildren().forEach(x -> {
             ((TextField)x).setPrefSize((stageHeight - Math.sqrt(boardSize)) / boardSize, (stageHeight - 52) / boardSize);
-            ((TextField)x).setFont(new Font((int)(stageHeight - 52) / (3 * boardSize) - 1));
+            if (problem[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)] != -1) {
+                ((TextField)x).setFont(Font.font(null, FontWeight.BOLD, FontPosture.REGULAR, (int)(stageHeight - 52) / (3 * boardSize) - 1));
+            } else {
+                ((TextField)x).setFont(new Font((int)(stageHeight - 52) / (3 * boardSize) - 1));
+            }
             if (GridPane.getRowIndex(x) % (int)(Math.ceil(Math.sqrt(boardSize))) == 0 || GridPane.getRowIndex(x) == boardSize - 1) {
                 ((TextField)x).setPrefHeight((stageHeight - 52) / boardSize + 5);
             }
@@ -126,6 +112,17 @@ public class GameView {
     }
 
     /**
+     * Показ подсказки игроку.
+     * @param selectedField клетка, в которой нужно показать число.
+     * @param value само число.
+     */
+    public void showTip(TextField selectedField, int value) {
+        selectedField.setText(Integer.toString(value));
+        selectedField.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
+        resetCellsColorAwait();
+    }
+
+    /**
      * Показ информационного сообщения об ошибочном значении клетки игрового поля.
      * @param selectedField клетка с ошибочным значением.
      */
@@ -135,26 +132,26 @@ public class GameView {
         selectedField.setFocusTraversable(true);
         selectedField.selectAll();
         selectedField.requestFocus();
-        selectedField.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (ColorThemeManager.isDarkTheme()) {
-                    selectedField.setBackground(new Background(new BackgroundFill(Color.valueOf("#464646"), null, null)));
-                } else {
-                    selectedField.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-                }
-                timer.cancel();
-            }
-        }, 5*1000);
     }
 
     /**
      * Показ результата проверки решения пользователя.
      * @param result результат.
+     * @param solution правильное решение головоломки (необходимо для подсвечивания неправильных клеток).
      */
-    public void displayCheckAnswerResult(GameCheckResult result) {
+    public void displayCheckAnswerResult(GameCheckResult result, int[][] solution) {
+        resetCellsColor(gameBoard);
+        gameBoard.getChildren().forEach(x -> {
+            if (x.getClass() == TextField.class) {
+                try {
+                    if (Integer.parseInt(((TextField)x).getText()) != solution[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)]) {
+                        ((TextField)x).setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+                    }
+                } catch (Exception e) {
+                    ((TextField)x).setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+                }
+            }
+        });
         switch (result) {
             case EMPTY_CELLS -> {
                 Dialog dialog = new Dialog(DialogType.ERROR, "Судоку не решена", "\nНе все клетки заполнены.", getCurrentStage());
@@ -169,5 +166,31 @@ public class GameView {
                 dialog.showDialog();
             }
         }
+        resetCellsColorAwait();
+    }
+
+    // Отложенный сброс цветов закрашенных клеток.
+    private void resetCellsColorAwait() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                resetCellsColor(gameBoard);
+                timer.cancel();
+            }
+        }, 4000);
+    }
+
+    // Сброс цветов закрашенных клеток.
+    public static void resetCellsColor(GridPane gameBoard) {
+        gameBoard.getChildren().forEach(x -> {
+            if (x.getClass() == TextField.class) {
+                if (ColorThemeManager.isDarkTheme()) {
+                    ((TextField)x).setBackground(new Background(new BackgroundFill(Color.valueOf("#464646"), null, null)));
+                } else {
+                    ((TextField)x).setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+                }
+            }
+        });
     }
 }
