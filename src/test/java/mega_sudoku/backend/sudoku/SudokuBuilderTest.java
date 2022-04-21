@@ -2,6 +2,8 @@ package mega_sudoku.backend.sudoku;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SudokuBuilderTest {
@@ -40,11 +42,7 @@ class SudokuBuilderTest {
         builder.generateSudoku(boardSize, difficultyLevel);
         int count = 0;
         for (int[] row : builder.getGeneratedSudoku().getProblem()) {
-            for (int number : row) {
-                if (number == -1) {
-                    count++;
-                }
-            }
+            count += Arrays.stream(row).filter(number -> number == -1).count();
         }
         assertEquals(builder.getCount(), count);
     }

@@ -1,6 +1,6 @@
 package mega_sudoku.backend.sudoku;
 
-import mega_sudoku.backend.dlx.DancingLinksAlgorithm;
+import mega_sudoku.backend.dlx.DLXAlgoStarter;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -109,10 +109,10 @@ public class SudokuBuilder {
                 int back = problem[i][j]; // Запоминаем цифру прежду чем удалить, на случай, если без нее решение будет не единственное.
                 problem[i][j] = -1;
                 count++;
-                DancingLinksAlgorithm dancingLinksAlgorithm = new DancingLinksAlgorithm(problem);
-                dancingLinksAlgorithm.solve();
+                DLXAlgoStarter DLXAlgoStarter = new DLXAlgoStarter(problem);
+                DLXAlgoStarter.solve();
                 // Проверка единственности решения.
-                if (!dancingLinksAlgorithm.getIfOnlyOneSolution()) {
+                if (!DLXAlgoStarter.getIfOnlyOneSolution()) {
                     problem[i][j] = back;
                     count--;
                 }

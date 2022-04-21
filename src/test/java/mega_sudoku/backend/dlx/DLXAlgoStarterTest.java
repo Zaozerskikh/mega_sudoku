@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class DancingLinksAlgorithmTest {
+class DLXAlgoStarterTest {
 
     @Test
     void solve16EASYTest() {
@@ -41,8 +41,8 @@ class DancingLinksAlgorithmTest {
     private void checkSudokuSolving(int boardSize, DifficultyLevel difficultyLevel) {
         SudokuBuilder builder = SudokuBuilder.getSudokuBuilder();
         builder.generateSudoku(boardSize, difficultyLevel);
-        DancingLinksAlgorithm dancingLinksAlgorithm = new DancingLinksAlgorithm(builder.getGeneratedSudoku().getProblem());
-        dancingLinksAlgorithm.solve();
-        assertTrue(dancingLinksAlgorithm.getIfOnlyOneSolution());
+        DLXAlgoStarter DLXAlgoStarter = new DLXAlgoStarter(builder.getGeneratedSudoku().getProblem());
+        DLXAlgoStarter.solve();
+        assertTrue(DLXAlgoStarter.getIfOnlyOneSolution());
     }
 }

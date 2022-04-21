@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Класс, отвечающий за работу и реализацию алгоритма "танцующих" ссылок.
  */
-public class DancingLinks {
+public class DLXAlgo {
     private final ColumnNode header;
 
     private List<DancingNode> answer;
@@ -93,7 +93,7 @@ public class DancingLinks {
         return headerNode;
     }
 
-    DancingLinks(boolean[][] cover) {
+    DLXAlgo(boolean[][] cover) {
         header = makeDLXBoard(cover);
     }
 
