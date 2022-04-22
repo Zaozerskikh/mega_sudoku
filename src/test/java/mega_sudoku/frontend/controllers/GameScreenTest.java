@@ -25,6 +25,8 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.util.NodeQueryUtils;
+
+import java.io.IOException;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
@@ -41,11 +43,18 @@ class GameScreenTest extends ApplicationTest {
     GameController controller;
 
     @Override
-    public void start(Stage xstage) throws Exception {
-        SudokuBuilder.getSudokuBuilder().generateSudoku(16, DifficultyLevel.EASY);
+    public void start(Stage stage) throws Exception {
+        initStage(16);
+    }
+
+    // Конструирование окна с игрой.
+    public void initStage(int boardSize) throws IOException {
+        SudokuBuilder.getSudokuBuilder().generateSudoku(boardSize, DifficultyLevel.EASY);
         var sudoku = SudokuBuilder.getSudokuBuilder().getGeneratedSudoku();
         GameGridBuilder.getBuilder().buildGameGrid(sudoku.getBoardSize(), sudoku.getCurrentPosition());
         var gameGrid = GameGridBuilder.getBuilder().getGeneratedPane();
+
+        // Инициализация окна.
         Stage stage = new Stage();
         stage.setTitle("Игра");
         var loader = new FXMLLoader(this.getClass().getResource("/fxml_views/game_view.fxml"));
@@ -54,6 +63,8 @@ class GameScreenTest extends ApplicationTest {
         ((GridPane)(scene.getRoot().getChildrenUnmodifiable().get(0))).add(gameGrid, 0, 0);
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
+
+        // Декорирование окна.
         ColorThemeManager.setThemeToScene(stage.getScene(),
                 Objects.requireNonNull(SudokuBuilder.class.getResource("/styles/dark_game_screen.css")).toExternalForm(),
                 Objects.requireNonNull(SudokuBuilder.class.getResource("/styles/white_game_screen.css")).toExternalForm());
@@ -84,7 +95,7 @@ class GameScreenTest extends ApplicationTest {
      * Тестирование закрашивания некорректных клеток красным цветом.
      */
     @Test
-    void incorrectFillingTest() {
+    public void incorrectFillingTest() {
         controller.getGameBoard().getChildren().forEach(x -> {
             if (x.getClass() == TextField.class && ((TextField)x).isEditable()) {
                 clickOn(x).type(KeyCode.DIGIT1);
@@ -95,12 +106,19 @@ class GameScreenTest extends ApplicationTest {
         assertAll(
                 () -> assertEquals("\nПоле заполнено с ошибками :(", ((Label) ((Pane) ((GridPane) NodeQueryUtils.rootOfWindow(window("dialog")).toArray()[0])
                         .getChildren().get(1)).getChildren().get(0)).getText()),
+                () -> clickOn(
+                        ((Pane) ((GridPane) NodeQueryUtils
+                                .rootOfWindow(window("dialog")).toArray()[0])
+                                .getChildren().get(1)).getChildren().get(2)
+                ),
                 () -> controller.getGameBoard().getChildren().stream()
                         .filter(x -> x.getClass() == TextField.class)
                         .forEach(x -> {
                             if (((TextField)x).getText().equals(String.valueOf(model.getSudoku()
                                     .getSolution()[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)]))) {
-                                assertNotEquals(Color.RED, ((TextField)x).getBackground().getFills().get(0).getFill());
+                                assertNotEquals(Color.INDIANRED, ((TextField)x).getBackground().getFills().get(0).getFill());
+                            } else {
+                                assertEquals(Color.INDIANRED, ((TextField)x).getBackground().getFills().get(0).getFill());
                             }
                         })
         );
@@ -120,13 +138,18 @@ class GameScreenTest extends ApplicationTest {
                 () -> assertEquals("\nНе все клетки заполнены.",
                         ((Label) ((Pane) ((GridPane) NodeQueryUtils.rootOfWindow(window("dialog")).toArray()[0])
                                 .getChildren().get(1)).getChildren().get(0)).getText()),
+                () -> clickOn(
+                        ((Pane) ((GridPane) NodeQueryUtils
+                                .rootOfWindow(window("dialog")).toArray()[0])
+                                .getChildren().get(1)).getChildren().get(2)
+                ),
                 () -> controller.getGameBoard().getChildren().stream()
                         .filter(x -> x.getClass() == TextField.class)
                         .forEach(x -> {
                             if (((TextField)x).getText().equals("")) {
-                                assertEquals(Color.RED, ((TextField)x).getBackground().getFills().get(0).getFill());
+                                assertEquals(Color.INDIANRED, ((TextField)x).getBackground().getFills().get(0).getFill());
                             } else {
-                                assertNotEquals(Color.RED, ((TextField)x).getBackground().getFills().get(0).getFill());
+                                assertNotEquals(Color.INDIANRED, ((TextField)x).getBackground().getFills().get(0).getFill());
                             }
                         })
         );

@@ -47,6 +47,4 @@ public class DialogController {
     protected void onMousePressed(MouseEvent e) {
         ToolBarManager.onMousePressed(e, getCurrentStage());
     }
-
-    // TODO: Проверить свертываемость окна на MAC OS.
 }

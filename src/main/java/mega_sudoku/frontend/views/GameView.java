@@ -25,7 +25,6 @@ import java.util.TimerTask;
  * Класс, определяющий представление текущей игры.
  */
 public class GameView {
-
     // Объект модели данного представления
     protected final GameModel gameModel;
 
@@ -141,31 +140,25 @@ public class GameView {
      */
     public void displayCheckAnswerResult(GameCheckResult result, int[][] solution) {
         resetCellsColor(gameBoard);
-        gameBoard.getChildren().forEach(x -> {
+        gameBoard.requestFocus();
+        Dialog dialog;
+        switch (result) {
+            case EMPTY_CELLS -> dialog = new Dialog(DialogType.ERROR, "Судоку не решена", "\nНе все клетки заполнены.", getCurrentStage());
+            case INCORRECT -> dialog = new Dialog(DialogType.ERROR, "Судоку решена неверно", "\nПоле заполнено с ошибками :(", getCurrentStage());
+            default -> dialog = new Dialog(DialogType.INFO, "Успех!", "\nСудоку решена верно!", getCurrentStage());
+        }
+        dialog.yesButton.getScene().getWindow().setOnHidden(action -> gameBoard.getChildren().forEach(x -> {
             if (x.getClass() == TextField.class) {
                 try {
                     if (Integer.parseInt(((TextField)x).getText()) != solution[GridPane.getColumnIndex(x)][GridPane.getRowIndex(x)]) {
-                        ((TextField)x).setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+                        ((TextField)x).setBackground(new Background(new BackgroundFill(Color.INDIANRED, null, null)));
                     }
                 } catch (Exception e) {
-                    ((TextField)x).setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+                    ((TextField)x).setBackground(new Background(new BackgroundFill(Color.INDIANRED, null, null)));
                 }
             }
-        });
-        switch (result) {
-            case EMPTY_CELLS -> {
-                Dialog dialog = new Dialog(DialogType.ERROR, "Судоку не решена", "\nНе все клетки заполнены.", getCurrentStage());
-                dialog.showDialog();
-            }
-            case INCORRECT -> {
-                Dialog dialog = new Dialog(DialogType.ERROR, "Судоку решена неверно", "\nПоле заполнено с ошибками :(", getCurrentStage());
-                dialog.showDialog();
-            }
-            default -> {
-                Dialog dialog = new Dialog(DialogType.INFO, "Успех!", "\nСудоку решена верно!", getCurrentStage());
-                dialog.showDialog();
-            }
-        }
+        }));
+        dialog.showDialog();
         resetCellsColorAwait();
     }
 

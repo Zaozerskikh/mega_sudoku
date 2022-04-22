@@ -61,7 +61,7 @@ public class GameGridBuilder {
                 textField.setMaxHeight(Double.MAX_VALUE);
                 textField.setMaxWidth(Double.MAX_VALUE);
 
-                addEventHandlers(gridPane, textField);
+                addEventHandlers(gridPane, boardSize, textField);
                 gridPane.add(textField, i, j);
             }
         }
@@ -149,7 +149,7 @@ public class GameGridBuilder {
 
     // Добавление обработчиков событий.
     @SuppressWarnings("all")
-    private void addEventHandlers(GridPane gridPane, TextField textField) {
+    private void addEventHandlers(GridPane gridPane, int boardSize, TextField textField) {
         textField.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                 if (mouseEvent.getClickCount() == 2) {
@@ -174,7 +174,63 @@ public class GameGridBuilder {
                 }
             }
         });
-        textField.setOnKeyPressed(e -> GameView.resetCellsColor(gridPane));
+
+        textField.setOnKeyPressed(e -> {
+            GameView.resetCellsColor(gridPane);
+
+            if (isValid(textField, boardSize)) {
+                switch (e.getCode()) {
+                    case DOWN -> {
+                        if (GridPane.getRowIndex(textField) < boardSize - 1) {
+                            requireFocus(gridPane, GridPane.getRowIndex(textField) + 1, GridPane.getColumnIndex(textField));
+                        } else {
+                            requireFocus(gridPane, 0, GridPane.getColumnIndex(textField));
+                        }
+                    }
+                    case UP -> {
+                        if (GridPane.getRowIndex(textField) > 0) {
+                            requireFocus(gridPane, GridPane.getRowIndex(textField) - 1, GridPane.getColumnIndex(textField));
+                        } else {
+                            requireFocus(gridPane, boardSize - 1, GridPane.getColumnIndex(textField));
+                        }
+                    }
+                    case LEFT -> {
+                        if (GridPane.getColumnIndex(textField) > 0) {
+                            requireFocus(gridPane, GridPane.getRowIndex(textField), GridPane.getColumnIndex(textField) - 1);
+                        } else {
+                            requireFocus(gridPane, GridPane.getRowIndex(textField), boardSize - 1);
+                        }
+                    }
+                    case RIGHT -> {
+                        if (GridPane.getColumnIndex(textField) < boardSize - 1) {
+                            requireFocus(gridPane, GridPane.getRowIndex(textField), GridPane.getColumnIndex(textField) + 1);
+                        } else {
+                            requireFocus(gridPane, GridPane.getRowIndex(textField), 0);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Запрос фокуса на клетку.
+    private void requireFocus(GridPane board, int row, int column) {
+        board.getChildren().stream()
+                .filter(x -> GridPane.getRowIndex(x) == row)
+                .filter(x -> GridPane.getColumnIndex(x) == column)
+                .findAny().orElse(null).requestFocus();
+    }
+
+    // Проверка значения клетки на валидность.
+    private boolean isValid(TextField tf, int boardSize) {
+        if (tf.getText().equals("")) {
+            return true;
+        }
+        try {
+            return Integer.parseInt(tf.getText()) > 0 && Integer.parseInt(tf.getText()) <= boardSize;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**

@@ -61,6 +61,9 @@ public class GameModel {
      */
     public void checkAnswer() {
         selectedCellChanged(selectedField);
+        if (!check(selectedField)) {
+            return;
+        }
         for (int i = 0; i < sudoku.getBoardSize(); i++) {
             for (int j = 0; j < sudoku.getBoardSize(); j++) {
                 if (sudoku.getCurrentPosition()[i][j] == -1) {
@@ -85,7 +88,6 @@ public class GameModel {
      */
     public void showTip() {
         GameView.resetCellsColor(view.getGameBoard());
-        selectedCellChanged(selectedField);
         if (selectedField != null) {
             sudoku.updateCurrentPosition(sudoku.getSolution()[GridPane.getColumnIndex(selectedField)][GridPane.getRowIndex(selectedField)],
                     GridPane.getColumnIndex(selectedField), GridPane.getRowIndex(selectedField));
@@ -110,6 +112,9 @@ public class GameModel {
     public void saveGame(Stage parentStage) {
         GameView.resetCellsColor(view.getGameBoard());
         selectedCellChanged(selectedField);
+        if (!check(selectedField)) {
+            return;
+        }
         try {
             if(GameSaver.save(sudoku, parentStage)) {
                 setSaved(true);
@@ -143,12 +148,7 @@ public class GameModel {
     public void selectedCellChanged(TextField newTextField) {
         boolean isCorrect = true;
         if (selectedField != null && !selectedField.getText().equals("")) {
-            try {
-                int value = Integer.parseInt(selectedField.getText());
-                isCorrect = value > 0 && value <= sudoku.getBoardSize();
-            } catch (Exception e) {
-                isCorrect = false;
-            }
+            isCorrect = check(selectedField);
             if (isCorrect) {
                 setSaved(false);
                 sudoku.updateCurrentPosition(Integer.parseInt(selectedField.getText()),
@@ -161,6 +161,21 @@ public class GameModel {
         }
         if (isCorrect) {
             this.selectedField = newTextField;
+        }
+    }
+
+    // Проверка корректности значения в клетке.
+    private boolean check(TextField tf) {
+        if (tf == null) {
+            return true;
+        }
+        if (tf.getText().equals("")) {
+            return true;
+        }
+        try {
+            return Integer.parseInt(tf.getText()) > 0 && Integer.parseInt(tf.getText()) <= getSudoku().getBoardSize();
+        } catch (Exception e) {
+            return false;
         }
     }
 }

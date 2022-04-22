@@ -44,7 +44,7 @@ public class ToolBarManager {
      * @param stage окно.
      */
     public static void onMouseMoved(MouseEvent me, Stage stage) {
-        if (me.getButton()!=MouseButton.MIDDLE) {
+        if (me.getButton() != MouseButton.MIDDLE && !stage.isFullScreen()) {
             stage.getScene().getWindow().setX( me.getScreenX() - initialX );
             stage.getScene().getWindow().setY( me.getScreenY() - initialY);
         }
