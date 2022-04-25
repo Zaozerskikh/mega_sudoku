@@ -48,6 +48,7 @@ public class GameController extends GameView {
      */
     public GameController() {
         gameBoard.getChildren().forEach(x -> x.setOnMousePressed(mouseEvent -> selectedCellChanged((TextField) mouseEvent.getSource())));
+        gameBoard.getChildren().forEach(x -> x.setOnKeyReleased(mouseEvent -> selectedCellChanged((TextField) mouseEvent.getSource())));
     }
 
     /**
