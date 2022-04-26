@@ -88,11 +88,11 @@ public class SudokuBuilder {
             System.arraycopy(solution[i], 0, problem[i], 0, boardSize);
         }
 
-        // Вспомогательная матрица (-1, если в основной матрице клетка заполненна; 1, если не заполненна).
-        int[][] checkMatrix = new int[boardSize][boardSize];
+        // Вспомогательная матрица (false, если в основной матрице клетка заполненна; true, если не заполненна).
+        boolean[][] checkMatrix = new boolean[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                checkMatrix[i][j] = -1;
+                checkMatrix[i][j] = false;
             }
         }
 
@@ -103,9 +103,9 @@ public class SudokuBuilder {
             }
             int i = ThreadLocalRandom.current().nextInt(0, boardSize);
             int j = ThreadLocalRandom.current().nextInt(0, boardSize);
-            if (checkMatrix[i][j] == -1) {
+            if (!checkMatrix[i][j]) {
                 iterator++;
-                checkMatrix[i][j] = 1;
+                checkMatrix[i][j] = true;
                 int back = problem[i][j]; // Запоминаем цифру прежду чем удалить, на случай, если без нее решение будет не единственное.
                 problem[i][j] = -1;
                 count++;

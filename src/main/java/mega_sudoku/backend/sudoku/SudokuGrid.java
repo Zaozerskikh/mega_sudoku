@@ -105,10 +105,10 @@ public class SudokuGrid {
      * Метод, позволяющий рандомным образом переставить стандартную матрицу судоку.
      */
     private void mix() {
-        final int changesNumber = 100;
+        final int changesNumber = 10000;
         for (int i = 0; i < changesNumber; i++) {
-            int id = ThreadLocalRandom.current().nextInt(0, 5);
-            switch (id) {
+            int choose = ThreadLocalRandom.current().nextInt(0, 5);
+            switch (choose) {
                 case 0 -> transpose();
                 case 1 -> swapRows();
                 case 2 -> swapColumns();

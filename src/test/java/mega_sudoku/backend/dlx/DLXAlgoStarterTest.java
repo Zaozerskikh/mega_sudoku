@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DLXAlgoStarterTest {
-
     @Test
     void solve16EASYTest() {
         checkSudokuSolving(16, DifficultyLevel.EASY);
