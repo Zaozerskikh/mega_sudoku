@@ -90,29 +90,19 @@ public class SudokuBuilder {
 
         // Вспомогательная матрица (false, если в основной матрице клетка заполненна; true, если не заполненна).
         boolean[][] checkMatrix = new boolean[boardSize][boardSize];
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
-                checkMatrix[i][j] = false;
-            }
-        }
 
-        int iterator = 0;
-        while (iterator < boardSize * boardSize) {
-            if (count > emptyCellsCount) {
-                break;
-            }
+        while (count <= emptyCellsCount) {
             int i = ThreadLocalRandom.current().nextInt(0, boardSize);
             int j = ThreadLocalRandom.current().nextInt(0, boardSize);
             if (!checkMatrix[i][j]) {
-                iterator++;
                 checkMatrix[i][j] = true;
                 int back = problem[i][j]; // Запоминаем цифру прежду чем удалить, на случай, если без нее решение будет не единственное.
                 problem[i][j] = -1;
                 count++;
-                DLXAlgoStarter DLXAlgoStarter = new DLXAlgoStarter(problem);
-                DLXAlgoStarter.solve();
+                DLXAlgoStarter dlxAlgoStarter = new DLXAlgoStarter(problem);
+                dlxAlgoStarter.solve();
                 // Проверка единственности решения.
-                if (!DLXAlgoStarter.getIfOnlyOneSolution()) {
+                if (!dlxAlgoStarter.getIfOnlyOneSolution()) {
                     problem[i][j] = back;
                     count--;
                 }

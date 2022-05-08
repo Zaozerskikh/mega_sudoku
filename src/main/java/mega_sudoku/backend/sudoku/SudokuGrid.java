@@ -46,9 +46,10 @@ public class SudokuGrid {
      * @param secondRowIndex Номер второго ряда.
      */
     private void swapTwoArraysInTable(int firstRowIndex, int secondRowIndex) {
-        int[] tmp = table[firstRowIndex];
-        table[firstRowIndex] = table[secondRowIndex];
-        table[secondRowIndex] = tmp;
+        int[] tmp = new int[table[firstRowIndex].length];
+        System.arraycopy(table[firstRowIndex], 0, tmp, 0, tmp.length);
+        System.arraycopy(table[secondRowIndex], 0, table[firstRowIndex], 0, table[firstRowIndex].length);
+        System.arraycopy(tmp, 0, table[secondRowIndex], 0, table[secondRowIndex].length);
     }
 
     /**

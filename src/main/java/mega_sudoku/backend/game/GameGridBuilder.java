@@ -16,7 +16,7 @@ import mega_sudoku.frontend.views.GameView;
  * Класс, отвечающий за построение игровой сетки заданного размера.
  */
 public class GameGridBuilder {
-     //Холдер для объекта синглтона.
+    // Холдер для объекта синглтона.
     private static GameGridBuilder INSTANCE;
 
     // Сгенерированная игровая сетка.
