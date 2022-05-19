@@ -244,14 +244,14 @@ class GameScreenTest extends ApplicationTest {
                 .findAny().get();
 
         // string val test.
-        clickOn(cell).write("abc").clickOn(cell);
+        clickOn(cell).write("c").clickOn(cell);
         FxAssert.verifyThat(window("dialog"), WindowMatchers.isShowing());
         assertAll(
                 () -> assertEquals("\nНекорректное значение поля.", ((Label) ((Pane) ((GridPane) NodeQueryUtils
                         .rootOfWindow(window("dialog")).toArray()[0])
                         .getChildren().get(1)).getChildren().get(0)).getText()
                 ),
-                () -> assertEquals("abc", cell.selectedTextProperty().get())
+                () -> assertEquals("c", cell.selectedTextProperty().get())
         );
         clickOn(
                 ((Pane) ((GridPane) NodeQueryUtils
