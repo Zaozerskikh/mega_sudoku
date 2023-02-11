@@ -8,6 +8,7 @@ import java.util.List;
  * Класс, отвечающий за работу и реализацию алгоритма "танцующих" ссылок.
  */
 public class DLXAlgo {
+
     private final ColumnNode header;
 
     private List<DancingNode> answer;
@@ -25,6 +26,7 @@ public class DLXAlgo {
             columnNode.cover();
 
             for (DancingNode r = columnNode.down; r != columnNode; r = r.down) {
+
                 answer.add(r);
 
                 for (DancingNode j = r.right; j != r; j = j.right) {

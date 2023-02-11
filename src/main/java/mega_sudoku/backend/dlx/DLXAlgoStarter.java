@@ -35,8 +35,7 @@ public class DLXAlgoStarter {
      * @param board Конкретная доска.
      */
     public DLXAlgoStarter(int[][] board) {
-        int size = board.length;
-        boardSize = maxValue = size;
+        int size = boardSize = maxValue = board.length;
         subsectionSize = (int)Math.sqrt(size);
         minValue = 1;
         noValue = -1;

@@ -2,6 +2,7 @@ package mega_sudoku.backend.sudoku;
 
 import mega_sudoku.backend.dlx.DLXAlgoStarter;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -12,20 +13,26 @@ public class SudokuBuilder {
     private static SudokuBuilder INSTANCE;
 
     /**
-     * Поле определяющее сложность (количество пустых клеток).
+     * Поле, определяющее сложность (количество пустых клеток).
      */
-    private int emptyCellsCount = 1000;
+    private int totalEmptyCells = 1000;
 
-    private int count = 0;
+    /**
+     * Поле, определяющее количество УЖЕ удаленных клеток.
+     */
+    private int emptyCellsCount = 0;
+
+    public int getTotalEmptyCells() {
+        return totalEmptyCells;
+    }
 
     public int getEmptyCellsCount() {
         return emptyCellsCount;
     }
 
-    public int getCount() {
-        return count;
-    }
-
+    /**
+     * Решенная данная судоку.
+     */
     private int[][] solution;
 
     private SudokuBuilder() {
@@ -38,7 +45,7 @@ public class SudokuBuilder {
         return INSTANCE;
     }
 
-    // Сгенерированная судоку.
+    // Сгенерированная задача судоку.
     private Sudoku generatedSudoku;
 
     public void setGeneratedSudoku(Sudoku sudoku) {
@@ -52,13 +59,13 @@ public class SudokuBuilder {
      */
     public void generateSudoku(int boardSize, DifficultyLevel diffLevel) {
         if (boardSize == 16) {
-            emptyCellsCount = switch (diffLevel) {
+            totalEmptyCells = switch (diffLevel) {
                 case EASY -> 100;
                 case MEDIUM -> 120;
                 case HARD -> 148;
             };
         } else {
-            emptyCellsCount = switch (diffLevel) {
+            totalEmptyCells = switch (diffLevel) {
                 case EASY -> 240;
                 case MEDIUM -> 270;
                 case HARD -> 300;
@@ -82,32 +89,38 @@ public class SudokuBuilder {
      * @return Доска с некоторыми незаполненными клетками.
      */
     private int[][] generateProblem(int boardSize) {
-        count = 0;
+        emptyCellsCount = 0;
         int[][] problem = new int[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
             System.arraycopy(solution[i], 0, problem[i], 0, boardSize);
         }
 
-        // Вспомогательная матрица (false, если в основной матрице клетка заполненна; true, если не заполненна).
-        boolean[][] checkMatrix = new boolean[boardSize][boardSize];
+        record Coordinates(int x, int y) {
+        }
 
-        while (count <= emptyCellsCount) {
-            int i = ThreadLocalRandom.current().nextInt(0, boardSize);
-            int j = ThreadLocalRandom.current().nextInt(0, boardSize);
-            if (!checkMatrix[i][j]) {
-                checkMatrix[i][j] = true;
-                int back = problem[i][j]; // Запоминаем цифру прежду чем удалить, на случай, если без нее решение будет не единственное.
-                problem[i][j] = -1;
-                count++;
-                DLXAlgoStarter dlxAlgoStarter = new DLXAlgoStarter(problem);
-                dlxAlgoStarter.solve();
-                // Проверка единственности решения.
-                if (!dlxAlgoStarter.getIfOnlyOneSolution()) {
-                    problem[i][j] = back;
-                    count--;
-                }
+        var pairs = new ArrayList<Coordinates>(boardSize * boardSize);
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                pairs.add(new Coordinates(i, j));
             }
         }
+
+        while (emptyCellsCount != totalEmptyCells + 1 && pairs.size() != 0) {
+            int pairNum = ThreadLocalRandom.current().nextInt(0, pairs.size());
+            int i = pairs.get(pairNum).x;
+            int j = pairs.get(pairNum).y;
+            int back = problem[i][j];
+            problem[i][j] = -1;
+            emptyCellsCount++;
+            var algoStarter = new DLXAlgoStarter(problem);
+            algoStarter.solve();
+            if (!algoStarter.getIfOnlyOneSolution()) {
+                problem[i][j] = back;
+                emptyCellsCount--;
+            }
+            pairs.remove(pairNum);
+        }
+
         return problem;
     }
 

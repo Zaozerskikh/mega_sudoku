@@ -3,6 +3,12 @@ package mega_sudoku.backend.sudoku;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SudokuGrid {
+
+    /**
+     * Количество перестановок.
+     */
+    private static final int CHANGES_NUMBER = 10000;
+
     /**
      * Размер поля.
      */
@@ -106,8 +112,7 @@ public class SudokuGrid {
      * Метод, позволяющий рандомным образом переставить стандартную матрицу судоку.
      */
     private void mix() {
-        final int changesNumber = 10000;
-        for (int i = 0; i < changesNumber; i++) {
+        for (int i = 0; i < CHANGES_NUMBER; i++) {
             int choose = ThreadLocalRandom.current().nextInt(0, 5);
             switch (choose) {
                 case 0 -> transpose();
@@ -119,6 +124,10 @@ public class SudokuGrid {
         }
     }
 
+    /**
+     * Получение рандомной решенной судоку.
+     * @return Рандомная решенная судоку.
+     */
     public int[][] getMixedGrid() {
         mix();
         return table;

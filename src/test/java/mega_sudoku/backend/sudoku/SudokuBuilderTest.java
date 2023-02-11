@@ -8,42 +8,42 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SudokuBuilderTest {
     @Test
-    void getCount16EASYTest() {
-        checkCount(16, DifficultyLevel.EASY);
+    void getEmptyCellsCount16EASYTest() {
+        checkEmptyCellsCount(16, DifficultyLevel.EASY);
     }
 
     @Test
-    void getCount25EASYTest() {
-        checkCount(25, DifficultyLevel.EASY);
+    void getEmptyCellsCount25EASYTest() {
+        checkEmptyCellsCount(25, DifficultyLevel.EASY);
     }
 
     @Test
-    void getCount16MEDIUMTest() {
-        checkCount(16, DifficultyLevel.MEDIUM);
+    void getEmptyCellsCount16MEDIUMTest() {
+        checkEmptyCellsCount(16, DifficultyLevel.MEDIUM);
     }
 
     @Test
-    void getCount25MEDIUMTest() {
-        checkCount(25, DifficultyLevel.MEDIUM);
+    void getEmptyCellsCount25MEDIUMTest() {
+        checkEmptyCellsCount(25, DifficultyLevel.MEDIUM);
     }
 
     @Test
-    void getCount16HARDTest() {
-        checkCount(16, DifficultyLevel.HARD);
+    void getEmptyCellsCount16HARDTest() {
+        checkEmptyCellsCount(16, DifficultyLevel.HARD);
     }
 
     @Test
-    void getCount25HARDTest() {
-        checkCount(25, DifficultyLevel.HARD);
+    void getEmptyCellsCount25HARDTest() {
+        checkEmptyCellsCount(25, DifficultyLevel.HARD);
     }
 
-    private void checkCount(int boardSize, DifficultyLevel difficultyLevel) {
+    private void checkEmptyCellsCount(int boardSize, DifficultyLevel difficultyLevel) {
         SudokuBuilder builder = SudokuBuilder.getSudokuBuilder();
         builder.generateSudoku(boardSize, difficultyLevel);
         int count = 0;
         for (int[] row : builder.getGeneratedSudoku().getProblem()) {
             count += Arrays.stream(row).filter(number -> number == -1).count();
         }
-        assertEquals(builder.getCount(), count);
+        assertEquals(builder.getEmptyCellsCount(), count);
     }
 }
